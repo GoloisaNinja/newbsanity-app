@@ -1,0 +1,114 @@
+// Sizing
+
+$max-width: 110rem;
+
+@media (max-width: 45rem) {
+  #hide-sm {
+    display: none;
+  }
+}
+
+// Margin and Padding
+
+$spaceamounts: (1, 2, 3, 4, 5);
+
+@each $space in $spaceamounts {
+  // All Margin
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  // Vertical Margin
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+  // All Padding
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  // Vertical Padding
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
+}
+
+// Colors
+
+$primary-color: #17a2b8;
+$dark-color: #2b3036;
+$light-color: #f4f4f4;
+$danger-color: #dc3545;
+$success-color: #28a745;
+$white-color: #fff;
+
+// Set Text Color based on Background
+
+@function set-text-color($color) {
+  @if (lightness($color) > 55) {
+    @return #333;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Transition mixin
+
+@mixin easeOut {
+  transition: all 0.5s ease-out;
+}
+
+// Set Background and Text Color
+
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
+// Basic resets and mobile styling shutdowns
+
+.btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Bellota Text', cursive;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.6;
+  //background-color: #0e1013;
+  //background-attachment: fixed;
+  background-color: #88878f;
+  background-image: url('/img/bg3.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: darken(#0e1013, 10%);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: $white-color;
+  font-weight: 700;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}

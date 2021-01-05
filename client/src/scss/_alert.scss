@@ -1,0 +1,12 @@
+.alert {
+  font-weight: 700;
+  font-style: italic;
+  color: white;
+  padding: 1rem 1.5rem;
+  &.alert-danger {
+    background: #ff0a0a;
+  }
+  &.alert-success {
+    background: #5d685c;
+  }
+}

@@ -9,9 +9,10 @@ const auth = require('../middleware/auth');
 // Create new Event
 
 router.post('/api/events', auth, async (req, res) => {
-  const text = req.body.text;
-  const title = req.body.title;
+  const { title, text, mediaLink, mediaTypeIframe, date, time } = req.body;
   const user = await req.user;
+  const dateParts = date.split('/');
+  const formatDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
   const { name, id } = user;
   try {
     if (!user) {
@@ -20,6 +21,10 @@ router.post('/api/events', auth, async (req, res) => {
     const event = new Event({
       title,
       text,
+      mediaLink,
+      mediaTypeIframe,
+      date: formatDate,
+      time,
     });
     await event.save();
     res.status(200).json(event);
@@ -59,6 +64,23 @@ router.delete('/api/events/delete/:_id', auth, async (req, res) => {
 router.get('/api/events/all', async (req, res) => {
   try {
     const events = await Event.find().sort({ date: -1 });
+    if (!events) {
+      return res.status(404).send({ message: 'No Events...' });
+    }
+    res.status(200).send(events);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
+// Get LandingPage Events (4 events)
+
+router.get('/api/events/landing', async (req, res) => {
+  const today = Date.now();
+  try {
+    const events = await Event.find({ date: { $gte: today } })
+      .sort({ date: 1 })
+      .limit(4);
     if (!events) {
       return res.status(404).send({ message: 'No Events...' });
     }
@@ -122,11 +144,9 @@ router.post('/api/events/unlike/:eventId', auth, async (req, res) => {
   const _id = req.params.eventId;
   try {
     if (!user) {
-      return res
-        .status(401)
-        .send({
-          message: 'You must be looged in before you can like/unlike events...',
-        });
+      return res.status(401).send({
+        message: 'You must be looged in before you can like/unlike events...',
+      });
     }
     const event = await Event.findById({ _id });
     const liked = event.likes.filter((like) => like.user.toString() === id);

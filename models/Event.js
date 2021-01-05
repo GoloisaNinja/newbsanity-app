@@ -9,6 +9,14 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  mediaLink: {
+    type: String,
+    required: true,
+  },
+  mediaTypeIframe: {
+    type: Boolean,
+    required: true,
+  },
   likes: [
     {
       user: {
@@ -38,7 +46,11 @@ const EventSchema = new mongoose.Schema({
   ],
   date: {
     type: Date,
-    default: Date.now,
+    required: true,
+  },
+  time: {
+    type: String,
+    required: true,
   },
 });
 const Event = mongoose.model('Event', EventSchema);

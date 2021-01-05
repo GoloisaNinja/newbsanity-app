@@ -1,0 +1,16 @@
+.event-img {
+  max-width: 1200px;
+  height: 100%;
+}
+.event-title {
+  //border-bottom: 4px solid #cf0012;
+  margin-top: 1rem;
+  padding-top: 0;
+  padding-left: 2rem;
+}
+.event-text {
+  font-size: 1.25rem;
+  padding: 2rem;
+  font-weight: 300;
+  flex-grow: 1;
+}

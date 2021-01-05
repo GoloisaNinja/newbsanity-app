@@ -1,0 +1,5 @@
+.about-img {
+  @extend .event-img;
+  max-width: 600px;
+  height: 100%;
+}

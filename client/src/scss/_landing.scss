@@ -1,0 +1,32 @@
+.landing-intro {
+  border-bottom: 4px solid #ff0a0a;
+  margin-bottom: 2rem;
+}
+.landing-sponsors {
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.landing-sponsors__img {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  justify-content: center;
+  max-width: 25%;
+  margin-right: 2rem;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+@media (max-width: 45rem) {
+  .landing-sponsors {
+    flex-direction: column;
+  }
+  .landing-sponsors__img {
+    max-width: 70%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}

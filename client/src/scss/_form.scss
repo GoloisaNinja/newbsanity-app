@@ -1,0 +1,39 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 35rem;
+}
+.form-login {
+  display: flex;
+  flex-direction: column;
+}
+.form-input {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+// Input Label Floating Utils
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+.form-label {
+  position: absolute;
+  top: 0;
+  padding: 0.7rem 0 0 1rem;
+  transition: all 250ms;
+  opacity: 0.65;
+  font-size: 1.4rem;
+}
+
+.form-input:focus + .form-label,
+.form-input:valid + .form-label {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}

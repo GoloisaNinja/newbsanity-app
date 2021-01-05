@@ -9,13 +9,12 @@ const sharp = require('sharp');
 
 router.post('/api/users', async (req, res) => {
   const user = new User(req.body);
-  console.log(req.body);
   try {
     await user.save();
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(500).send({ message: e.message });
   }
 });
 
@@ -31,7 +30,7 @@ router.post('/api/user/login', async (req, res) => {
     await user.save();
     res.send({ user, token });
   } catch (e) {
-    res.status(401).send(e.message);
+    res.status(401).send({ message: 'Login failed...' });
   }
 });
 

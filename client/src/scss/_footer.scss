@@ -1,0 +1,31 @@
+.footer {
+  background: #5d685c;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: #fff;
+}
+#footer__icons {
+  padding-right: 1rem;
+  & last {
+    padding-right: 0;
+  }
+}
+
+.footer-sectionOne,
+.footer-sectionTwo {
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__text {
+  font-size: 1rem;
+  &.lead {
+    padding-bottom: 0.7rem;
+  }
+  &.hashtag {
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+}
