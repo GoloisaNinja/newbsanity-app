@@ -35,10 +35,10 @@ const About = () => {
           <div>
             <img
               className='about-img'
-              src='/img/jer1.jpg'
+              src='/img/jerM1.jpg'
               alt='jerry'
-              onMouseOver={(e) => (e.currentTarget.src = '/img/jer2.jpg')}
-              onMouseOut={(e) => (e.currentTarget.src = '/img/jer1.jpg')}
+              onMouseOver={(e) => (e.currentTarget.src = '/img/jerM2.jpg')}
+              onMouseOut={(e) => (e.currentTarget.src = '/img/jerM1.jpg')}
             />
           </div>
           <Link to='/'>
@@ -74,7 +74,7 @@ const About = () => {
               className='about-img'
               src='/img/jar1.jpg'
               alt='jerry'
-              onMouseOver={(e) => (e.currentTarget.src = '/img/jar2.jpg')}
+              onMouseOver={(e) => (e.currentTarget.src = '/img/jarM2.jpg')}
               onMouseOut={(e) => (e.currentTarget.src = '/img/jar1.jpg')}
             />
           </div>
