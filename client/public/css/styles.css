@@ -393,7 +393,6 @@ img {
   display: flex;
   flex-direction: column;
   background: #5d685c;
-  flex-grow: 1;
   width: 100%;
   position: relative; }
 
