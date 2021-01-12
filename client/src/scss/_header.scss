@@ -20,7 +20,7 @@
     align-items: center;
   }
   & li {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 700;
     padding-right: 2rem;
   }
@@ -28,15 +28,21 @@
 .skull {
   width: 27px;
 }
+.navbar-brand {
+  color: #f40a0a;
+  &:hover {
+    color: white;
+  }
+}
 .navbar-links:hover {
   //color: #141316;
   //color: #23ebe4;
   color: #f40a0a;
 }
 @media (max-width: 45rem) {
-  .skull {
-    display: none;
-  }
+  // .skull {
+  //   display: none;
+  // }
   .navbar {
     height: 10rem;
     flex-direction: column;

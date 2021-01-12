@@ -76,9 +76,9 @@ html {
   -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: 'Bellota Text', cursive;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.6;
   background-color: #88878f;
   background-image: url("/img/bg3.jpg");
@@ -94,7 +94,7 @@ body {
 a {
   text-decoration: none;
   color: #fff;
-  font-weight: 700; }
+  font-weight: 400; }
 
 ul {
   list-style: none; }
@@ -122,19 +122,22 @@ img {
     justify-content: space-around;
     align-items: center; }
   .navbar li {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 700;
     padding-right: 2rem; }
 
 .skull {
   width: 27px; }
 
+.navbar-brand {
+  color: #f40a0a; }
+  .navbar-brand:hover {
+    color: white; }
+
 .navbar-links:hover {
   color: #f40a0a; }
 
 @media (max-width: 45rem) {
-  .skull {
-    display: none; }
   .navbar {
     height: 10rem;
     flex-direction: column;
@@ -223,7 +226,8 @@ img {
   justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  color: #fff; }
+  color: #fff;
+  min-height: 23rem; }
 
 .flex-container-end {
   display: flex;
@@ -280,7 +284,7 @@ img {
     grid-template-columns: 1fr; } }
 
 .event-img, .about-img {
-  max-width: 1200px;
+  width: 300px;
   height: 100%; }
 
 .event-title {
@@ -293,6 +297,10 @@ img {
   padding: 2rem;
   font-weight: 300;
   flex-grow: 1; }
+
+@media (max-width: 45rem) {
+  .event-img, .about-img {
+    width: 100%; } }
 
 .red-span {
   color: #fff; }
@@ -311,7 +319,7 @@ img {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: #fff;
   cursor: pointer;
-  font-family: 'Bellota Text', cursive;
+  font-family: 'Oswald', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   padding: 1rem;
@@ -335,8 +343,8 @@ img {
     border-bottom: 2px solid #d60000; }
 
 .text-type-effect {
-  width: 16ch;
-  animation: typing 3s steps(16), blink 0.5s step-end infinite alternate;
+  width: 15ch;
+  animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid #242930; }
@@ -484,7 +492,7 @@ img {
   margin: 0 auto;
   margin-top: 1rem;
   padding: 1rem;
-  font-family: 'Bellota Text', cursive;
+  font-family: 'Oswald', sans-serif;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 1.6rem; }
@@ -522,16 +530,17 @@ img {
   margin-bottom: 1rem; }
 
 .post-text {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   padding: 1rem;
   flex-grow: 1;
   word-break: break-word; }
 
 .post-date {
   color: #ff0a0a;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-style: italic;
-  padding-left: 1rem; }
+  padding-left: 1rem;
+  font-weight: 400; }
 
 .post-user {
   text-align: center; }

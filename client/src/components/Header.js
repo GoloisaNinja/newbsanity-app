@@ -9,23 +9,34 @@ const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
     <ul>
       <li>
         <Link className='navbar-links' to='/pricing'>
-          <i className='fas fa-money-check-alt' id='hide-sm' /> shop
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-shopping-cart'
+            id='hide-sm'
+          />{' '}
+          shop
         </Link>
       </li>
       <li>
         <Link className='navbar-links' to='/posts'>
-          <i className='fas fa-comments' id='hide-sm' /> forum
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-comments'
+            id='hide-sm'
+          />{' '}
+          forum
         </Link>
       </li>
       <li>
         <Link className='navbar-links' to='/dashboard'>
-          <i className='fas fa-user-circle' />{' '}
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-user-circle' />{' '}
           <span id='hide-sm'>dashboard</span>
         </Link>
       </li>
       <li>
         <Link className='navbar-links' onClick={logoutUser} to='/login'>
-          <i className='fas fa-sign-out-alt' /> <span id='hide-sm'>logout</span>
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-sign-out-alt' />{' '}
+          <span id='hide-sm'>logout</span>
         </Link>
       </li>
     </ul>
@@ -34,22 +45,42 @@ const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
     <ul>
       <li>
         <Link className='navbar-links' to='/pricing'>
-          <i className='fas fa-money-check-alt' id='hide-sm' /> pricing
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-shopping-cart'
+            id='hide-sm'
+          />{' '}
+          pricing
         </Link>
       </li>
       <li>
         <Link className='navbar-links' to='/obstacles'>
-          <i className='fas fa-running' id='hide-sm' /> obstacles
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-running'
+            id='hide-sm'
+          />{' '}
+          obstacles
         </Link>
       </li>
       <li>
         <Link className='navbar-links' to='/about'>
-          <i className='fas fa-question-circle' id='hide-sm' /> about
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-question-circle'
+            id='hide-sm'
+          />{' '}
+          about
         </Link>
       </li>
       <li>
         <Link className='navbar-links' to='/login'>
-          <i className='fas fa-user-ninja' id='hide-sm' /> login
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-user-ninja'
+            id='hide-sm'
+          />{' '}
+          login
         </Link>
       </li>
     </ul>
@@ -58,7 +89,8 @@ const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
     <nav className='navbar'>
       <h1>
         <Link to='/' className='navbar-links'>
-          <img className='skull' src='/img/skull.png' /> NEWBSANITY
+          <img className='skull' src='/img/skull.png' />{' '}
+          <span className='navbar-brand'>NEWBSANITY</span>
         </Link>
       </h1>
       {!loading && (

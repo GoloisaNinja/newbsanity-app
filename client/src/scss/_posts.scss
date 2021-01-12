@@ -5,7 +5,7 @@
   margin: 0 auto;
   margin-top: 1rem;
   padding: 1rem;
-  font-family: 'Bellota Text', cursive;
+  font-family: 'Oswald', sans-serif;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 1.6rem;
@@ -43,16 +43,17 @@
   margin-bottom: 1rem;
 }
 .post-text {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   padding: 1rem;
   flex-grow: 1;
   word-break: break-word;
 }
 .post-date {
   color: #ff0a0a;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-style: italic;
   padding-left: 1rem;
+  font-weight: 400;
 }
 .post-user {
   text-align: center;

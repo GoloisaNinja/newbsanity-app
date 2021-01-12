@@ -15,7 +15,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: $white-color;
   cursor: pointer;
-  font-family: 'Bellota Text', cursive;
+  font-family: 'Oswald', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
   padding: 1rem;
@@ -44,8 +44,8 @@
   }
 }
 .text-type-effect {
-  width: 16ch;
-  animation: typing 3s steps(16), blink 0.5s step-end infinite alternate;
+  width: 15ch;
+  animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid lighten(#0e1013, 10%);
