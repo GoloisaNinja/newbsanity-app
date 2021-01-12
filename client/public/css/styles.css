@@ -107,7 +107,7 @@ img {
   background: #242930;
   border-bottom: 3px solid #0e1013;
   display: flex;
-  height: 6rem;
+  height: 7rem;
   justify-content: space-between;
   position: sticky;
   width: 100%;
@@ -136,16 +136,18 @@ img {
   .skull {
     display: none; }
   .navbar {
-    height: 8rem;
+    height: 10rem;
     flex-direction: column;
     justify-content: center; }
     .navbar h1 {
       padding-left: 0;
       margin: 0 auto;
-      margin-bottom: 1rem; }
+      margin-bottom: 1.2rem;
+      margin-top: 1.2rem; }
     .navbar ul {
       justify-content: center;
-      margin: 0 auto; }
+      margin: 0 auto;
+      margin-bottom: 1rem; }
     .navbar li {
       padding-right: 2.5rem;
       padding-bottom: 1rem; }
