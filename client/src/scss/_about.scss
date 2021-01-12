@@ -1,5 +1,10 @@
 .about-img {
   @extend .event-img;
-  max-width: 100%;
+  width: 300px;
   height: 100%;
+}
+@media (max-width: 45rem) {
+  .about-img {
+    width: 100%;
+  }
 }

@@ -482,8 +482,12 @@ img {
     grid-template-columns: 1fr; } }
 
 .about-img {
-  max-width: 100%;
+  width: 300px;
   height: 100%; }
+
+@media (max-width: 45rem) {
+  .about-img {
+    width: 100%; } }
 
 .post-textarea {
   background: #e0e0e0;
