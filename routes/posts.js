@@ -9,7 +9,6 @@ const auth = require('../middleware/auth');
 
 router.post('/api/posts', auth, async (req, res) => {
   const text = req.body.text;
-  const title = req.body.title;
   const user = await req.user;
   const { name, id } = user;
   try {
@@ -19,7 +18,6 @@ router.post('/api/posts', auth, async (req, res) => {
     const post = new Post({
       user: id,
       name,
-      title,
       text,
     });
     await post.save();

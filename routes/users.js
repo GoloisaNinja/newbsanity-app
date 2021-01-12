@@ -5,6 +5,21 @@ const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');
 
+// Load authenticated User
+
+router.get('/api/users/auth', auth, async (req, res) => {
+  const user = req.user;
+  try {
+    if (user) {
+      return res.status(200).json(user);
+    } else {
+      throw new Error('Please authenticate');
+    }
+  } catch (e) {
+    res.status(400).send({ message: e.message });
+  }
+});
+
 // Create new User
 
 router.post('/api/users', async (req, res) => {
@@ -113,13 +128,15 @@ router.get('/api/user/:id/avatar', async (req, res) => {
 
   try {
     if (!user || !user.avatar) {
-      throw new Error();
+      return res.status(400).send({ message: 'Not found' });
     }
 
     res.set('Content-Type', 'image/png');
-    res.send(user.avatar);
+    res.status(200).send(user.avatar);
+    console.log('sent image');
   } catch (e) {
-    res.status(404).send();
+    console.log('did not send image');
+    res.status(400).send(e.message);
   }
 });
 

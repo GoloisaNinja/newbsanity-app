@@ -1,6 +1,34 @@
 import axios from 'axios';
-import { LOGIN_USER, LOGOUT_USER, REGISTER_USER } from './types';
+import {
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT_USER,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+} from './types';
 import { setAlert } from './alert';
+import SetAuthToken from '../utils/SetAuthToken';
+
+// Load the User
+
+export const loadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    SetAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get('/api/users/auth');
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
 
 // Register new User
 
@@ -14,7 +42,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
   try {
     const res = await axios.post('/api/users', body, config);
     dispatch({
-      type: REGISTER_USER,
+      type: REGISTER_SUCCESS,
       payload: res.data,
     });
     dispatch(setAlert('Such Wow! Welcome to Newbsanity!', 'success'));
@@ -26,6 +54,9 @@ export const registerUser = (name, email, password) => async (dispatch) => {
       e.response.data.message = 'Email already exists...';
     }
     dispatch(setAlert(e.response.data.message, 'danger'));
+    dispatch({
+      type: REGISTER_FAIL,
+    });
   }
 };
 
@@ -41,10 +72,35 @@ export const loginUser = (email, password) => async (dispatch) => {
   try {
     const res = await axios.post('/api/user/login', body, config);
     dispatch({
-      type: LOGIN_USER,
+      type: LOGIN_SUCCESS,
       payload: res.data,
     });
   } catch (e) {
     dispatch(setAlert(e.response.data.message, 'danger'));
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
+
+// Logout the User
+
+export const logoutUser = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: token,
+    },
+  };
+  try {
+    const res = await axios.post('/api/user/logout', config);
+    if (res.status === 200) {
+      dispatch({
+        type: LOGOUT_USER,
+      });
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
