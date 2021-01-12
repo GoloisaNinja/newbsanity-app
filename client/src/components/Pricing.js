@@ -203,8 +203,8 @@ const Pricing = () => {
                     width: '100px',
                     fontSize: '1rem',
                     position: 'absolute',
-                    top: '90px',
-                    left: '-30px',
+                    top: '95px',
+                    left: '-24px',
                     paddingTop: '1rem',
                   }}>
                   per person
