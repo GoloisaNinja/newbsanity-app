@@ -133,9 +133,7 @@ router.get('/api/user/:id/avatar', async (req, res) => {
 
     res.set('Content-Type', 'image/png');
     res.status(200).send(user.avatar);
-    console.log('sent image');
   } catch (e) {
-    console.log('did not send image');
     res.status(400).send(e.message);
   }
 });
