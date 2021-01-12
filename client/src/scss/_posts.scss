@@ -44,6 +44,7 @@
 }
 .post-text {
   font-size: 1.6rem;
+  font-weight: 500;
   padding: 1rem;
   flex-grow: 1;
   word-break: break-word;
@@ -57,6 +58,7 @@
 }
 .post-user {
   text-align: center;
+  font-weight: 300;
 }
 @media (max-width: 45rem) {
   .post-container {

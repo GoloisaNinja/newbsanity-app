@@ -29,7 +29,7 @@ const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
       </li>
       <li>
         <Link className='navbar-links' to='/dashboard'>
-          <i style={{ fontSize: '1.6rem' }} className='fas fa-user-circle' />{' '}
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-user-ninja' />{' '}
           <span id='hide-sm'>dashboard</span>
         </Link>
       </li>
