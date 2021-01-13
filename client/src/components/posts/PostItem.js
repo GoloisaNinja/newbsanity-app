@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,28 +11,13 @@ const PostItem = ({
   deletePost,
   post,
   auth: { user },
+  showActions,
 }) => {
-  const [avatar, hasAvatar] = useState(false);
-  useEffect(() => {
-    checkAvatar();
-  }, [post]);
-
-  const checkAvatar = async () => {
-    try {
-      const res = await axios.get(`/api/user/${post.user}/avatar`);
-      if (res.status === 200) {
-        hasAvatar(true);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <Fragment>
       <div className='post-container'>
         <div className='post-user-container'>
-          {avatar ? (
+          {post.avatar ? (
             <img
               className='post-avatar'
               src={`/api/user/${post.user}/avatar`}
@@ -45,32 +31,46 @@ const PostItem = ({
         <div className='post-text-container'>
           <p className='post-text'>{post.text}</p>
           <p className='post-date'>posted: {post.date.slice(0, 10)}</p>
-          <div className='post-social-container'>
-            <button
-              className='btn post-like'
-              onClick={(e) => likePost(post._id)}>
-              <i className='far fa-thumbs-up' />{' '}
-              {post.likes.length > 0 && <span>{post.likes.length}</span>}
-            </button>
-            <button
-              className='btn post-like'
-              onClick={(e) => unlikePost(post._id)}>
-              <i className='far fa-thumbs-down' />
-            </button>
-            <button className='btn post-discussion'>Discussion</button>
-
-            {post.user === user._id && (
+          {showActions && (
+            <div className='post-social-container'>
               <button
-                className='btn post-delete'
-                onClick={(e) => deletePost(post._id)}>
-                <i className='fas fa-times' />
+                className='btn post-like'
+                onClick={(e) => likePost(post._id)}>
+                <i className='far fa-thumbs-up' />{' '}
+                {post.likes.length > 0 && <span>{post.likes.length}</span>}
               </button>
-            )}
-          </div>
+              <button
+                className='btn post-like'
+                onClick={(e) => unlikePost(post._id)}>
+                <i className='far fa-thumbs-down' />
+              </button>
+              <Link className='btn post-discussion' to={`/post/${post._id}`}>
+                Discussion
+                {post.comments.length > 0 && (
+                  <span className='post-discussion__count'>
+                    {' '}
+                    {post.comments.length}{' '}
+                  </span>
+                )}
+              </Link>
+
+              {post.user === user._id && (
+                <button
+                  className='btn post-delete'
+                  onClick={(e) => deletePost(post._id)}>
+                  <i className='fas fa-times' />
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </Fragment>
   );
+};
+
+PostItem.defaultProps = {
+  showActions: true,
 };
 
 PostItem.propTypes = {

@@ -7,6 +7,7 @@ import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Dashboard from '../Dashboard';
 import Posts from '../posts/Posts';
+import Post from '../post/Post';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
       <Route path='/register' component={Register} />
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/posts' component={Posts} />
+      <PrivateRoute path='/post/:id' component={Post} />
     </Switch>
   );
 };

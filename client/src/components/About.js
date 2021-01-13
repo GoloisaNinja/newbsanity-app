@@ -41,30 +41,29 @@ const About = () => {
               onMouseOut={(e) => (e.currentTarget.src = '/img/jerM1.jpg')}
             />
           </div>
-          <Link to='/'>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: '1000px',
-              }}>
-              <h3 className='event-title'>
-                Jarrett <span className='low-weight-span'>D. Newby</span>
-              </h3>
-              <p className='event-text'>
-                When it comes to NEWBSANITY, Jarry is the obstacle building
-                guru. He brings over 30 years of experience in construction and
-                land development. His ability to create well-built and
-                challenging structures enables NEWBSANITY to offer obstacles
-                that go toe-to-toe with any of the national event brands. With
-                an additional 10+ years of event management experience as a
-                professional motocross race official, he knows how to make event
-                day run smoothly. In his spare time, he enjoys being a certified
-                badass: he races motocross, runs marathons and is a 4-time age
-                group winner at World’s Toughest Mudder!
-              </p>
-            </div>
-          </Link>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: '1000px',
+            }}>
+            <h3 className='event-title'>
+              Jarrett <span className='low-weight-span'>D. Newby</span>
+            </h3>
+            <p className='event-text'>
+              When it comes to NEWBSANITY, Jarry is the obstacle building guru.
+              He brings over 30 years of experience in construction and land
+              development. His ability to create well-built and challenging
+              structures enables NEWBSANITY to offer obstacles that go
+              toe-to-toe with any of the national event brands. With an
+              additional 10+ years of event management experience as a
+              professional motocross race official, he knows how to make event
+              day run smoothly. In his spare time, he enjoys being a certified
+              badass: he races motocross, runs marathons and is a 4-time age
+              group winner at World’s Toughest Mudder!
+            </p>
+          </div>
         </div>
       </Fragment>
       <Fragment>
@@ -78,30 +77,29 @@ const About = () => {
               onMouseOut={(e) => (e.currentTarget.src = '/img/jar1.jpg')}
             />
           </div>
-          <Link to='/'>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: '1000px',
-              }}>
-              <h3 className='event-title'>
-                Jarrett <span className='low-weight-span'>S. Newby</span>
-              </h3>
-              <p className='event-text'>
-                When it comes to NEWBSANITY, Jarrett is the brains and good
-                looks behind the operation (He also writes the
-                marketing/informational materials...like this website).
-                Jarrett’s background includes time working at the NCAA, where he
-                was involved in event management for various championships and
-                5+ year with the professional motocross series as a race
-                official. He is a former Division I track & field/cross country
-                stand-out and more recently a 3-time World’s Toughest Mudder
-                competitor, with a best finish of 8th overall. Jarrett’s other
-                hobbies include: motocross, hiking, triathlons and crossfit.
-              </p>
-            </div>
-          </Link>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: '1000px',
+            }}>
+            <h3 className='event-title'>
+              Jarrett <span className='low-weight-span'>S. Newby</span>
+            </h3>
+            <p className='event-text'>
+              When it comes to NEWBSANITY, Jarrett is the brains and good looks
+              behind the operation (He also writes the marketing/informational
+              materials...like this website). Jarrett’s background includes time
+              working at the NCAA, where he was involved in event management for
+              various championships and 5+ year with the professional motocross
+              series as a race official. He is a former Division I track &
+              field/cross country stand-out and more recently a 3-time World’s
+              Toughest Mudder competitor, with a best finish of 8th overall.
+              Jarrett’s other hobbies include: motocross, hiking, triathlons and
+              crossfit.
+            </p>
+          </div>
         </div>
       </Fragment>
       <h3>
@@ -117,28 +115,26 @@ const About = () => {
               alt='father and son'
             />
           </div>
-          <Link to='/'>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: '1000px',
-              }}>
-              <h3 className='event-title'>
-                Father <span className='low-weight-span'>And Son</span>
-              </h3>
-              <p className='event-text'>
-                Whether it’s riding motocross, competing in 24-hour obstacle mud
-                races or waterskiing around icebergs, these two embrace the
-                NEWBSANITY motto of “Live Life on the Edge.” Their quest for new
-                and exciting adventures and the desire to share these
-                experiences with others is how NEWBSANITY was born. Together
-                they form a team that is passionate about creating unique events
-                that participants will have fun doing and be proud to
-                accomplish.
-              </p>
-            </div>
-          </Link>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: '1000px',
+            }}>
+            <h3 className='event-title'>
+              Father <span className='low-weight-span'>And Son</span>
+            </h3>
+            <p className='event-text'>
+              Whether it’s riding motocross, competing in 24-hour obstacle mud
+              races or waterskiing around icebergs, these two embrace the
+              NEWBSANITY motto of “Live Life on the Edge.” Their quest for new
+              and exciting adventures and the desire to share these experiences
+              with others is how NEWBSANITY was born. Together they form a team
+              that is passionate about creating unique events that participants
+              will have fun doing and be proud to accomplish.
+            </p>
+          </div>
         </div>
       </Fragment>
     </div>

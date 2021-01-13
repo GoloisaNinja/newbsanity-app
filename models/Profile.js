@@ -9,6 +9,12 @@ const ProfileSchema = new mongoose.Schema(
     bio: {
       type: String,
     },
+    age: {
+      type: Number,
+    },
+    gender: {
+      type: String,
+    },
     location: {
       type: String,
     },
@@ -28,6 +34,55 @@ const ProfileSchema = new mongoose.Schema(
     peronsalwebsite: {
       type: String,
     },
+    workouts: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        extremeRavineLaps: {
+          type: Number,
+        },
+        mudGauntletLaps: {
+          type: Number,
+        },
+        workoutPartner: {
+          type: String,
+        },
+        text: {
+          type: String,
+        },
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    registeredEvents: [
+      {
+        event: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Event',
+        },
+        eventName: {
+          type: String,
+          required: true,
+        },
+        text: {
+          type: String,
+        },
+        eventDate: {
+          type: Date,
+        },
+        eventTime: {
+          type: String,
+        },
+      },
+    ],
     social: {
       facebook: {
         type: String,

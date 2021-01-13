@@ -44,6 +44,25 @@ const EventSchema = new mongoose.Schema({
       },
     },
   ],
+  registration: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      text: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   date: {
     type: Date,
     required: true,

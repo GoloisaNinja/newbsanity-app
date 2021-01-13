@@ -7,6 +7,7 @@ import {
   LOGOUT_USER,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  CLEAR_POSTS,
 } from './types';
 import { setAlert } from './alert';
 import SetAuthToken from '../utils/SetAuthToken';
@@ -98,6 +99,9 @@ export const logoutUser = () => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: LOGOUT_USER,
+      });
+      dispatch({
+        type: CLEAR_POSTS,
       });
     }
   } catch (e) {

@@ -108,6 +108,42 @@ router.get('/api/events/event/:_id', async (req, res) => {
   }
 });
 
+// Register for an Event by Id
+
+router.post('/api/event/register/:_id', auth, async (req, res) => {
+  const user = req.user;
+  const { name, id } = user;
+  const text = req.body.text;
+  const _id = req.params._id;
+  const eventFields = {};
+  eventFields.user = id;
+  eventFields.name = name;
+  eventFields.text = text || '';
+  try {
+    const event = await Event.findById({ _id });
+    const profile = await Profile.findOne({ user: id });
+    if (!event) {
+      return res.status(404).send({ message: 'Could not find event...' });
+    }
+    event.registration.unshift(eventFields);
+    await event.save();
+    const { title, date, time } = event;
+    const regDeets = {
+      eventName: title,
+      eventDate: date,
+      eventTime: time,
+    };
+    profile.registeredEvents.unshift(regDeets);
+    await profile.save();
+    res.status(200).send(event);
+  } catch (e) {
+    if (e.kind === 'ObjectId') {
+      res.status(404).send({ message: 'Could not find event...' });
+    }
+    res.status(400).send({ message: e.message });
+  }
+});
+
 // Like an Event
 
 router.post('/api/events/like/:eventId', auth, async (req, res) => {

@@ -320,14 +320,15 @@ img {
   color: #fff;
   cursor: pointer;
   font-family: 'Oswald', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 1.4rem;
   text-transform: uppercase;
   padding: 1rem;
   margin-bottom: 1rem; }
   .btn.register {
     width: 40%;
     margin-right: 1rem; }
-  .btn.create-post {
+  .btn.create-post, .btn.btn-forum {
     background: #242930;
     border-bottom: 3px solid #191c22;
     margin-bottom: 1.5rem; }
@@ -341,13 +342,20 @@ img {
     margin-right: 1rem; }
   .btn.post-delete {
     border-bottom: 2px solid #d60000; }
+  .btn.btn-forum {
+    background: #ff0a0a;
+    border-bottom: 3px solid #d60000; }
 
-.text-type-effect {
+.text-type-effect, .text-type-effect2 {
   width: 15ch;
   animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid #242930; }
+
+.text-type-effect2 {
+  width: 16.5ch;
+  animation: typing 2s steps(16.5), blink 0.5s step-end infinite alternate; }
 
 @keyframes typing {
   from {
@@ -482,7 +490,7 @@ img {
     grid-template-columns: 1fr; } }
 
 .about-img {
-  width: 300px;
+  width: 250px;
   height: 100%; }
 
 @media (max-width: 45rem) {
@@ -550,6 +558,11 @@ img {
 .post-user {
   text-align: center;
   font-weight: 300; }
+
+.post-discussion__count {
+  color: white;
+  margin-left: 0.75rem;
+  text-align: center; }
 
 @media (max-width: 45rem) {
   .post-container {

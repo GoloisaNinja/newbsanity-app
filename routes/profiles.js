@@ -11,6 +11,8 @@ router.post('/api/profiles', auth, async (req, res) => {
   const _id = req.user._id;
   const {
     bio,
+    age,
+    gender,
     location,
     careerfield,
     currentfitnesslevel,
@@ -30,6 +32,8 @@ router.post('/api/profiles', auth, async (req, res) => {
   let profileFields = {};
   profileFields.user = _id;
   profileFields.bio = bio || '';
+  profileFields.age = age || 1;
+  profileFields.gender = gender || '';
   profileFields.location = location || '';
   profileFields.careerfield = careerfield || '';
   profileFields.currentfitnesslevel = currentfitnesslevel || '';

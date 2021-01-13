@@ -16,7 +16,8 @@
   color: $white-color;
   cursor: pointer;
   font-family: 'Oswald', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 1.4rem;
   text-transform: uppercase;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -42,6 +43,11 @@
   &.post-delete {
     border-bottom: 2px solid darken(#ff0a0a, 10%);
   }
+  &.btn-forum {
+    @extend .create-post;
+    background: #ff0a0a;
+    border-bottom: 3px solid darken(#ff0a0a, 10%);
+  }
 }
 .text-type-effect {
   width: 15ch;
@@ -49,6 +55,11 @@
   white-space: nowrap;
   overflow: hidden;
   border-right: 2px solid lighten(#0e1013, 10%);
+}
+.text-type-effect2 {
+  @extend .text-type-effect;
+  width: 16.5ch;
+  animation: typing 2s steps(16.5), blink 0.5s step-end infinite alternate;
 }
 
 @keyframes typing {

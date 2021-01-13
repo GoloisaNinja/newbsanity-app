@@ -10,7 +10,7 @@ const auth = require('../middleware/auth');
 router.post('/api/posts', auth, async (req, res) => {
   const text = req.body.text;
   const user = await req.user;
-  const { name, id } = user;
+  const { name, id, avatar } = user;
   try {
     if (!user) {
       throw new Error('Please authenticate...');
@@ -18,6 +18,7 @@ router.post('/api/posts', auth, async (req, res) => {
     const post = new Post({
       user: id,
       name,
+      avatar,
       text,
     });
     await post.save();
