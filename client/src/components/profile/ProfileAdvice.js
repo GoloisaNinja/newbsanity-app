@@ -30,7 +30,7 @@ const ProfileAdvice = () => {
   const advice =
     jarrettAdvice[Math.floor(Math.random() * jarrettAdvice.length)];
   return (
-    <div className='profile-container-special' style={{ height: '100%' }}>
+    <div className='profile-container-special'>
       <div className='main-flex-one' style={{ flex: 1 }}>
         <div className='profile-avatar'>
           <h2>

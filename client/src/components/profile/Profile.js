@@ -35,9 +35,7 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
                 )}
               </div>
               {profile === null ? (
-                <div
-                  className='profile-bio'
-                  style={{ flex: 1, minWidth: '30rem' }}>
+                <div className='profile-bio'>
                   <div className='profile-bio__header'>
                     <h3>
                       <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -62,9 +60,7 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
                   </div>
                 </div>
               ) : (
-                <div
-                  className='profile-bio'
-                  style={{ flex: 1, minWidth: '30rem' }}>
+                <div className='profile-bio' style={{ minWidth: '30rem' }}>
                   <div className='profile-bio__header'>
                     <h3>
                       <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -142,8 +138,8 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
             </div>
           </div>
           <div className='double-flex'>
-            <ProfileRegisteredEvents />
             <ProfileAdvice />
+            <ProfileRegisteredEvents />
           </div>
         </div>
         <ProfileEvents />

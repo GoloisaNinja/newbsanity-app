@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 const ProfileRegisteredEvents = ({ profile: { profile } }) => {
   return (
     <div className='profile-container-special' style={{ height: '100%' }}>
-      <div className='main-flex-one' style={{ flexGrow: 1 }}>
+      <div className='main-flex-one' style={{ flex: 1 }}>
         <div className='profile-avatar'>
           <h2>
             Registered<span style={{ color: '#ff0a0a' }}> Events</span>
           </h2>
         </div>
-        <div className='profile-bio' style={{ flexGrow: 1 }}>
+        <div className='profile-bio' style={{ flex: 1 }}>
           <div className='profile-bio__header'>
             <h3>
               <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -25,30 +25,26 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
           </p>
           {profile ? (
             profile.registeredEvents.length > 0 ? (
-              <Fragment>
-                {profile.registeredEvents.map((event) => (
-                  <div className='profile-events' key={event.eventName}>
-                    <div>
-                      <h3 className='event-title'>
-                        {event.eventName}{' '}
-                        <span className='low-weight-span'></span>
-                      </h3>
-                      <h5 style={{ paddingLeft: '2rem' }}>
-                        Date:{' '}
-                        <span className='low-weight-span'>
-                          {event.eventDate.slice(0, 10)}
-                        </span>
-                      </h5>
-                      <h5 style={{ paddingLeft: '2rem' }}>
-                        Time:{' '}
-                        <span className='low-weight-span'>
-                          {event.eventTime}
-                        </span>
-                      </h5>
-                    </div>
+              profile.registeredEvents.map((event) => (
+                <div className='profile-events' key={event.eventName}>
+                  <div>
+                    <h3 className='event-title'>
+                      {event.eventName}{' '}
+                      <span className='low-weight-span'></span>
+                    </h3>
+                    <h5 style={{ paddingLeft: '2rem' }}>
+                      Date:{' '}
+                      <span className='low-weight-span'>
+                        {event.eventDate.slice(0, 10)}
+                      </span>
+                    </h5>
+                    <h5 style={{ paddingLeft: '2rem' }}>
+                      Time:{' '}
+                      <span className='low-weight-span'>{event.eventTime}</span>
+                    </h5>
                   </div>
-                ))}
-              </Fragment>
+                </div>
+              ))
             ) : (
               <div className='profile-events'>
                 <h3 className='event-title'>
