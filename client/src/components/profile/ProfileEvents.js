@@ -8,48 +8,46 @@ const ProfileEvents = ({ events, getLandingEvents }) => {
     getLandingEvents();
   }, [getLandingEvents]);
   return (
-    <div className='profile-container'>
-      <div className='main-flex-one'>
-        <div className='profile-avatar'>
-          <h2>
-            #Seeing<span style={{ color: '#ff0a0a' }}>Red</span>
-          </h2>
+    <div className='profile-events-container'>
+      <div className='profile-avatar'>
+        <h2>
+          #Seeing<span style={{ color: '#ff0a0a' }}>Red</span>
+        </h2>
+      </div>
+      <div className='profile-bio'>
+        <div className='profile-bio__header'>
+          <h3>
+            <span className='red-span' style={{ color: '#ff0a0a' }}>
+              Newbsanity{' '}
+            </span>{' '}
+            <span className='low-weight-span'>Events</span>
+          </h3>
         </div>
-        <div className='profile-bio'>
-          <div className='profile-bio__header'>
-            <h3>
-              <span className='red-span' style={{ color: '#ff0a0a' }}>
-                Newbsanity{' '}
-              </span>{' '}
-              <span className='low-weight-span'>Events</span>
-            </h3>
-          </div>
-          <p style={{ borderBottom: '3px solid #ff0a0a' }}>Upcoming Events</p>
-          <Fragment>
-            {events.map((event) => (
-              <div
-                className='profile-events'
-                key={event.title}
-                style={{ display: 'flex', flexDirection: 'column' }}>
-                <div>
-                  <h3 className='event-title'>
-                    {event.title} <span className='low-weight-span'></span>
-                  </h3>
-                  <h5 style={{ paddingLeft: '2rem' }}>
-                    Date:{' '}
-                    <span className='low-weight-span'>
-                      {event.date.slice(0, 10)}
-                    </span>
-                  </h5>
-                  <h5 style={{ paddingLeft: '2rem' }}>
-                    Time: <span className='low-weight-span'>{event.time}</span>
-                  </h5>
-                  <p className='event-text'>{event.text}</p>
-                </div>
+        <p style={{ borderBottom: '3px solid #ff0a0a' }}>Upcoming Events</p>
+        <Fragment>
+          {events.map((event) => (
+            <div
+              className='profile-events'
+              key={event.title}
+              style={{ display: 'flex', flexDirection: 'column' }}>
+              <div>
+                <h3 className='event-title'>
+                  {event.title} <span className='low-weight-span'></span>
+                </h3>
+                <h5 style={{ paddingLeft: '2rem' }}>
+                  Date:{' '}
+                  <span className='low-weight-span'>
+                    {event.date.slice(0, 10)}
+                  </span>
+                </h5>
+                <h5 style={{ paddingLeft: '2rem' }}>
+                  Time: <span className='low-weight-span'>{event.time}</span>
+                </h5>
+                <p className='event-text'>{event.text}</p>
               </div>
-            ))}
-          </Fragment>
-        </div>
+            </div>
+          ))}
+        </Fragment>
       </div>
     </div>
   );

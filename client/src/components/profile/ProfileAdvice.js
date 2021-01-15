@@ -30,42 +30,40 @@ const ProfileAdvice = () => {
   const advice =
     jarrettAdvice[Math.floor(Math.random() * jarrettAdvice.length)];
   return (
-    <div className='profile-container-special'>
-      <div className='main-flex-one' style={{ flex: 1 }}>
-        <div className='profile-avatar'>
-          <h2>
-            Jarrett's<span style={{ color: '#ff0a0a' }}> Corner</span>
-          </h2>
+    <div className='profile-advice-container'>
+      <div className='profile-avatar'>
+        <h2>
+          Jarrett's<span style={{ color: '#ff0a0a' }}> Corner</span>
+        </h2>
+      </div>
+      <div className='profile-bio' style={{ flex: 1 }}>
+        <div className='profile-bio__header'>
+          <h3>
+            <span className='red-span' style={{ color: '#ff0a0a' }}>
+              Your Daily{' '}
+            </span>{' '}
+            <span className='low-weight-span'>Advice</span>
+          </h3>
         </div>
-        <div className='profile-bio' style={{ flex: 1 }}>
-          <div className='profile-bio__header'>
-            <h3>
-              <span className='red-span' style={{ color: '#ff0a0a' }}>
-                Your Daily{' '}
-              </span>{' '}
-              <span className='low-weight-span'>Advice</span>
-            </h3>
-          </div>
-          <p style={{ borderBottom: '3px solid #ff0a0a' }}>
-            Channel your inner Jarrett
+        <p style={{ borderBottom: '3px solid #ff0a0a' }}>
+          Channel your inner Jarrett
+        </p>
+
+        <div className='profile-events'>
+          <h3 className='event-title'>
+            Today's Theme:{' '}
+            <span className='low-weight-span'>{advice.theme}</span>
+          </h3>
+          <p className='event-text'>
+            <i className='fas fa-quote-left' /> {advice.advice}{' '}
+            <i className='fas fa-quote-right' />
           </p>
 
-          <div className='profile-events'>
-            <h3 className='event-title'>
-              Today's Theme:{' '}
-              <span className='low-weight-span'>{advice.theme}</span>
-            </h3>
-            <p className='event-text'>
-              <i className='fas fa-quote-left' /> {advice.advice}{' '}
-              <i className='fas fa-quote-right' />
-            </p>
-
-            <h5 style={{ textAlign: 'right', paddingRight: '2rem' }}>
-              <span style={{ fontStyle: 'italic' }}>
-                - Jarrett <span className='low-weight-span'>Newby 2021</span>
-              </span>
-            </h5>
-          </div>
+          <h5 style={{ textAlign: 'right', paddingRight: '2rem' }}>
+            <span style={{ fontStyle: 'italic' }}>
+              - Jarrett <span className='low-weight-span'>Newby 2021</span>
+            </span>
+          </h5>
         </div>
       </div>
     </div>

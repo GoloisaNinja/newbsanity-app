@@ -573,23 +573,13 @@ img {
     max-width: 150px;
     margin-bottom: 1.5rem; } }
 
-.profile-container, .profile-container-special {
+.profile-container, .profile-advice-container, .profile-registered-container {
+  grid-area: one;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: 2rem;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
-
-.main-flex-one {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
 
@@ -628,13 +618,20 @@ img {
   .profile-hobbies__item {
     font-size: 1.2rem; }
 
-.bio-flex {
-  display: flex; }
+.profile-main-grid {
+  display: grid;
+  grid-template-areas: 'one two' 'one three';
+  grid-gap: 2rem; }
 
-.double-flex {
-  display: flex;
-  flex-direction: column;
-  margin-left: 2rem; }
+.profile-advice-container {
+  grid-area: two; }
+
+.profile-registered-container {
+  grid-area: three;
+  width: 100%; }
+
+.profile-events-container {
+  margin-top: 2rem; }
 
 #hobby-icon {
   color: #758374;
@@ -648,7 +645,8 @@ img {
     border-bottom: none; }
 
 @media (max-width: 45rem) {
-  .bio-flex {
-    flex-direction: column; }
-  .double-flex {
-    margin-left: 0; } }
+  .profile-main-grid {
+    grid-template-areas: 'one' 'two' 'three';
+    grid-gap: 3rem; }
+  .profile-events-container {
+    margin-top: 3rem; } }
