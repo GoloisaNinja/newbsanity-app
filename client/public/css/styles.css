@@ -644,6 +644,11 @@ img {
   .profile-events:last-child {
     border-bottom: none; }
 
+.advice-img {
+  border-radius: 50%;
+  width: 50px;
+  margin-right: 1rem; }
+
 @media (max-width: 45rem) {
   .profile-main-grid {
     grid-template-areas: 'one' 'two' 'three';

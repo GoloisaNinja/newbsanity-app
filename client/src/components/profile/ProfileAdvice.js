@@ -24,7 +24,7 @@ const ProfileAdvice = () => {
     },
     {
       theme: 'Deep thoughts',
-      advice: `Are clouds solid enough to run on? Could Newbsanity have obstacles in the sky? Is that beeping I'm hearing a fire alarm?`,
+      advice: `Are clouds solid enough to run on? Could Newbsanity have obstacles in the sky? Is it possible to taste danger?`,
     },
   ];
   const advice =
@@ -58,12 +58,24 @@ const ProfileAdvice = () => {
             <i className='fas fa-quote-left' /> {advice.advice}{' '}
             <i className='fas fa-quote-right' />
           </p>
-
-          <h5 style={{ textAlign: 'right', paddingRight: '2rem' }}>
-            <span style={{ fontStyle: 'italic' }}>
-              - Jarrett <span className='low-weight-span'>Newby 2021</span>
-            </span>
-          </h5>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+            }}>
+            <div>
+              <img className='advice-img' src='/img/jar1.jpg' />{' '}
+            </div>
+            <div>
+              <h5 style={{ textAlign: 'right', paddingRight: '2rem' }}>
+                <span style={{ fontStyle: 'italic' }}>
+                  {' '}
+                  - Jarrett <span className='low-weight-span'>Newby 2021</span>
+                </span>
+              </h5>
+            </div>
+          </div>
         </div>
       </div>
     </div>
