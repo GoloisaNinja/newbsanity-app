@@ -37,7 +37,7 @@ const ProfileAdvice = () => {
             Jarrett's<span style={{ color: '#ff0a0a' }}> Corner</span>
           </h2>
         </div>
-        <div className='profile-bio' style={{ flexGrow: 1 }}>
+        <div className='profile-bio'>
           <div className='profile-bio__header'>
             <h3>
               <span className='red-span' style={{ color: '#ff0a0a' }}>
