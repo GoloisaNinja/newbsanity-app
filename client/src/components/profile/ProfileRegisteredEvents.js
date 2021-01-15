@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 const ProfileRegisteredEvents = ({ profile: { profile } }) => {
   return (
-    <div className='profile-container-special'>
-      <div className='main-flex-one'>
+    <div className='profile-container-special' style={{ height: '100%' }}>
+      <div className='main-flex-one' style={{ flexGrow: 1 }}>
         <div className='profile-avatar'>
           <h2>
             Registered<span style={{ color: '#ff0a0a' }}> Events</span>
           </h2>
         </div>
-        <div className='profile-bio'>
+        <div className='profile-bio' style={{ flexGrow: 1 }}>
           <div className='profile-bio__header'>
             <h3>
               <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -30,8 +30,8 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
                   <div
                     className='profile-events'
                     key={event.eventName}
-                    style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div>
+                    style={{ flexGrow: 1 }}>
+                    <div style={{ flexGrow: 1 }}>
                       <h3 className='event-title'>
                         {event.eventName}{' '}
                         <span className='low-weight-span'></span>
