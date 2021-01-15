@@ -31,13 +31,13 @@ const ProfileAdvice = () => {
     jarrettAdvice[Math.floor(Math.random() * jarrettAdvice.length)];
   return (
     <div className='profile-container-special' style={{ height: '100%' }}>
-      <div className='main-flex-one' style={{ flexGrow: 1 }}>
+      <div className='main-flex-one' style={{ flex: 1 }}>
         <div className='profile-avatar'>
           <h2>
             Jarrett's<span style={{ color: '#ff0a0a' }}> Corner</span>
           </h2>
         </div>
-        <div className='profile-bio'>
+        <div className='profile-bio' style={{ flex: 1 }}>
           <div className='profile-bio__header'>
             <h3>
               <span className='red-span' style={{ color: '#ff0a0a' }}>

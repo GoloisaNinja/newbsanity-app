@@ -19,8 +19,8 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
       </h1>
       <div>
         <div className='bio-flex' style={{ height: '100%' }}>
-          <div className='profile-container' style={{ flexGrow: 1 }}>
-            <div className='main-flex-one' style={{ flexGrow: 1 }}>
+          <div className='profile-container' style={{ flex: 1 }}>
+            <div className='main-flex-one' style={{ flex: 1 }}>
               <div className='profile-avatar'>
                 {user.avatar ? (
                   <img
@@ -35,7 +35,9 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
                 )}
               </div>
               {profile === null ? (
-                <div className='profile-bio' style={{ flexGrow: 1 }}>
+                <div
+                  className='profile-bio'
+                  style={{ flex: 1, minWidth: '30rem' }}>
                   <div className='profile-bio__header'>
                     <h3>
                       <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -48,18 +50,21 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
                     Wow such empties...
                   </p>
 
-                  <div className='profile-events' style={{ flexGrow: 1 }}>
+                  <div className='profile-events'>
                     <h3 className='event-title'>
                       Looks{' '}
                       <span className='low-weight-span'>
                         like you don't have a profile...
                       </span>
                     </h3>
+
                     <p className='event-text'>You should make one!</p>
                   </div>
                 </div>
               ) : (
-                <div className='profile-bio' style={{ flexGrow: 1 }}>
+                <div
+                  className='profile-bio'
+                  style={{ flex: 1, minWidth: '30rem' }}>
                   <div className='profile-bio__header'>
                     <h3>
                       <span className='red-span' style={{ color: '#ff0a0a' }}>
