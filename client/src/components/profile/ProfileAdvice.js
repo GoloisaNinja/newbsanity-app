@@ -50,7 +50,7 @@ const ProfileAdvice = () => {
             Channel your inner Jarrett
           </p>
 
-          <div className='profile-events' style={{ flexGrow: 1 }}>
+          <div className='profile-events'>
             <h3 className='event-title'>
               Today's Theme:{' '}
               <span className='low-weight-span'>{advice.theme}</span>

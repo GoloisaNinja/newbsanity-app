@@ -27,11 +27,8 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
             profile.registeredEvents.length > 0 ? (
               <Fragment>
                 {profile.registeredEvents.map((event) => (
-                  <div
-                    className='profile-events'
-                    key={event.eventName}
-                    style={{ flexGrow: 1 }}>
-                    <div style={{ flexGrow: 1 }}>
+                  <div className='profile-events' key={event.eventName}>
+                    <div>
                       <h3 className='event-title'>
                         {event.eventName}{' '}
                         <span className='low-weight-span'></span>
@@ -53,9 +50,7 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
                 ))}
               </Fragment>
             ) : (
-              <div
-                className='profile-events'
-                style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className='profile-events'>
                 <h3 className='event-title'>
                   Not{' '}
                   <span className='low-weight-span'>
@@ -68,9 +63,7 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
               </div>
             )
           ) : (
-            <div
-              className='profile-events'
-              style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className='profile-events'>
               <p className='event-text'>
                 Create{' '}
                 <span className='low-weight-span'>

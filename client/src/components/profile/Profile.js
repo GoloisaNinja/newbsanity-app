@@ -59,7 +59,7 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
                   </div>
                 </div>
               ) : (
-                <div className='profile-bio'>
+                <div className='profile-bio' style={{ flexGrow: 1 }}>
                   <div className='profile-bio__header'>
                     <h3>
                       <span className='red-span' style={{ color: '#ff0a0a' }}>
