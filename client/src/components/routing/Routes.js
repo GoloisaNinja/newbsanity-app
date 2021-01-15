@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import About from '../About';
-import Obstacles from '../Obstacles';
+import Obstacles from '../obstacles/Obstacles';
 import Pricing from '../Pricing';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
-import Dashboard from '../Dashboard';
+import Dashboard from '../profile/Dashboard';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import PrivateRoute from './PrivateRoute';

@@ -1,16 +1,19 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Alert from './Alert';
-import Spinner from './Spinner';
+import Alert from '../Alert';
+import Spinner from '../Spinner';
+import Profile from './Profile';
 
-const Dashboard = ({ auth: { user, loading } }) => {
+const Dashboard = ({ auth: { user, loading }, events }) => {
   return (
     <div>
       {!loading ? (
         <Fragment>
           <Alert />
-          <p>Welcome your Dashboard {user.name}</p>
+          <div className='content-container'>
+            <Profile user={user} />
+          </div>
         </Fragment>
       ) : (
         <Spinner />
@@ -21,10 +24,12 @@ const Dashboard = ({ auth: { user, loading } }) => {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
+  events: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  events: state.events.events,
 });
 
 export default connect(mapStateToProps)(Dashboard);

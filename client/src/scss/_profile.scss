@@ -1,0 +1,89 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.main-flex-one {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.profile-avatar {
+  display: flex;
+  margin: 0 auto;
+  background-color: lighten(#88878f, 15%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.post-avatar-profile {
+  @extend .post-avatar;
+  margin-top: 1.5rem;
+}
+.profile-bio {
+  background: lighten(#0e1013, 10%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 2rem;
+  color: #fff;
+  width: 100%;
+}
+.profile-bio__header {
+  justify-content: center;
+  text-align: center;
+}
+.personal-item-span {
+  color: lighten(#5d685c, 10%);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.profile-hobbies {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  &__item {
+    font-size: 1.2rem;
+  }
+}
+.bio-flex {
+  display: flex;
+}
+.double-flex {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+.profile-container-special {
+  @extend .profile-container;
+}
+
+#hobby-icon {
+  color: lighten(#5d685c, 10%);
+  margin-top: 0.2rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+.profile-events {
+  border-bottom: 2px solid lighten(#88878f, 15%);
+  &:last-child {
+    border-bottom: none;
+  }
+}
+@media (max-width: 45rem) {
+  .bio-flex {
+    flex-direction: column;
+  }
+  .double-flex {
+    margin-left: 0;
+  }
+}

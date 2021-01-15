@@ -50,7 +50,7 @@
   }
 }
 .text-type-effect {
-  width: 15ch;
+  width: 15.2ch;
   animation: typing 2s steps(15), blink 0.5s step-end infinite alternate;
   white-space: nowrap;
   overflow: hidden;
@@ -59,7 +59,7 @@
 .text-type-effect2 {
   @extend .text-type-effect;
   width: 16.5ch;
-  animation: typing 2s steps(16.5), blink 0.5s step-end infinite alternate;
+  animation: typing 2s steps(16), blink 0.5s step-end infinite alternate;
 }
 
 @keyframes typing {

@@ -16,3 +16,6 @@ export const CLEAR_POSTS = 'CLEAR_POSTS';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const GET_PROFILE = 'GET_PROFILE';
+export const PROFILE_FAIL = 'PROFILE_FAIL';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';

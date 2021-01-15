@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Landing from '../components/Landing';
 import Routes from '../components/routing/Routes';
+import ScrollToTop from '../components/ScollToTop';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -22,6 +23,7 @@ const AppRouter = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
         <Fragment>
           <Header />
           <Switch>

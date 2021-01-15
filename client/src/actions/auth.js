@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   CLEAR_POSTS,
+  CLEAR_PROFILE,
 } from './types';
 import { setAlert } from './alert';
 import SetAuthToken from '../utils/SetAuthToken';
@@ -84,7 +85,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   }
 };
 
-// Logout the User
+// Logout the User/Clear profiles
 
 export const logoutUser = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -102,6 +103,9 @@ export const logoutUser = () => async (dispatch) => {
       });
       dispatch({
         type: CLEAR_POSTS,
+      });
+      dispatch({
+        type: CLEAR_PROFILE,
       });
     }
   } catch (e) {
