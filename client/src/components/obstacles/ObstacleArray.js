@@ -31,7 +31,7 @@ const obstacleArray = [
     name2: 'Beard',
     description: `This deceptively hard obstacle will make you focus a little
       harder on your next abs day. Climb the underside of a cargo net
-      down and back up all without letting you body touch the group
+      down, and back up all, without letting your body touch the group
       below.`,
     key: 4,
   },

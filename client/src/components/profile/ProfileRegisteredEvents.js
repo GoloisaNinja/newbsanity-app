@@ -10,7 +10,7 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
           Registered<span style={{ color: '#ff0a0a' }}> Events</span>
         </h2>
       </div>
-      <div className='profile-bio' style={{ flex: 1 }}>
+      <div className='profile-bio-regevents'>
         <div className='profile-bio__header'>
           <h3>
             <span className='red-span' style={{ color: '#ff0a0a' }}>
@@ -51,8 +51,15 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
                   registered for any events...
                 </span>
               </h3>
-              <div>
-                <button className='btn'>Events Page</button>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '2.5rem',
+                }}>
+                <button style={{ width: '100%' }} className='btn'>
+                  Events Page
+                </button>
               </div>
             </div>
           )

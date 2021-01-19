@@ -52,18 +52,20 @@ router.post('/api/profiles', auth, async (req, res) => {
   profileFields.social.youtube = youtube || '';
   try {
     let profile = await Profile.findOne({ user: _id });
+
     if (profile) {
-      profile = await Profile.findByIdAndUpdate({
-        user: _id,
-        $set: profileFields,
-        new: true,
-      });
+      profile = await Profile.findOneAndUpdate(
+        { user: _id },
+        { $set: profileFields },
+        { new: true }
+      );
       return res.status(200).json(profile);
     }
     profile = new Profile(profileFields);
     await profile.save();
     res.status(200).json(profile);
   } catch (e) {
+    console.log(e);
     res.status(500).send(e.message);
   }
 });
@@ -86,11 +88,13 @@ router.get('/api/profiles/all', async (req, res) => {
 // Get a profile by Id
 
 router.get('/api/profiles/:_id', async (req, res) => {
+  console.log(req.params._id);
   const _id = req.params._id;
   try {
     const profile = await Profile.findOne({
       user: _id,
     }).populate('user', ['name']);
+    console.log(profile);
     if (profile) {
       return res.status(200).send(profile);
     } else {

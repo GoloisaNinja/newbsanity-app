@@ -1,3 +1,30 @@
+.profile-actions {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.btn {
+  &.profile-action {
+    background: lighten(#0e1013, 10%);
+    border-bottom: #0e1013;
+    margin-right: 2rem;
+  }
+  &.profile-social {
+    border-bottom: #0e1013;
+    background: lighten(#0e1013, 10%);
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  &.profile-submit {
+    width: 100%;
+  }
+}
+.profile-label {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .profile-container {
   grid-area: one;
   display: flex;
@@ -8,20 +35,34 @@
   align-items: center;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
 }
 
 .profile-avatar {
   display: flex;
+  flex-direction: column;
   margin: 0 auto;
-  background-color: lighten(#88878f, 15%);
+  //background-color: lighten(#88878f, 15%);
+  background-color: #cecece;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
+.profile-social-icons {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#prof-icons {
+  margin-right: 1rem;
+  color: lighten(#0e1013, 10%);
+}
+
 .post-avatar-profile {
   @extend .post-avatar;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .profile-bio {
   background: lighten(#0e1013, 10%);
@@ -29,6 +70,20 @@
   padding: 2rem;
   color: #fff;
   width: 100%;
+  flex-grow: 1;
+}
+.profile-bio-regevents {
+  @extend .profile-bio;
+  max-height: 25rem;
+  overflow-y: scroll;
+  justify-content: start;
+  flex: 1;
+  scrollbar-width: none; //firefox scrollbar fix
+  -ms-overflow-style: none; // IE 10+ scrollbar fix
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0; // Webkit scollbar fix
+  }
 }
 .profile-bio__header {
   justify-content: center;
@@ -86,6 +141,14 @@
   width: 50px;
   margin-right: 1rem;
 }
+
+// Profile Form
+#form-icons {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
 @media (max-width: 45rem) {
   .profile-main-grid {
     grid-template-areas:
@@ -96,5 +159,11 @@
   }
   .profile-events-container {
     margin-top: 3rem;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+  .btn.profile-action {
+    width: 100%;
   }
 }

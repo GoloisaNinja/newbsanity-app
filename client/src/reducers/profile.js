@@ -23,6 +23,7 @@ export default function (state = initialState, action) {
         profile: null,
         profiles: [],
         loading: false,
+        error: payload,
       };
     default:
       return state;

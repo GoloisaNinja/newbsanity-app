@@ -28,7 +28,7 @@ const Obstacles = () => {
               <h3
                 style={{ padding: '0 2rem', color: 'white', fontSize: '3rem' }}
                 className='event-title'>
-                Newsanity <span className='low-weight-span'>Grip Rig</span>
+                Newbsanity <span className='low-weight-span'>Grip Rig</span>
               </h3>
             </div>
           </div>

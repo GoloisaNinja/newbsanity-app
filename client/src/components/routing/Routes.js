@@ -8,6 +8,7 @@ import Register from '../auth/Register';
 import Dashboard from '../profile/Dashboard';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
+import CreateProfileForm from '../profile/profile-forms/CreateProfileForm';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = () => {
@@ -21,6 +22,7 @@ const Routes = () => {
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <PrivateRoute path='/posts' component={Posts} />
       <PrivateRoute path='/post/:id' component={Post} />
+      <PrivateRoute path='/profile' component={CreateProfileForm} />
     </Switch>
   );
 };

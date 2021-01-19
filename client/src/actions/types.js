@@ -19,3 +19,4 @@ export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const GET_PROFILE = 'GET_PROFILE';
 export const PROFILE_FAIL = 'PROFILE_FAIL';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const CREATE_PROFILE = 'CREATE_PROFILE';
