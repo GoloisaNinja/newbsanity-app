@@ -26,7 +26,6 @@ router.post('/api/profiles', auth, async (req, res) => {
     linkedin,
     youtube,
   } = req.body;
-  console.log(hobbies);
 
   // build profile object
   let profileFields = {};
@@ -88,7 +87,6 @@ router.get('/api/profiles/all', async (req, res) => {
 // Get a profile by Id
 
 router.get('/api/profiles/:_id', async (req, res) => {
-  console.log(req.params._id);
   const _id = req.params._id;
   try {
     const profile = await Profile.findOne({

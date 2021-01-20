@@ -102,6 +102,11 @@ ul {
 img {
   width: 100%; }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
 .navbar {
   align-items: center;
   background: #242930;
