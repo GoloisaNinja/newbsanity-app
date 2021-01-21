@@ -105,7 +105,7 @@ router.post(
     const user = await req.user;
     user.avatar = buffer;
     await user.save();
-    res.send('Avatar image uploaded successfully...');
+    res.status(200).send({ message: 'Avatar image uploaded successfully...' });
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });

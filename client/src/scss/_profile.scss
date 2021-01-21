@@ -62,7 +62,6 @@
 .post-avatar-profile {
   @extend .post-avatar;
   margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 .profile-bio {
   background: lighten(#0e1013, 10%);
@@ -147,6 +146,40 @@
   font-size: 3rem;
   margin-bottom: 1rem;
   margin-left: 1rem;
+}
+
+// Avatar form input button styling
+
+input[type='file']::-webkit-file-upload-button {
+  border: none;
+  border-radius: 3px;
+  background: #0e1013;
+  border-bottom: 2px solid darken(#0e1013, 5%);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease-in-out;
+  width: 125px;
+  &:hover {
+    background: lighten(#0e1013, 15%);
+  }
+}
+
+input[type='file']::file-selector-button {
+  border: none;
+  border-radius: 3px;
+  background: #0e1013;
+  border-bottom: 2px solid darken(#0e1013, 5%);
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  width: 125px;
 }
 
 @media (max-width: 45rem) {

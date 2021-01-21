@@ -5,6 +5,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_USER,
+  EDIT_AVATAR,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   CLEAR_POSTS,
@@ -110,5 +111,29 @@ export const logoutUser = () => async (dispatch) => {
     }
   } catch (e) {
     console.log(e);
+  }
+};
+
+// Upload user image for avatar
+
+export const editAvatar = (formData, history) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      'Content-type': 'multipart/form-data',
+      Authorization: token,
+    },
+  };
+
+  try {
+    const res = await axios.post('/api/user/me/avatar', formData, config);
+    if (res.status === 200) {
+      dispatch(loadUser());
+      dispatch(setAlert(res.data.message, 'success'));
+      history.push('/dashboard');
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(setAlert(e.response.data.error, 'danger'));
   }
 };

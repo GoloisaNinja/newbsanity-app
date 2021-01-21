@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -7,12 +8,75 @@ const ProfileTop = ({ auth: { user }, profile: { profile } }) => {
     <div className='profile-container'>
       <div className='profile-avatar'>
         {user.avatar ? (
-          <img
-            className='post-avatar-profile'
-            src={`/api/user/${user._id}/avatar`}
-          />
+          <Fragment>
+            <div className='avatar-container' style={{ position: 'relative' }}>
+              <img
+                className='post-avatar-profile'
+                src={`/api/user/${user._id}/avatar`}
+              />
+              <div
+                className='img-overlay'
+                style={{
+                  borderRadius: '50%',
+                  height: '150px',
+                  width: '150px',
+                  marginTop: '1.5rem',
+                }}>
+                <div className='text-overlay'>
+                  <Link to='/avatar'>
+                    <h6
+                      style={{ padding: '0 2rem', color: '#fff' }}
+                      className='event-title'>
+                      <i
+                        style={{
+                          marginBottom: '.4rem',
+                          color: '#fff',
+                          fontSize: '4rem',
+                        }}
+                        className='fas fa-user-ninja'
+                      />{' '}
+                      edit<span className='low-weight-span'>avatar</span>
+                    </h6>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Fragment>
         ) : (
-          <img className='post-avatar-profile' src='/img/defaultProfile.jpg' />
+          <Fragment>
+            <div className='avatar-container' style={{ position: 'relative' }}>
+              <img
+                className='post-avatar-profile'
+                src='/img/defaultProfile.jpg'
+              />
+              <div
+                className='img-overlay'
+                style={{
+                  borderRadius: '50%',
+                  height: '150px',
+                  width: '150px',
+                  marginTop: '1.5rem',
+                }}>
+                <div className='text-overlay'>
+                  <Link to='/avatar'>
+                    <h6
+                      style={{ padding: '0 2rem', color: '#fff' }}
+                      className='event-title'>
+                      <i
+                        style={{
+                          marginBottom: '.4rem',
+                          color: '#fff',
+                          fontSize: '4rem',
+                        }}
+                        className='fas fa-user-ninja'
+                      />{' '}
+                      edit<span className='low-weight-span'>avatar</span>
+                    </h6>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Fragment>
         )}
         {profile !== null && (
           <div className='profile-social-icons'>

@@ -9,6 +9,7 @@ import Dashboard from '../profile/Dashboard';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import CreateProfileForm from '../profile/profile-forms/CreateProfileForm';
+import Avatar from '../profile/profile-forms/Avatar';
 import PrivateRoute from './PrivateRoute';
 
 const Routes = () => {
@@ -23,6 +24,7 @@ const Routes = () => {
       <PrivateRoute path='/posts' component={Posts} />
       <PrivateRoute path='/post/:id' component={Post} />
       <PrivateRoute path='/profile' component={CreateProfileForm} />
+      <PrivateRoute path='/avatar' component={Avatar} />
     </Switch>
   );
 };
