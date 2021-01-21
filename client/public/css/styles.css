@@ -614,7 +614,8 @@ select {
   align-items: center;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  width: 100%; }
+  width: 100%;
+  min-width: 30rem; }
 
 .profile-avatar {
   display: flex;
@@ -747,6 +748,8 @@ input[type='file']::file-selector-button {
   .profile-main-grid {
     grid-template-areas: 'one' 'two' 'three';
     grid-gap: 3rem; }
+  .profile-container, .profile-advice-container, .profile-registered-container {
+    min-width: 20rem; }
   .profile-events-container {
     margin-top: 3rem; }
   .profile-actions {

@@ -36,6 +36,7 @@
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   width: 100%;
+  min-width: 30rem;
 }
 
 .profile-avatar {
@@ -196,6 +197,9 @@ input[type='file']::file-selector-button {
       'two'
       'three';
     grid-gap: 3rem;
+  }
+  .profile-container {
+    min-width: 20rem;
   }
   .profile-events-container {
     margin-top: 3rem;
