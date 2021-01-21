@@ -720,7 +720,9 @@ input[type='file']::-webkit-file-upload-button {
   padding: 0.5rem;
   text-transform: uppercase;
   transition: opacity 0.3s ease-in-out;
-  width: 125px; }
+  width: 125px;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
   input[type='file']::-webkit-file-upload-button:hover {
     background: #2e353f; }
 
@@ -735,7 +737,11 @@ input[type='file']::file-selector-button {
   font-size: 1.6rem;
   padding: 0.5rem;
   text-transform: uppercase;
-  width: 125px; }
+  width: 125px;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+  input[type='file']::file-selector-button:hover {
+    background: #2e353f; }
 
 @media (max-width: 45rem) {
   .profile-main-grid {

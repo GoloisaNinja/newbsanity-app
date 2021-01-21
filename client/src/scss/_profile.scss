@@ -163,6 +163,8 @@ input[type='file']::-webkit-file-upload-button {
   text-transform: uppercase;
   transition: opacity 0.3s ease-in-out;
   width: 125px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   &:hover {
     background: lighten(#0e1013, 15%);
   }
@@ -180,6 +182,11 @@ input[type='file']::file-selector-button {
   padding: 0.5rem;
   text-transform: uppercase;
   width: 125px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  &:hover {
+    background: lighten(#0e1013, 15%);
+  }
 }
 
 @media (max-width: 45rem) {
