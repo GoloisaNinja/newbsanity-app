@@ -111,12 +111,16 @@ const FullEvent = ({
               </h5>
 
               <form onSubmit={(e) => handleSubmit(e)}>
+                <label style={{ fontSize: '1.4rem', fontWeight: 300 }}>
+                  **Optional** Before you click register you can enter event
+                  info like desired bib number
+                </label>
                 <textarea
                   className='event-regForm-textArea'
+                  placeholder='enter your info here...'
                   cols='30'
                   rows='4'
                   value={comment}
-                  placeholder='enter registration related comments (e.g. desired bib #, elite class, etc.)'
                   onChange={(e) => setComment(e.target.value)}></textarea>
                 <input
                   className='event-regForm-submit'
