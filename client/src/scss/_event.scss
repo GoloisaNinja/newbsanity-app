@@ -35,7 +35,7 @@
 }
 // Event Registration form
 .event-regForm-textArea {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   width: 100%;
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
@@ -49,8 +49,9 @@
   width: 100%;
   margin-bottom: 1rem;
   font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  padding: 0.7rem;
+  padding: 1rem;
   cursor: pointer;
   transition: opacity 2s ease-in-out;
   &:hover:not(:disabled) {

@@ -102,7 +102,7 @@ const FullEvent = ({
                 padding: '2rem',
                 width: '100%',
               }}>
-              <h5 style={{ marginBottom: '1rem' }}>
+              <h5 style={{ marginBottom: '2rem' }}>
                 {checkDate(event.date)
                   ? 'Past Events cannot be registered for.'
                   : checkRegistered()
