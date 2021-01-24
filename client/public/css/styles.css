@@ -327,8 +327,10 @@ input {
 
 .event-regForm-textArea {
   margin-bottom: 2rem;
+  margin-top: 1rem;
   width: 100%;
   font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
   text-transform: uppercase;
   padding-left: 1rem; }
 

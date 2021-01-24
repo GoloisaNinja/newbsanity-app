@@ -111,7 +111,12 @@ const FullEvent = ({
               </h5>
 
               <form onSubmit={(e) => handleSubmit(e)}>
-                <label style={{ fontSize: '1.4rem', fontWeight: 300 }}>
+                <label
+                  style={{
+                    fontSize: '1.4rem',
+                    fontWeight: 300,
+                    marginBottom: '2rem',
+                  }}>
                   **Optional** Before you click register you can enter event
                   info like desired bib number
                 </label>
