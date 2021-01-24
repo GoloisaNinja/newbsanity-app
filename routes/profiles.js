@@ -92,7 +92,7 @@ router.get('/api/profiles/:_id', async (req, res) => {
     const profile = await Profile.findOne({
       user: _id,
     }).populate('user', ['name']);
-    console.log(profile);
+
     if (profile) {
       return res.status(200).send(profile);
     } else {

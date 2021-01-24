@@ -63,7 +63,7 @@ router.delete('/api/events/delete/:_id', auth, async (req, res) => {
 
 router.get('/api/events/all', async (req, res) => {
   try {
-    const events = await Event.find().sort({ date: -1 });
+    const events = await Event.find().sort({ date: 1 });
     if (!events) {
       return res.status(404).send({ message: 'No Events...' });
     }
@@ -125,6 +125,14 @@ router.post('/api/event/register/:_id', auth, async (req, res) => {
     if (!event) {
       return res.status(404).send({ message: 'Could not find event...' });
     }
+    const registered = event.registration.filter(
+      (register) => register.user.toString() === id
+    );
+    if (registered.length > 0) {
+      return res
+        .status(400)
+        .send({ message: 'You already registered for this event' });
+    }
     event.registration.unshift(eventFields);
     await event.save();
     const { title, date, time } = event;
@@ -135,7 +143,7 @@ router.post('/api/event/register/:_id', auth, async (req, res) => {
     };
     profile.registeredEvents.unshift(regDeets);
     await profile.save();
-    res.status(200).send(event);
+    res.status(200).send(event.registration);
   } catch (e) {
     if (e.kind === 'ObjectId') {
       res.status(404).send({ message: 'Could not find event...' });
@@ -207,7 +215,7 @@ router.post('/api/events/unlike/:eventId', auth, async (req, res) => {
 router.post('/api/events/comment/:eventId', auth, async (req, res) => {
   const user = await req.user;
   const { name, id } = user;
-  const _id = req.params.postId;
+  const _id = req.params.eventId;
   const text = req.body.text;
   try {
     if (!user) {
@@ -247,7 +255,7 @@ router.delete(
       if (!user) {
         return res.status(201).send({ message: 'Please authenticate ' });
       }
-      const event = await Event.findById(postId);
+      const event = await Event.findById(eventId);
       if (!event) {
         return res.status(404).send({ message: 'Could not find event...' });
       }
@@ -262,7 +270,7 @@ router.delete(
         });
       }
       event.comments.splice(index, 1);
-      console.log(post.comments);
+      console.log(event.comments);
       await event.save();
       res
         .status(200)

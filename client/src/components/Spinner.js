@@ -8,7 +8,7 @@ const Spinner = () => (
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '70vh',
+        height: '95vh',
       }}>
       <img
         src={loader}

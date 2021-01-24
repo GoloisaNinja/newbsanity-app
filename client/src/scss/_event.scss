@@ -2,6 +2,11 @@
   width: 300px;
   height: 100%;
 }
+.allevent-img {
+  @extend .event-img;
+  width: 100%;
+  min-height: 230px;
+}
 .event-title {
   //border-bottom: 4px solid #cf0012;
   margin-top: 1rem;
@@ -14,8 +19,59 @@
   font-weight: 300;
   flex-grow: 1;
 }
+// All Events Page
+.event-grid-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3rem;
+}
+.flex-container-event {
+  @extend .flex-container;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  justify-content: space-between;
+}
+// Event Registration form
+.event-regForm-textArea {
+  margin-bottom: 1rem;
+  width: 100%;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  padding-left: 1rem;
+}
+.event-regForm-submit {
+  background: #ff0a0a;
+  border: none;
+  border-bottom: 2px solid darken(#ff0a0a, 15%);
+  color: #fff;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: opacity 2s ease-in-out;
+  &:hover:not(:disabled) {
+    background: lighten(#ff0a0a, 10%);
+  }
+  &:disabled {
+    opacity: 55%;
+    cursor: default;
+  }
+}
+
+// Event Discussion Page
+.event-heading {
+  padding-left: 2rem;
+}
+
 @media (max-width: 45rem) {
   .event-img {
     width: 100%;
+  }
+  .event-grid-main {
+    grid-template-columns: 1fr;
   }
 }

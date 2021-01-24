@@ -55,8 +55,11 @@
   margin-bottom: 1rem;
 }
 
-#prof-icons {
+.profile-social-icons > a:not(:last-child) {
   margin-right: 1rem;
+}
+
+#prof-icons {
   color: lighten(#0e1013, 10%);
 }
 
@@ -128,7 +131,7 @@
   color: lighten(#5d685c, 10%);
   margin-top: 0.2rem;
   margin-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding-left: 0.2rem;
 }
 .profile-events {
   border-bottom: 2px solid lighten(#88878f, 15%);

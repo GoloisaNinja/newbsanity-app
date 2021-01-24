@@ -6,8 +6,10 @@ import Pricing from '../Pricing';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
 import Dashboard from '../profile/Dashboard';
+import EventsPage from '../events/EventsPage';
 import Posts from '../posts/Posts';
 import Post from '../post/Post';
+import Event from '../events/Event';
 import CreateProfileForm from '../profile/profile-forms/CreateProfileForm';
 import Avatar from '../profile/profile-forms/Avatar';
 import PrivateRoute from './PrivateRoute';
@@ -25,6 +27,8 @@ const Routes = () => {
       <PrivateRoute path='/post/:id' component={Post} />
       <PrivateRoute path='/profile' component={CreateProfileForm} />
       <PrivateRoute path='/avatar' component={Avatar} />
+      <PrivateRoute path='/events' component={EventsPage} />
+      <PrivateRoute path='/event/:id' component={Event} />
     </Switch>
   );
 };

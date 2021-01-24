@@ -1,8 +1,18 @@
-import { GET_LANDING_EVENTS } from '../actions/types';
+import {
+  GET_LANDING_EVENTS,
+  GET_ALL_EVENTS,
+  GET_EVENT,
+  REGISTER_SUCCESS,
+  UPDATE_EVENT_LIKES,
+  CREATE_EVENT_COMMENT,
+  DELETE_EVENT_COMMENT,
+} from '../actions/types';
 
 const initialState = {
   loading: true,
   events: [],
+  allevents: [],
+  event: null,
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +23,53 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         events: payload,
+      };
+    case GET_ALL_EVENTS:
+      return {
+        ...state,
+        loading: false,
+        allevents: payload,
+      };
+    case GET_EVENT:
+      return {
+        ...state,
+        loading: false,
+        event: payload,
+      };
+    case CREATE_EVENT_COMMENT:
+      return {
+        ...state,
+        event: { ...state.event, comments: payload },
+        loading: false,
+      };
+    case DELETE_EVENT_COMMENT:
+      return {
+        ...state,
+        event: {
+          ...state.event,
+          comments: state.event.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
+        loading: false,
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        allevents: state.allevents.map((event) =>
+          event._id === payload.id
+            ? { ...event, registration: payload.registration }
+            : event
+        ),
+      };
+    case UPDATE_EVENT_LIKES:
+      return {
+        ...state,
+        loading: false,
+        allevents: state.allevents.map((event) =>
+          event._id === payload.id ? { ...event, likes: payload.likes } : event
+        ),
       };
     default:
       return state;

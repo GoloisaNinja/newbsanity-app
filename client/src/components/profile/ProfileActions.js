@@ -9,7 +9,7 @@ const ProfileActions = () => {
           <i className='fas fa-id-badge' /> Create/edit Profile
         </button>
       </Link>
-      <Link to='/dashboard'>
+      <Link to='/events'>
         <button className='btn profile-action'>
           <i className='fas fa-calendar-alt' /> View/register Events
         </button>

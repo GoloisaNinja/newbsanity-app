@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -57,9 +58,11 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
                   justifyContent: 'center',
                   marginTop: '2.5rem',
                 }}>
-                <button style={{ width: '100%' }} className='btn'>
-                  Events Page
-                </button>
+                <Link style={{ width: '100%' }} to='/events'>
+                  <button style={{ width: '100%' }} className='btn'>
+                    Events Page
+                  </button>
+                </Link>
               </div>
             </div>
           )
