@@ -11,6 +11,7 @@ const FullEvent = ({
   registerForEvent,
   likeEvent,
   unlikeEvent,
+  profile: { profile },
 }) => {
   const [comment, setComment] = useState('');
 
@@ -103,10 +104,12 @@ const FullEvent = ({
                 width: '100%',
               }}>
               <h5 style={{ marginBottom: '2rem' }}>
-                {checkDate(event.date)
+                {profile === null
+                  ? 'You have to have a profile to register for events'
+                  : checkDate(event.date)
                   ? 'Past Events cannot be registered for.'
                   : checkRegistered()
-                  ? 'You already registeed for this event.'
+                  ? 'You already registered for this event.'
                   : `Register for ${event.title}!`}
               </h5>
 
@@ -115,7 +118,6 @@ const FullEvent = ({
                   style={{
                     fontSize: '1.4rem',
                     fontWeight: 300,
-                    marginBottom: '2rem',
                   }}>
                   **Optional** Before you click register you can enter event
                   info like desired bib number
@@ -130,7 +132,11 @@ const FullEvent = ({
                 <input
                   className='event-regForm-submit'
                   type='submit'
-                  disabled={checkDate(event.date) || checkRegistered()}
+                  disabled={
+                    profile === null ||
+                    checkDate(event.date) ||
+                    checkRegistered()
+                  }
                   value='Register'
                 />
               </form>
@@ -148,8 +154,15 @@ FullEvent.propTypes = {
   registerForEvent: PropTypes.func.isRequired,
   likeEvent: PropTypes.func.isRequired,
   unlikeEvent: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
-export default connect(null, { registerForEvent, likeEvent, unlikeEvent })(
-  FullEvent
-);
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, {
+  registerForEvent,
+  likeEvent,
+  unlikeEvent,
+})(FullEvent);
