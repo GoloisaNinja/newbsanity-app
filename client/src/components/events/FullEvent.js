@@ -49,6 +49,7 @@ const FullEvent = ({
             <iframe
               src={event.mediaLink}
               title={event.title}
+              loading='lazy'
               className='allevent-img'
               frameBorder='0'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
@@ -57,6 +58,7 @@ const FullEvent = ({
             <img
               className='allevent-img'
               src={event.mediaLink}
+              loading='lazy'
               alt={event.title}
             />
           )}

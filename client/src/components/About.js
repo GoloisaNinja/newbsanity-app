@@ -35,6 +35,7 @@ const About = () => {
           <div>
             <img
               className='about-img'
+              loading='lazy'
               src='/img/jerM1.jpg'
               alt='jerry'
               onMouseOver={(e) => (e.currentTarget.src = '/img/jerM2.jpg')}
@@ -71,6 +72,7 @@ const About = () => {
           <div>
             <img
               className='about-img'
+              loading='lazy'
               src='/img/jar1.jpg'
               alt='jerry'
               onMouseOver={(e) => (e.currentTarget.src = '/img/jarM2.jpg')}
@@ -111,6 +113,7 @@ const About = () => {
           <div>
             <img
               className='about-img'
+              loading='lazy'
               src='/img/jerjar.jpg'
               alt='father and son'
             />

@@ -21,6 +21,7 @@ const Obstacles = () => {
           <img
             className='obstacle-dom'
             src='/img/obstacles/redRig.jpg'
+            loading='lazy'
             alt='dom pizza slice'
           />
           <div className='img-overlay'>

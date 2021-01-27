@@ -29,9 +29,14 @@ const CommentItem = ({ deleteComment, comment, postId, auth: { user } }) => {
             <img
               className='post-avatar'
               src={`/api/user/${comment.user}/avatar`}
+              loading='lazy'
             />
           ) : (
-            <img className='post-avatar' src='/img/defaultProfile.jpg' />
+            <img
+              className='post-avatar'
+              src='/img/defaultProfile.jpg'
+              loading='lazy'
+            />
           )}
 
           <h5 className='post-user'>{comment.name}</h5>

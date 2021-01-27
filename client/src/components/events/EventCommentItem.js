@@ -33,10 +33,15 @@ const EventCommentItem = ({
           {avatar ? (
             <img
               className='post-avatar'
+              loading='lazy'
               src={`/api/user/${comment.user}/avatar`}
             />
           ) : (
-            <img className='post-avatar' src='/img/defaultProfile.jpg' />
+            <img
+              className='post-avatar'
+              src='/img/defaultProfile.jpg'
+              loading='lazy'
+            />
           )}
 
           <h5 className='post-user'>{comment.name}</h5>

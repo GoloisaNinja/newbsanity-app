@@ -10,6 +10,7 @@ const Obstacle = () => {
             <img
               style={{ height: '100%' }}
               src={obstacle.src}
+              loading='lazy'
               alt={`Newbsanity people near obstacle named ${obstacle.name1} ${obstacle.name2}`}
             />
             <div className='img-overlay'>

@@ -21,9 +21,14 @@ const PostItem = ({
             <img
               className='post-avatar'
               src={`/api/user/${post.user}/avatar`}
+              loading='lazy'
             />
           ) : (
-            <img className='post-avatar' src='/img/defaultProfile.jpg' />
+            <img
+              className='post-avatar'
+              src='/img/defaultProfile.jpg'
+              loading='lazy'
+            />
           )}
 
           <h5 className='post-user'>{post.name}</h5>

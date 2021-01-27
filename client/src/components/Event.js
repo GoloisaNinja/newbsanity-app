@@ -21,6 +21,7 @@ const Event = (props) => {
             {event.mediaTypeIframe ? (
               <iframe
                 src={event.mediaLink}
+                loading='lazy'
                 title={event.title}
                 className='event-img'
                 frameBorder='0'
@@ -29,6 +30,7 @@ const Event = (props) => {
             ) : (
               <img
                 className='event-img'
+                loading='lazy'
                 src={event.mediaLink}
                 alt={event.title}
               />
