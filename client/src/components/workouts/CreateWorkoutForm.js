@@ -11,7 +11,7 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
     mudGauntletLaps: 0,
     workoutPartner: '',
     text: '',
-    date: '',
+    date: '2021-01-01',
   });
 
   const {
@@ -33,7 +33,7 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
       mudGauntletLaps: 0,
       workoutPartner: '',
       text: '',
-      date: '',
+      date: '2021-01-01',
     });
   };
 
