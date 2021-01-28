@@ -2,7 +2,7 @@ import {
   GET_LANDING_EVENTS,
   GET_ALL_EVENTS,
   GET_EVENT,
-  REGISTER_SUCCESS,
+  UPDATE_EVENT_REGISTRATION,
   UPDATE_EVENT_LIKES,
   CREATE_EVENT_COMMENT,
   DELETE_EVENT_COMMENT,
@@ -53,7 +53,7 @@ export default function (state = initialState, action) {
         },
         loading: false,
       };
-    case REGISTER_SUCCESS:
+    case UPDATE_EVENT_REGISTRATION:
       return {
         ...state,
         loading: false,

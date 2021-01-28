@@ -11,6 +11,7 @@ import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import Event from '../events/Event';
 import CreateProfileForm from '../profile/profile-forms/CreateProfileForm';
+import CreateWorkoutForm from '../workouts/CreateWorkoutForm';
 import Avatar from '../profile/profile-forms/Avatar';
 import PrivateRoute from './PrivateRoute';
 
@@ -29,6 +30,7 @@ const Routes = () => {
       <PrivateRoute path='/avatar' component={Avatar} />
       <PrivateRoute path='/events' component={EventsPage} />
       <PrivateRoute path='/event/:id' component={Event} />
+      <PrivateRoute path='/workouts' component={CreateWorkoutForm} />
     </Switch>
   );
 };

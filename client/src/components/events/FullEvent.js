@@ -1,22 +1,29 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { registerForEvent, likeEvent, unlikeEvent } from '../../actions/events';
-import events from '../../reducers/events';
+import {
+  registerForEvent,
+  unRegisterForEvent,
+  likeEvent,
+  unlikeEvent,
+} from '../../actions/events';
 
 const FullEvent = ({
   event,
   user,
   registerForEvent,
+  unRegisterForEvent,
   likeEvent,
   unlikeEvent,
   profile: { profile },
 }) => {
   const [comment, setComment] = useState('');
+  const [expired, setExpired] = useState(false);
+  const [isRegistered, setIsRegistered] = useState();
 
-  const checkDate = (eventDate) => {
-    const formatDate = eventDate.slice(0, 10);
+  const checkDate = () => {
+    const formatDate = event.date.slice(0, 10);
     const dateParts = formatDate.split('-');
     const eventDateObject = new Date(
       dateParts[0],
@@ -24,21 +31,37 @@ const FullEvent = ({
       dateParts[2]
     );
     const today = new Date();
-    return eventDateObject < today;
+    if (eventDateObject < today) {
+      setExpired(true);
+    }
   };
+  useEffect(() => {
+    checkDate();
+  }, []);
 
   const checkRegistered = () => {
     for (let i = 0; i < event.registration.length; i++) {
       if (event.registration[i]['user'] === user._id) {
-        return true;
+        setIsRegistered(true);
       }
     }
   };
 
+  useEffect(() => {
+    checkRegistered();
+  }, [event]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerForEvent(event._id, comment);
-    setComment('');
+    if (!isRegistered) {
+      registerForEvent(event._id, comment);
+      setComment('');
+      setIsRegistered(true);
+    } else {
+      unRegisterForEvent(event._id);
+      setComment('');
+      setIsRegistered(false);
+    }
   };
 
   return (
@@ -108,9 +131,9 @@ const FullEvent = ({
               <h5 style={{ marginBottom: '2rem' }}>
                 {profile === null
                   ? 'You have to have a profile to register for events'
-                  : checkDate(event.date)
-                  ? 'Past Events cannot be registered for.'
-                  : checkRegistered()
+                  : expired
+                  ? 'Past Events cannot be registered/unregistered.'
+                  : isRegistered
                   ? 'You already registered for this event.'
                   : `Register for ${event.title}!`}
               </h5>
@@ -131,16 +154,21 @@ const FullEvent = ({
                   rows='4'
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}></textarea>
-                <input
-                  className='event-regForm-submit'
-                  type='submit'
-                  disabled={
-                    profile === null ||
-                    checkDate(event.date) ||
-                    checkRegistered()
-                  }
-                  value='Register'
-                />
+                {isRegistered ? (
+                  <input
+                    className='event-regForm-submit-unreg'
+                    type='submit'
+                    disabled={profile === null || expired}
+                    value='Unregister'
+                  />
+                ) : (
+                  <input
+                    className='event-regForm-submit'
+                    type='submit'
+                    disabled={profile === null || expired}
+                    value='Register'
+                  />
+                )}
               </form>
             </div>
           </div>
@@ -154,6 +182,7 @@ FullEvent.propTypes = {
   user: PropTypes.object.isRequired,
   event: PropTypes.object.isRequired,
   registerForEvent: PropTypes.func.isRequired,
+  unRegisterForEvent: PropTypes.func.isRequired,
   likeEvent: PropTypes.func.isRequired,
   unlikeEvent: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
@@ -165,6 +194,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   registerForEvent,
+  unRegisterForEvent,
   likeEvent,
   unlikeEvent,
 })(FullEvent);

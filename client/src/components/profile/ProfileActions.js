@@ -14,7 +14,7 @@ const ProfileActions = () => {
           <i className='fas fa-calendar-alt' /> View/register Events
         </button>
       </Link>
-      <Link to='/dashboard'>
+      <Link to='/workouts'>
         <button className='btn profile-action'>
           <i className='fas fa-dumbbell' /> Create/edit workout
         </button>

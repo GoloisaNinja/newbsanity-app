@@ -2,14 +2,16 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAllEvents } from '../../actions/events';
+import { getProfile } from '../../actions/profile';
 import FullEvent from './FullEvent';
 import Spinner from '../Spinner';
 import Alert from '../Alert';
 
-const EventsPage = ({ user, loading, getAllEvents, allevents }) => {
+const EventsPage = ({ user, loading, getAllEvents, allevents, getProfile }) => {
   useEffect(() => {
     getAllEvents();
-  }, [getAllEvents]);
+    getProfile(user._id);
+  }, [getAllEvents, getProfile]);
   return (
     <Fragment>
       {loading ? (
@@ -56,6 +58,7 @@ EventsPage.propTypes = {
   loading: PropTypes.bool.isRequired,
   allevents: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
+  getProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -64,4 +67,6 @@ const mapStateToProps = (state) => ({
   loading: state.events.loading,
 });
 
-export default connect(mapStateToProps, { getAllEvents })(EventsPage);
+export default connect(mapStateToProps, { getAllEvents, getProfile })(
+  EventsPage
+);

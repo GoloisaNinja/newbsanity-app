@@ -4,7 +4,7 @@ import {
   GET_LANDING_EVENTS,
   GET_ALL_EVENTS,
   GET_EVENT,
-  REGISTER_SUCCESS,
+  UPDATE_EVENT_REGISTRATION,
   UPDATE_EVENT_LIKES,
   CREATE_EVENT_COMMENT,
   DELETE_EVENT_COMMENT,
@@ -74,13 +74,39 @@ export const registerForEvent = (id, comment) => async (dispatch) => {
     const body = { text: comment };
     const res = await axios.post(`/api/event/register/${id}`, body, config);
     dispatch({
-      type: REGISTER_SUCCESS,
+      type: UPDATE_EVENT_REGISTRATION,
       payload: {
         id,
         registration: res.data,
       },
     });
-    dispatch(setAlert('Registered! Congrats - you are insane!', 'success'));
+    dispatch(setAlert('Registered for event!', 'success'));
+  } catch (e) {
+    console.log(e);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// UnRegister User for Event
+
+export const unRegisterForEvent = (id) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.post(`/api/event/unregister/${id}`, config);
+    dispatch({
+      type: UPDATE_EVENT_REGISTRATION,
+      payload: {
+        id,
+        registration: res.data,
+      },
+    });
+    dispatch(setAlert('Unregistered QuitterMcQuitterson...', 'success'));
   } catch (e) {
     console.log(e);
     dispatch(setAlert(e.response.data.message, 'danger'));

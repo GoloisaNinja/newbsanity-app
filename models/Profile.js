@@ -34,34 +34,6 @@ const ProfileSchema = new mongoose.Schema(
     personalwebsite: {
       type: String,
     },
-    workouts: [
-      {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-        },
-        name: {
-          type: String,
-          required: true,
-        },
-        extremeRavineLaps: {
-          type: Number,
-        },
-        mudGauntletLaps: {
-          type: Number,
-        },
-        workoutPartner: {
-          type: String,
-        },
-        text: {
-          type: String,
-        },
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
     registeredEvents: [
       {
         event: {

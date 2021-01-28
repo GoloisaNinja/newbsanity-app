@@ -334,7 +334,7 @@ input {
   text-transform: uppercase;
   padding-left: 1rem; }
 
-.event-regForm-submit {
+.event-regForm-submit, .event-regForm-submit-unreg {
   background: #ff0a0a;
   border: none;
   border-bottom: 2px solid #bd0000;
@@ -348,11 +348,16 @@ input {
   padding: 1rem;
   cursor: pointer;
   transition: opacity 2s ease-in-out; }
-  .event-regForm-submit:hover:not(:disabled) {
+  .event-regForm-submit:hover:not(:disabled), .event-regForm-submit-unreg:hover:not(:disabled) {
     background: #ff3d3d; }
-  .event-regForm-submit:disabled {
+  .event-regForm-submit:disabled, .event-regForm-submit-unreg:disabled {
     opacity: 55%;
     cursor: default; }
+  .event-regForm-submit-unreg {
+    background: #5d685c;
+    border-bottom: 2px solid #393f38; }
+    .event-regForm-submit-unreg:hover:not(:disabled) {
+      background: #758374; }
 
 .event-heading {
   padding-left: 2rem; }

@@ -1,195 +1,99 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post');
-const Profile = require('../models/Profile');
-const User = require('../models/User');
-const Event = require('../models/Event');
+const Workout = require('../models/Workout');
 const auth = require('../middleware/auth');
 
-// Create new Event
+// Create new Workout
 
-router.post('/api/events', auth, async (req, res) => {
-  const { title, text, mediaLink, mediaTypeIframe, date, time } = req.body;
+router.post('/api/workouts', auth, async (req, res) => {
+  const {
+    extremeRavineLaps = 0,
+    mudGauntletLaps = 0,
+    workoutPartner = '',
+    text = '',
+    date,
+  } = req.body;
   const user = await req.user;
-  const dateParts = date.split('/');
+  const dateParts = date.split('-');
   const formatDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
   const { name, id } = user;
   try {
     if (!user) {
       throw new Error('Please authenticate...');
     }
-    const event = new Event({
-      title,
+    const workout = new Workout({
+      user: id,
+      name,
+      extremeRavineLaps,
+      mudGauntletLaps,
+      workoutPartner,
       text,
-      mediaLink,
-      mediaTypeIframe,
       date: formatDate,
-      time,
     });
-    await event.save();
-    res.status(200).json(event);
+    await workout.save();
+    res.status(200).json(workout);
   } catch (e) {
     console.error({ message: e.message });
     res.json({ message: e.message });
   }
 });
 
-// Delete an Event
+// Delete a Workout
 
-router.delete('/api/events/delete/:_id', auth, async (req, res) => {
+router.delete('/api/workouts/delete/:_id', auth, async (req, res) => {
   const _id = req.params._id;
   const user = await req.user;
   const { id } = user;
   try {
-    const event = await Post.findById({ _id });
-    if (!event) {
-      return res.status(404).send({ message: 'Could not find event...' });
+    const workout = await Workout.findById({ _id });
+    if (!workout) {
+      return res.status(404).send({ message: 'Could not find workout...' });
     }
-    // need to handle auth for Jarrett and CMS
-    // if (post.user.toString() !== id) {
-    //   return res.status(403).send({ message: 'Not authorized' });
-    // }
-    await post.remove();
-    res.status(200).send({ message: 'Event successfully removed...' });
+    await workout.remove();
+    res.status(200).send({ message: 'Workout successfully deleted...' });
   } catch (e) {
     if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find event...' });
+      res.status(404).send({ message: 'Could not find workout...' });
     }
     res.status(400).send({ message: e.message });
   }
 });
 
-// Get all Events
+// Get all Workouts
 
-router.get('/api/events/all', async (req, res) => {
+router.get('/api/workouts/all', async (req, res) => {
   try {
-    const events = await Event.find().sort({ date: 1 });
-    if (!events) {
-      return res.status(404).send({ message: 'No Events...' });
+    const workouts = await Workout.find().sort({ date: 1 });
+    if (!workouts) {
+      return res.status(404).send({ message: 'No Workouts by members...' });
     }
-    res.status(200).send(events);
+    res.status(200).send(workouts);
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
 
-// Get LandingPage Events (4 events)
+// Get a Workout by Id
 
-router.get('/api/events/landing', async (req, res) => {
-  const today = Date.now();
-  try {
-    const events = await Event.find({ date: { $gte: today } })
-      .sort({ date: 1 })
-      .limit(4);
-    if (!events) {
-      return res.status(404).send({ message: 'No Events...' });
-    }
-    res.status(200).send(events);
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
-});
-
-// Get a Event by Id
-
-router.get('/api/events/event/:_id', async (req, res) => {
+router.get('/api/workouts/workout/:_id', async (req, res) => {
   const _id = req.params._id;
   try {
-    const event = await Event.findById({ _id });
-    if (!event) {
-      return res.status(404).send({ message: 'Could not find event...' });
+    const workout = await Workout.findById({ _id });
+    if (!workout) {
+      return res.status(404).send({ message: 'Could not find workout...' });
     }
-    res.status(200).send(event);
+    res.status(200).send(workout);
   } catch (e) {
     if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find event...' });
+      res.status(404).send({ message: 'Could not find workout...' });
     }
     res.status(400).send({ message: e.message });
   }
 });
 
-// Register for an Event by Id
+///// THESE NEED TO BE REFACTORED FOR WORKOUTS THEY STILL REFLECT EVENT DATA //////////
 
-router.post('/api/event/register/:_id', auth, async (req, res) => {
-  const user = req.user;
-  const { name, id } = user;
-  const text = req.body.text;
-  const _id = req.params._id;
-  const eventFields = {};
-  eventFields.user = id;
-  eventFields.name = name;
-  eventFields.text = text || '';
-  try {
-    const event = await Event.findById({ _id });
-    const profile = await Profile.findOne({ user: id });
-    if (!event) {
-      return res.status(404).send({ message: 'Could not find event...' });
-    }
-    const registered = event.registration.filter(
-      (register) => register.user.toString() === id
-    );
-    if (registered.length > 0) {
-      return res
-        .status(400)
-        .send({ message: 'You already registered for this event' });
-    }
-    event.registration.unshift(eventFields);
-    await event.save();
-    const { title, date, time } = event;
-    const regDeets = {
-      event: _id,
-      eventName: title,
-      eventDate: date,
-      eventTime: time,
-    };
-    profile.registeredEvents.unshift(regDeets);
-    await profile.save();
-    res.status(200).send(event.registration);
-  } catch (e) {
-    if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find event...' });
-    }
-    res.status(400).send({ message: e.message });
-  }
-});
-
-// Unregister for an Event by Id
-
-router.post('/api/event/unregister/:_id', auth, async (req, res) => {
-  const user = req.user;
-  const { name, id } = user;
-  const _id = req.params._id;
-  try {
-    const event = await Event.findById({ _id });
-    const profile = await Profile.findOne({ user: id });
-    if (!event) {
-      return res.status(404).send({ message: 'Could not find event...' });
-    }
-    const registered = event.registration.filter(
-      (register) => register.user.toString() === id
-    );
-    if (registered.length === 0) {
-      return res
-        .status(400)
-        .send({ message: 'You are not registered for this event' });
-    }
-    event.registration = event.registration.filter(
-      (event) => event.user.toString() !== id
-    );
-    await event.save();
-
-    profile.registeredEvents = profile.registeredEvents.filter(
-      (register) => register.event.toString() !== event._id.toString()
-    );
-    await profile.save();
-    res.status(200).send(event.registration);
-  } catch (e) {
-    if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find event...' });
-    }
-    res.status(400).send({ message: e.message });
-  }
-});
+/*
 
 // Like an Event
 
@@ -321,6 +225,6 @@ router.delete(
       res.status(400).send({ message: e.message });
     }
   }
-);
+); */
 
 module.exports = router;

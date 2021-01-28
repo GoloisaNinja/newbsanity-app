@@ -57,12 +57,21 @@
   padding: 1rem;
   cursor: pointer;
   transition: opacity 2s ease-in-out;
+
   &:hover:not(:disabled) {
     background: lighten(#ff0a0a, 10%);
   }
   &:disabled {
     opacity: 55%;
     cursor: default;
+  }
+  &-unreg {
+    @extend .event-regForm-submit;
+    background: #5d685c;
+    border-bottom: 2px solid darken(#5d685c, 15%);
+    &:hover:not(:disabled) {
+      background: lighten(#5d685c, 10%);
+    }
   }
 }
 
