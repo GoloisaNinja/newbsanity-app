@@ -21,7 +21,11 @@ tr:nth-child(even) {
 }
 .profile-workouts-container {
   @extend .profile-registered-container;
+  display: flex;
+  flex-direction: column;
   margin-top: 2rem;
+  min-height: 40rem;
+  justify-content: flex-start;
 }
 
 .workout-progress-container {
@@ -29,6 +33,11 @@ tr:nth-child(even) {
   flex-direction: column;
   margin-bottom: 1rem;
   justify-content: center;
+  flex-grow: 1;
+}
+.profile-workout-main {
+  @extend .profile-bio-regevents;
+  max-height: 50rem;
 }
 
 progress[value] {

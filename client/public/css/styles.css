@@ -706,7 +706,7 @@ input {
 .post-avatar-profile {
   margin-top: 1.5rem; }
 
-.profile-bio, .profile-bio-regevents {
+.profile-bio, .profile-bio-regevents, .profile-workout-main {
   background: #242930;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 2rem;
@@ -714,14 +714,14 @@ input {
   width: 100%;
   flex-grow: 1; }
 
-.profile-bio-regevents {
+.profile-bio-regevents, .profile-workout-main {
   max-height: 25rem;
   overflow-y: scroll;
   justify-content: start;
   flex: 1;
   scrollbar-width: none;
   -ms-overflow-style: none; }
-  .profile-bio-regevents::-webkit-scrollbar {
+  .profile-bio-regevents::-webkit-scrollbar, .profile-workout-main::-webkit-scrollbar {
     width: 0;
     height: 0; }
 
@@ -847,13 +847,21 @@ tr:nth-child(even) {
   background: #2e353f; }
 
 .profile-workouts-container {
-  margin-top: 2rem; }
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  min-height: 40rem;
+  justify-content: flex-start; }
 
 .workout-progress-container {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-  justify-content: center; }
+  justify-content: center;
+  flex-grow: 1; }
+
+.profile-workout-main {
+  max-height: 50rem; }
 
 progress[value] {
   -webkit-appearance: none;

@@ -41,7 +41,7 @@ const ProfileWorkouts = ({
             Completed<span style={{ color: '#ff0a0a' }}> Workouts</span>
           </h2>
         </div>
-        <div className='profile-bio-regevents'>
+        <div className='profile-workout-main'>
           <div className='profile-bio__header'>
             <h3>
               <span className='red-span' style={{ color: '#ff0a0a' }}>
