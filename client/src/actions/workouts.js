@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_WORKOUT, GET_USER_WORKOUTS } from './types';
+import { CREATE_WORKOUT, GET_USER_WORKOUTS, DELETE_WORKOUT } from './types';
 import { setAlert } from './alert';
 
 // Create a new Workout
@@ -20,6 +20,30 @@ export const createWorkout = (formData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert('Workout Created!', 'success'));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Delete a Workout
+
+export const deleteWorkout = (id) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.delete(`/api/workouts/delete/${id}`, config);
+    if (res.status === 200) {
+      dispatch({
+        type: DELETE_WORKOUT,
+        payload: id,
+      });
+      dispatch(setAlert('Workout dirty deleted...', 'success'));
+    }
   } catch (e) {
     console.log(e);
   }

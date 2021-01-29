@@ -2,11 +2,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserWorkouts } from '../../actions/workouts';
+import { getUserWorkouts, deleteWorkout } from '../../actions/workouts';
 import Spinner from '../Spinner';
 import ProfileWorkoutProgress from './ProfileWorkoutProgress';
 
 const ProfileWorkouts = ({
+  deleteWorkout,
   getUserWorkouts,
   workouts: { loading, workouts },
 }) => {
@@ -24,7 +25,9 @@ const ProfileWorkouts = ({
         {workout.text}
       </td>
       <td>
-        <button className='btn workout-delete'>
+        <button
+          className='btn workout-delete'
+          onClick={(e) => deleteWorkout(workout._id)}>
           <i className='fas fa-trash-alt' />
         </button>
       </td>
@@ -102,6 +105,7 @@ const ProfileWorkouts = ({
 
 ProfileWorkouts.propTypes = {
   getUserWorkouts: PropTypes.func.isRequired,
+  deleteWorkout: PropTypes.func.isRequired,
   workouts: PropTypes.object.isRequired,
 };
 
@@ -109,4 +113,6 @@ const mapStateToProps = (state) => ({
   workouts: state.workouts,
 });
 
-export default connect(mapStateToProps, { getUserWorkouts })(ProfileWorkouts);
+export default connect(mapStateToProps, { getUserWorkouts, deleteWorkout })(
+  ProfileWorkouts
+);
