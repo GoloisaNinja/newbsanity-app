@@ -16,7 +16,7 @@ const ProfileActions = () => {
       </Link>
       <Link to='/workouts'>
         <button className='btn profile-action'>
-          <i className='fas fa-dumbbell' /> Create/edit workout
+          <i className='fas fa-dumbbell' /> Create workout
         </button>
       </Link>
     </div>

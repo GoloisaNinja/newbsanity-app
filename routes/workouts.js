@@ -91,6 +91,27 @@ router.get('/api/workouts/workout/:_id', async (req, res) => {
   }
 });
 
+// Get all Workout by User Id
+
+router.get('/api/workouts/user', auth, async (req, res) => {
+  const user = req.user;
+  const { name, id } = user;
+  try {
+    const workouts = await Workout.find({ user: id }).sort({ date: -1 });
+    if (!workouts) {
+      return res
+        .status(404)
+        .send({ message: 'Could not find any workouts...' });
+    }
+    res.status(200).send(workouts);
+  } catch (e) {
+    if (e.kind === 'ObjectId') {
+      res.status(404).send({ message: 'Could not find workout...' });
+    }
+    res.status(400).send({ message: e.message });
+  }
+});
+
 ///// THESE NEED TO BE REFACTORED FOR WORKOUTS THEY STILL REFLECT EVENT DATA //////////
 
 /*

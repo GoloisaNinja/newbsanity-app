@@ -48,6 +48,13 @@
     background: #ff0a0a;
     border-bottom: 3px solid darken(#ff0a0a, 10%);
   }
+  &.workout-delete {
+    font-size: 1.2rem;
+    padding: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
 }
 .text-type-effect {
   width: 15.2ch;

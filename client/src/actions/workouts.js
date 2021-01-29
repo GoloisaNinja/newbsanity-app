@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_WORKOUT } from './types';
+import { CREATE_WORKOUT, GET_USER_WORKOUTS } from './types';
 import { setAlert } from './alert';
 
 // Create a new Workout
@@ -20,6 +20,27 @@ export const createWorkout = (formData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert('Workout Created!', 'success'));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Get all workouts by User Id
+
+export const getUserWorkouts = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.get('/api/workouts/user', config);
+    dispatch({
+      type: GET_USER_WORKOUTS,
+      payload: res.data,
+    });
   } catch (e) {
     console.log(e);
   }

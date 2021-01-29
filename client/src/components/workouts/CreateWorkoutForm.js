@@ -3,9 +3,15 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createWorkout } from '../../actions/workouts';
+import { setAlert } from '../../actions/alert';
 import Alert from '../Alert';
 
-const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
+const CreateWorkoutForm = ({
+  setAlert,
+  createWorkout,
+  user: { _id },
+  history,
+}) => {
   const [formData, setFormData] = useState({
     extremeRavineLaps: 0,
     mudGauntletLaps: 0,
@@ -27,14 +33,21 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    createWorkout(formData);
-    setFormData({
-      extremeRavineLaps: 0,
-      mudGauntletLaps: 0,
-      workoutPartner: '',
-      text: '',
-      date: '2021-01-01',
-    });
+    if (extremeRavineLaps === 0 && mudGauntletLaps === 0) {
+      setAlert(
+        'A workout must contain a total of greater than 0 laps...',
+        'danger'
+      );
+    } else {
+      createWorkout(formData);
+      setFormData({
+        extremeRavineLaps: 0,
+        mudGauntletLaps: 0,
+        workoutPartner: '',
+        text: '',
+        date: '2021-01-01',
+      });
+    }
   };
 
   return (
@@ -48,8 +61,8 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
         </div>
         <div className='landing-intro'>
           <h1 style={{ marginBottom: '1rem' }}>
-            <span className='red-span'>Create/Edit</span>{' '}
-            <span className='low-weight-span'>your workouts</span>
+            <span className='red-span'>Create</span>{' '}
+            <span className='low-weight-span'>your workout</span>
           </h1>
           <p style={{ marginBottom: '1rem' }}>
             As a part of the Newbsanity community, you have the express
@@ -58,13 +71,27 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
             tier of atheletes that have completed one of the following:
           </p>
           <ul style={{ marginBottom: '1rem' }}>
-            <li style={{ fontWeight: 300, fontSize: '1.2rem', color: '#fff' }}>
+            <li style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
+              <i
+                className='fas fa-skull-crossbones'
+                style={{ color: '#ff0a0a' }}
+              />{' '}
               50 laps of the Extreme Ravine and 50 laps of the Mud Gauntlet
             </li>
-            <li style={{ fontWeight: 300, fontSize: '1.2rem', color: '#fff' }}>
+
+            <li style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
+              <i
+                className='fas fa-skull-crossbones'
+                style={{ color: '#ff0a0a' }}
+              />{' '}
               100 laps of Extreme Ravine
             </li>
-            <li style={{ fontWeight: 300, fontSize: '1.2rem', color: '#fff' }}>
+
+            <li style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
+              <i
+                className='fas fa-skull-crossbones'
+                style={{ color: '#ff0a0a' }}
+              />{' '}
               100 laps of Mud Gauntlet
             </li>
           </ul>
@@ -164,12 +191,13 @@ const CreateWorkoutForm = ({ createWorkout, user: { _id }, history }) => {
 CreateWorkoutForm.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { createWorkout })(
+export default connect(mapStateToProps, { createWorkout, setAlert })(
   withRouter(CreateWorkoutForm)
 );

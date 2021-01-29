@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const setAlert = (message, alertType, timeout = 5000) => (dispatch) => {
   const id = uuidv4();
+  window.scrollTo(0, 0);
   dispatch({
     type: SET_ALERT,
     payload: { message, alertType, id },

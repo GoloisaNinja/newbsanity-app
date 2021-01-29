@@ -7,6 +7,7 @@ import ProfileTop from './ProfileTop';
 import ProfileEvents from './ProfileEvents';
 import ProfileAdvice from './ProfileAdvice';
 import ProfileRegisteredEvents from './ProfileRegisteredEvents';
+import ProfileWorkouts from './ProfileWorkouts';
 
 const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const Profile = ({ user, getProfile, profile: { loading, profile } }) => {
           <ProfileRegisteredEvents />
         </div>
         <ProfileEvents />
+        <ProfileWorkouts />
       </div>
     </Fragment>
   ) : (

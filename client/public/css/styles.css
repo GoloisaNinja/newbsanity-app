@@ -411,6 +411,12 @@ input {
   .btn.btn-forum {
     background: #ff0a0a;
     border-bottom: 3px solid #d60000; }
+  .btn.workout-delete {
+    font-size: 1.2rem;
+    padding: none;
+    background: none;
+    border: none;
+    box-shadow: none; }
 
 .text-type-effect, .text-type-effect2 {
   width: 15.2ch;
@@ -665,7 +671,7 @@ input {
   margin-left: 1rem;
   margin-bottom: 0.5rem; }
 
-.profile-container, .profile-advice-container, .profile-registered-container {
+.profile-container, .profile-advice-container, .profile-registered-container, .profile-workouts-container {
   grid-area: one;
   display: flex;
   flex-direction: column;
@@ -721,7 +727,8 @@ input {
 
 .profile-bio__header {
   justify-content: center;
-  text-align: center; }
+  text-align: center;
+  align-items: center; }
 
 .personal-item-span {
   color: #758374;
@@ -743,7 +750,7 @@ input {
 .profile-advice-container {
   grid-area: two; }
 
-.profile-registered-container {
+.profile-registered-container, .profile-workouts-container {
   grid-area: three;
   width: 100%; }
 
@@ -810,7 +817,7 @@ input[type='file']::file-selector-button {
   .profile-main-grid {
     grid-template-areas: 'one' 'two' 'three';
     grid-gap: 3rem; }
-  .profile-container, .profile-advice-container, .profile-registered-container {
+  .profile-container, .profile-advice-container, .profile-registered-container, .profile-workouts-container {
     min-width: 20rem; }
   .profile-events-container {
     margin-top: 3rem; }
@@ -818,3 +825,59 @@ input[type='file']::file-selector-button {
     flex-direction: column; }
   .btn.profile-action {
     width: 100%; } }
+
+.workout-table {
+  margin: 0 auto;
+  margin-top: 1rem; }
+
+th {
+  font-weight: 400;
+  font-size: 1.3rem;
+  text-align: left;
+  background: #39414e;
+  padding: 0.5rem; }
+
+td {
+  font-weight: 300;
+  font-size: 1.2rem;
+  text-align: left;
+  padding: 0.5rem; }
+
+tr:nth-child(even) {
+  background: #2e353f; }
+
+.profile-workouts-container {
+  margin-top: 2rem; }
+
+.workout-progress-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  justify-content: center; }
+
+progress[value] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 25rem;
+  height: 2rem;
+  margin-left: 1rem; }
+
+progress[value]::-webkit-progress-bar {
+  background-color: #758374;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+
+progress[value]::-webkit-progress-value {
+  background: #ff0a0a;
+  border-radius: 3px; }
+
+progress[value]::-moz-progress-bar {
+  background-color: #758374;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+
+progress[value]::-moz-progress-value {
+  background: #ff0a0a;
+  border-radius: 3px; }
