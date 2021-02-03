@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Workout = require('../models/Workout');
+const Profile = require('../models/Profile');
 const auth = require('../middleware/auth');
 
 // Create new Workout
@@ -21,6 +22,10 @@ router.post('/api/workouts', auth, async (req, res) => {
     if (!user) {
       throw new Error('Please authenticate...');
     }
+    const profile = await Profile.findOne({ user: id });
+    if (!profile) {
+      throw new Error('Profile not found...');
+    }
     const workout = new Workout({
       user: id,
       name,
@@ -31,6 +36,78 @@ router.post('/api/workouts', auth, async (req, res) => {
       date: formatDate,
     });
     await workout.save();
+    const profWorkout = {
+      workout: workout._id,
+      extremeRavineLaps,
+      mudGauntletLaps,
+      workoutPartner,
+      text,
+      date: formatDate,
+    };
+    profile.workouts.unshift(profWorkout);
+
+    const {
+      ravineClubTotal,
+      ravineTotal,
+      gauntletClubTotal,
+      gauntletTotal,
+    } = profile.centuryClub;
+
+    // Extreme Ravine Club Total Adjustment
+
+    if (Number(ravineTotal) + Number(extremeRavineLaps) < 50) {
+      ravineAdjustment = Number(extremeRavineLaps);
+    } else if (
+      Number(ravineTotal) < 50 &&
+      Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
+      Number(ravineTotal) + Number(extremeRavineLaps) < 100
+    ) {
+      ravineAdjustment = 50 - Number(ravineTotal);
+    } else if (
+      Number(ravineTotal) > 50 &&
+      Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
+      Number(ravineTotal) + Number(extremeRavineLaps) < 100
+    ) {
+      ravineAdjustment = 0;
+    } else {
+      ravineAdjustment = Number(extremeRavineLaps);
+    }
+
+    // Mud Gauntlet Club Total Adjustment
+
+    if (Number(gauntletTotal) + Number(mudGauntletLaps) < 50) {
+      mudAdjustment = Number(mudGauntletLaps);
+    } else if (
+      Number(gauntletTotal) < 50 &&
+      Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
+      Number(gauntletTotal) + Number(mudGauntletLaps) < 100
+    ) {
+      mudAdjustment = 50 - Number(gauntletTotal);
+    } else if (
+      Number(gauntletTotal) > 50 &&
+      Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
+      Number(gauntletTotal) + Number(mudGauntletLaps) < 100
+    ) {
+      mudAdjustment = 0;
+    } else {
+      mudAdjustment = Number(mudGauntletLaps);
+    }
+
+    // Set values for profile updates
+
+    const newRavineClub = Number(ravineClubTotal) + Number(ravineAdjustment);
+    const newGauntletClub = Number(gauntletClubTotal) + Number(mudGauntletLaps);
+    const newRavine = Number(ravineTotal) + Number(extremeRavineLaps);
+    const newGauntlet = Number(gauntletTotal) + Number(mudGauntletLaps);
+
+    profile.centuryClub = {
+      ravineClubTotal: newRavineClub,
+      gauntletClubTotal: newGauntletClub,
+      ravineTotal: newRavine,
+      gauntletTotal: newGauntlet,
+    };
+
+    await profile.save();
     res.status(200).json(workout);
   } catch (e) {
     console.error({ message: e.message });
@@ -49,7 +126,79 @@ router.delete('/api/workouts/delete/:_id', auth, async (req, res) => {
     if (!workout) {
       return res.status(404).send({ message: 'Could not find workout...' });
     }
+    const profile = await Profile.findOne({ user: id });
+    if (!profile) {
+      return res.status(404).send({ message: 'Could not find profile...' });
+    }
+    profile.workouts = profile.workouts.filter(
+      (workout) => workout.workout.toString() !== _id.toString()
+    );
+    const { extremeRavineLaps, mudGauntletLaps } = workout;
+
+    const {
+      ravineClubTotal,
+      ravineTotal,
+      gauntletClubTotal,
+      gauntletTotal,
+    } = profile.centuryClub;
+
+    // Extreme Ravine Club Total Adjustment
+
+    if (extremeRavineLaps !== 0) {
+      if (
+        ravineClubTotal >= 50 &&
+        ravineClubTotal < 100 &&
+        ravineTotal - extremeRavineLaps >= 50
+      ) {
+        ravineAdjustment = 0;
+      } else if (
+        ravineClubTotal >= 50 &&
+        ravineClubTotal < 100 &&
+        ravineTotal - extremeRavineLaps < 50
+      ) {
+        ravineAdjustment = 50 - (ravineTotal - extremeRavineLaps);
+      } else {
+        ravineAdjustment = extremeRavineLaps;
+      }
+    } else {
+      ravineAdjustment = 0;
+    }
+    // Mud Gauntlet Club Total Adjustment
+
+    if (mudGauntletLaps !== 0) {
+      if (
+        gauntletClubTotal >= 50 &&
+        gauntletClubTotal < 100 &&
+        gauntletTotal - mudGauntletLaps >= 50
+      ) {
+        mudAdjustment = 0;
+      } else if (
+        gauntletClubTotal >= 50 &&
+        gauntletClubTotal < 100 &&
+        gauntletTotal - mudGauntletLaps < 50
+      ) {
+        mudAdjustment = 50 - (gauntletTotal - mudGauntletLaps);
+      } else {
+        mudAdjustment = mudGauntletLaps;
+      }
+    } else {
+      mudAdjustment = 0;
+    }
+    // Set values for profile updates
+
+    const newRavineClub = Number(ravineClubTotal) - Number(ravineAdjustment);
+    const newGauntletClub = Number(gauntletClubTotal) - Number(mudGauntletLaps);
+    const newRavine = Number(ravineTotal) - Number(extremeRavineLaps);
+    const newGauntlet = Number(gauntletTotal) - Number(mudGauntletLaps);
+
+    profile.centuryClub = {
+      ravineClubTotal: newRavineClub,
+      gauntletClubTotal: newGauntletClub,
+      ravineTotal: newRavine,
+      gauntletTotal: newGauntlet,
+    };
     await workout.remove();
+    await profile.save();
     res.status(200).send({ message: 'Workout successfully deleted...' });
   } catch (e) {
     if (e.kind === 'ObjectId') {

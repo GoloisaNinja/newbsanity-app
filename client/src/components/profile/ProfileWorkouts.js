@@ -7,9 +7,11 @@ import Spinner from '../Spinner';
 import ProfileWorkoutProgress from './ProfileWorkoutProgress';
 
 const ProfileWorkouts = ({
+  auth: { user },
   deleteWorkout,
   getUserWorkouts,
   workouts: { loading, workouts },
+  profile: { profile },
 }) => {
   useEffect(() => {
     getUserWorkouts();
@@ -27,7 +29,7 @@ const ProfileWorkouts = ({
       <td>
         <button
           className='btn workout-delete'
-          onClick={(e) => deleteWorkout(workout._id)}>
+          onClick={(e) => deleteWorkout(workout._id, user._id)}>
           <i className='fas fa-trash-alt' />
         </button>
       </td>
@@ -52,7 +54,7 @@ const ProfileWorkouts = ({
               </span>{' '}
               <span className='low-weight-span'>Century Club</span>
             </h3>
-            <ProfileWorkoutProgress workouts={workouts} />
+            <ProfileWorkoutProgress />
           </div>
           <p style={{ borderBottom: '3px solid #ff0a0a' }}>
             workouts you have logged
@@ -77,23 +79,41 @@ const ProfileWorkouts = ({
             </Fragment>
           ) : (
             <div className='profile-events'>
-              <h3 className='event-title'>
-                No{' '}
-                <span className='low-weight-span'>
-                  workouts recorded yet...
-                </span>
-              </h3>
+              {profile === null ? (
+                <h3 className='event-title'>
+                  Create{' '}
+                  <span className='low-weight-span'>
+                    a profile to log workouts...
+                  </span>
+                </h3>
+              ) : (
+                <h3 className='event-title'>
+                  No{' '}
+                  <span className='low-weight-span'>
+                    workouts recorded yet...
+                  </span>
+                </h3>
+              )}
+
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
                   marginTop: '2.5rem',
                 }}>
-                <Link style={{ width: '100%' }} to='/workouts'>
-                  <button style={{ width: '100%' }} className='btn'>
-                    Create a Workout
-                  </button>
-                </Link>
+                {profile === null ? (
+                  <Link style={{ width: '100%' }} to='/profile'>
+                    <button style={{ width: '100%' }} className='btn'>
+                      Create a profile
+                    </button>
+                  </Link>
+                ) : (
+                  <Link style={{ width: '100%' }} to='/workouts'>
+                    <button style={{ width: '100%' }} className='btn'>
+                      Create a Workout
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -107,10 +127,14 @@ ProfileWorkouts.propTypes = {
   getUserWorkouts: PropTypes.func.isRequired,
   deleteWorkout: PropTypes.func.isRequired,
   workouts: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   workouts: state.workouts,
+  profile: state.profile,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getUserWorkouts, deleteWorkout })(

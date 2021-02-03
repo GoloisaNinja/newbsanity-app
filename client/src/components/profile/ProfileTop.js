@@ -143,7 +143,10 @@ const ProfileTop = ({ auth: { user }, profile: { profile } }) => {
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ flex: 1 }}>
-                <p className='event-text'>You should make one!</p>
+                <p className='event-text'>
+                  You should make one! A profile allows you to log workouts and
+                  register for events.
+                </p>
               </div>
             </div>
           </div>

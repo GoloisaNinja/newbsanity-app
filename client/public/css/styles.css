@@ -390,7 +390,13 @@ input {
   font-size: 1.4rem;
   text-transform: uppercase;
   padding: 1rem;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  transition: opacity 2s ease-in-out; }
+  .btn:hover:not(:disabled) {
+    background: #ff3d3d; }
+  .btn:disabled {
+    opacity: 55%;
+    cursor: default; }
   .btn.register {
     width: 40%;
     margin-right: 1rem; }
@@ -417,6 +423,10 @@ input {
     background: none;
     border: none;
     box-shadow: none; }
+  .btn.club-standings {
+    background: none; }
+    .btn.club-standings:hover {
+      background: #444e5c; }
 
 .text-type-effect, .text-type-effect2 {
   width: 15.2ch;
@@ -656,6 +666,9 @@ input {
   background: #242930;
   border-bottom: #0e1013;
   margin-right: 2rem; }
+  .btn.profile-action:disabled {
+    opacity: 55%;
+    cursor: default; }
 
 .btn.profile-social {
   border-bottom: #0e1013;

@@ -8,6 +8,10 @@
     background: lighten(#0e1013, 10%);
     border-bottom: #0e1013;
     margin-right: 2rem;
+    &:disabled {
+      opacity: 55%;
+      cursor: default;
+    }
   }
   &.profile-social {
     border-bottom: #0e1013;

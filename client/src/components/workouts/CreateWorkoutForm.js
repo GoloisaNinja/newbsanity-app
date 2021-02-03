@@ -33,12 +33,14 @@ const CreateWorkoutForm = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    if (extremeRavineLaps === 0 && mudGauntletLaps === 0) {
+    if (parseInt(extremeRavineLaps) === 0 && parseInt(mudGauntletLaps) === 0) {
+      console.log(formData);
       setAlert(
         'A workout must contain a total of greater than 0 laps...',
         'danger'
       );
     } else {
+      console.log(formData);
       createWorkout(formData);
       setFormData({
         extremeRavineLaps: 0,
@@ -106,12 +108,13 @@ const CreateWorkoutForm = ({
         <div className='form-container'>
           <form className='form-profile' onSubmit={(e) => onSubmit(e)}>
             <div className='form-group'>
-              <label className='profile-label' htmlFor='age'>
+              <label className='profile-label' htmlFor='extremeRavineLaps'>
                 Extreme Ravine Laps (if any)
               </label>
               <input
                 className='form-input'
                 type='number'
+                min='0'
                 id='extremeRavineLaps'
                 name='extremeRavineLaps'
                 value={extremeRavineLaps}
@@ -119,12 +122,13 @@ const CreateWorkoutForm = ({
               />
             </div>
             <div className='form-group'>
-              <label className='profile-label' htmlFor='gender'>
+              <label className='profile-label' htmlFor='mudGauntletLaps'>
                 Mud Gauntlet Laps (if any)
               </label>
               <input
                 className='form-input'
                 type='number'
+                min='0'
                 id='mudGauntletLaps'
                 name='mudGauntletLaps'
                 value={mudGauntletLaps}
@@ -132,7 +136,7 @@ const CreateWorkoutForm = ({
               />
             </div>
             <div className='form-group'>
-              <label className='profile-label' htmlFor='location'>
+              <label className='profile-label' htmlFor='workoutPartner'>
                 Workout Partner Name (if any)
               </label>
               <input
@@ -145,7 +149,7 @@ const CreateWorkoutForm = ({
               />
             </div>
             <div className='form-group'>
-              <label className='profile-label' htmlFor='bio'>
+              <label className='profile-label' htmlFor='text'>
                 Workout Notes/Trash Talk
               </label>
               <textarea
@@ -160,7 +164,7 @@ const CreateWorkoutForm = ({
               />
             </div>
             <div className='form-group'>
-              <label className='profile-label' htmlFor='location'>
+              <label className='profile-label' htmlFor='date'>
                 Date of Workout *required
               </label>
               <input

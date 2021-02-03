@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CREATE_WORKOUT, GET_USER_WORKOUTS, DELETE_WORKOUT } from './types';
+import { getProfile } from './profile';
 import { setAlert } from './alert';
 
 // Create a new Workout
@@ -27,7 +28,7 @@ export const createWorkout = (formData) => async (dispatch) => {
 
 // Delete a Workout
 
-export const deleteWorkout = (id) => async (dispatch) => {
+export const deleteWorkout = (id, userId) => async (dispatch) => {
   const token = localStorage.getItem('token');
   try {
     const config = {
@@ -42,6 +43,7 @@ export const deleteWorkout = (id) => async (dispatch) => {
         type: DELETE_WORKOUT,
         payload: id,
       });
+      dispatch(getProfile(userId));
       dispatch(setAlert('Workout dirty deleted...', 'success'));
     }
   } catch (e) {

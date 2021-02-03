@@ -15,7 +15,7 @@ const ProfileRegisteredEvents = ({ profile: { profile } }) => {
         <div className='profile-bio__header'>
           <h3>
             <span className='red-span' style={{ color: '#ff0a0a' }}>
-              Newbsanity{' '}
+              Your{' '}
             </span>{' '}
             <span className='low-weight-span'>Events</span>
           </h3>

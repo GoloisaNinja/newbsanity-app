@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const ProfileActions = () => {
+const ProfileActions = ({ profile: { profile } }) => {
   return (
     <div className='profile-actions'>
       <Link to='/profile'>
@@ -15,7 +17,7 @@ const ProfileActions = () => {
         </button>
       </Link>
       <Link to='/workouts'>
-        <button className='btn profile-action'>
+        <button className='btn profile-action' disabled={profile === null}>
           <i className='fas fa-dumbbell' /> Create workout
         </button>
       </Link>
@@ -23,4 +25,12 @@ const ProfileActions = () => {
   );
 };
 
-export default ProfileActions;
+ProfileActions.propTypes = {
+  profile: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps)(ProfileActions);

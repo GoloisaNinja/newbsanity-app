@@ -55,6 +55,49 @@ const ProfileSchema = new mongoose.Schema(
         },
       },
     ],
+    workouts: [
+      {
+        workout: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Workout',
+        },
+        extremeRavineLaps: {
+          type: Number,
+        },
+        mudGauntletLaps: {
+          type: Number,
+        },
+        workoutPartner: {
+          type: String,
+        },
+        text: {
+          type: String,
+        },
+        date: {
+          type: Date,
+          required: true,
+        },
+      },
+      { timestamps: true },
+    ],
+    centuryClub: {
+      ravineClubTotal: {
+        type: Number,
+        default: 0,
+      },
+      gauntletClubTotal: {
+        type: Number,
+        default: 0,
+      },
+      ravineTotal: {
+        type: Number,
+        default: 0,
+      },
+      gauntletTotal: {
+        type: Number,
+        default: 0,
+      },
+    },
     social: {
       facebook: {
         type: String,
