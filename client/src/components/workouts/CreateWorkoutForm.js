@@ -34,7 +34,6 @@ const CreateWorkoutForm = ({
   const onSubmit = (e) => {
     e.preventDefault();
     if (parseInt(extremeRavineLaps) === 0 && parseInt(mudGauntletLaps) === 0) {
-      console.log(formData);
       setAlert(
         'A workout must contain a total of greater than 0 laps...',
         'danger'

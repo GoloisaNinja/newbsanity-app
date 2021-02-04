@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserWorkouts, deleteWorkout } from '../../actions/workouts';
 import Spinner from '../Spinner';
+import Modal from '../Modal';
 import ProfileWorkoutProgress from './ProfileWorkoutProgress';
 
 const ProfileWorkouts = ({
@@ -17,6 +18,25 @@ const ProfileWorkouts = ({
     getUserWorkouts();
   }, [getUserWorkouts]);
 
+  const [show, setShow] = useState(false);
+  const [workoutId, setWorkoutId] = useState('');
+
+  const content = {
+    title: 'Delete Workout?',
+    body: 'OMG, are you sure you want to delete this workout?',
+    icon: '/img/ninja.png',
+  };
+  const handleDelete = (id) => {
+    setWorkoutId(id);
+    setShow(true);
+  };
+  const handleClose = (shouldDelete, id) => {
+    setShow(false);
+    if (shouldDelete) {
+      deleteWorkout(id, user._id);
+    }
+  };
+
   const workoutEntries = workouts.map((workout) => (
     <tr key={workout._id}>
       <td>{workout.date.slice(0, 10)}</td>
@@ -29,7 +49,7 @@ const ProfileWorkouts = ({
       <td>
         <button
           className='btn workout-delete'
-          onClick={(e) => deleteWorkout(workout._id, user._id)}>
+          onClick={(e) => handleDelete(workout._id)}>
           <i className='fas fa-trash-alt' />
         </button>
       </td>
@@ -118,6 +138,12 @@ const ProfileWorkouts = ({
             </div>
           )}
         </div>
+        <Modal
+          show={show}
+          handleClose={handleClose}
+          content={content}
+          workoutId={workoutId}
+        />
       </div>
     </Fragment>
   );

@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Modal from '../Modal';
 import {
   registerForEvent,
   unRegisterForEvent,
@@ -21,6 +22,7 @@ const FullEvent = ({
   const [comment, setComment] = useState('');
   const [expired, setExpired] = useState(false);
   const [isRegistered, setIsRegistered] = useState();
+  const [show, setShow] = useState(false);
 
   const checkDate = () => {
     const formatDate = event.date.slice(0, 10);
@@ -51,17 +53,34 @@ const FullEvent = ({
     checkRegistered();
   }, [event]);
 
+  const content = {
+    title: isRegistered
+      ? `Unregister for ${event.title}`
+      : `Register for ${event.title}`,
+    body: isRegistered
+      ? `Are you sure you want to unregister for ${event.title}?`
+      : `Are you sure you want to register for ${event.title}?`,
+    icon: '/img/crossbone.png',
+  };
+
+  const handleClose = (shouldAction) => {
+    setShow(false);
+    if (shouldAction) {
+      if (!isRegistered) {
+        registerForEvent(event._id, comment);
+        setComment('');
+        setIsRegistered(true);
+      } else {
+        unRegisterForEvent(event._id);
+        setComment('');
+        setIsRegistered(false);
+      }
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isRegistered) {
-      registerForEvent(event._id, comment);
-      setComment('');
-      setIsRegistered(true);
-    } else {
-      unRegisterForEvent(event._id);
-      setComment('');
-      setIsRegistered(false);
-    }
+    setShow(true);
   };
 
   return (
@@ -174,6 +193,7 @@ const FullEvent = ({
           </div>
         </div>
       </div>
+      <Modal show={show} handleClose={handleClose} content={content} />
     </Fragment>
   );
 };

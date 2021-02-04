@@ -106,7 +106,7 @@ export const unRegisterForEvent = (id) => async (dispatch) => {
         registration: res.data,
       },
     });
-    dispatch(setAlert('Unregistered QuitterMcQuitterson...', 'success'));
+    dispatch(setAlert('Unregistered Quitter McQuitterson...', 'success'));
   } catch (e) {
     console.log(e);
     dispatch(setAlert(e.response.data.message, 'danger'));

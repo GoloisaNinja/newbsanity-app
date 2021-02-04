@@ -9,6 +9,16 @@ const Footer = () => {
           <p className='footer__text'>Newbsanity Adventure Center</p>
           <p className='footer__text'>790 Dunham Hill Road</p>
           <p className='footer__text'>Binghamton, NY 13905</p>
+          <p className='footer__text'>
+            Icons made by{' '}
+            <a href='https://www.freepik.com' title='Freepik'>
+              Freepik
+            </a>{' '}
+            from{' '}
+            <a href='https://www.flaticon.com/' title='Flaticon'>
+              www.flaticon.com
+            </a>
+          </p>
         </div>
         <div className='footer-sectionTwo'>
           <p className='footer__text lead'>find us on social media!</p>
