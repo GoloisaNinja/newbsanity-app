@@ -22,16 +22,24 @@ const Profile = ({
   useEffect(() => {
     getProfile(user._id);
   }, [getProfile]);
+
+  const [show, setShow] = useState(false);
+  const [content, setContent] = useState();
+
+  const handleDismiss = () => {
+    seenTrophy(trophy._id);
+    setShow(false);
+  };
+
   useEffect(() => {
     if (user.loginCount === 10) {
       assignTrophy('601d2694d9db960017439143');
     }
   }, []);
-  const [show, setShow] = useState(false);
-  const [content, setContent] = useState();
 
   useEffect(() => {
     if (trophy !== null) {
+      console.log('running based on trophy');
       setContent({
         title: trophy.title,
         body: trophy.body,
@@ -41,10 +49,7 @@ const Profile = ({
       setShow(true);
     }
   }, [trophy]);
-  const handleDismiss = () => {
-    seenTrophy(trophy._id);
-    setShow(false);
-  };
+
   return !loading ? (
     <Fragment>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
