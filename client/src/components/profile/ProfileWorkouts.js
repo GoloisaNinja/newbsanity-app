@@ -35,7 +35,7 @@ const ProfileWorkouts = ({
       });
       setShow(true);
     }
-  }, [profile]);
+  }, [profile.centuryClub]);
 
   const [show, setShow] = useState(false);
   const [workoutId, setWorkoutId] = useState('');
