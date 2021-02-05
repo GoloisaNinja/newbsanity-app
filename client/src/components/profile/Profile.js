@@ -24,7 +24,7 @@ const Profile = ({
   }, [getProfile]);
   useEffect(() => {
     if (user.loginCount === 10) {
-      assignTrophy('601d0d8d06f1328ecfe1d9cd');
+      assignTrophy('601d2694d9db960017439143');
     }
   }, []);
   const [show, setShow] = useState(false);

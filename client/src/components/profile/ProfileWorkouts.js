@@ -24,7 +24,7 @@ const ProfileWorkouts = ({
 
   useEffect(() => {
     if (workouts.length === 1) {
-      assignTrophy('601d179ead25af90297faa12');
+      assignTrophy('601d25a4d9db960017439142');
     }
     if (trophy !== null) {
       setContent({
