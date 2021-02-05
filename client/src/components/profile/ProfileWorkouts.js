@@ -22,21 +22,6 @@ const ProfileWorkouts = ({
     getUserWorkouts();
   }, [getUserWorkouts]);
 
-  useEffect(() => {
-    if (workouts.length === 1) {
-      assignTrophy('601d25a4d9db960017439142');
-    }
-    if (trophy !== null) {
-      setContent({
-        title: trophy.title,
-        body: trophy.body,
-        icon: trophy.icon,
-        type: 'dismiss',
-      });
-      setShow(true);
-    }
-  }, [profile.centuryClub]);
-
   const [show, setShow] = useState(false);
   const [workoutId, setWorkoutId] = useState('');
   const [content, setContent] = useState();
@@ -80,6 +65,24 @@ const ProfileWorkouts = ({
       </td>
     </tr>
   ));
+
+  useEffect(() => {
+    if (workouts.length === 1) {
+      assignTrophy('601d25a4d9db960017439142');
+    }
+  }, [workouts]);
+
+  useEffect(() => {
+    if (trophy !== null) {
+      setContent({
+        title: trophy.title,
+        body: trophy.body,
+        icon: trophy.icon,
+        type: 'dismiss',
+      });
+      setShow(true);
+    }
+  }, [assignTrophy]);
 
   return loading ? (
     <Spinner />
