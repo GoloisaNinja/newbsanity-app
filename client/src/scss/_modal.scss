@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
+  width: 300px;
   max-width: 90%;
   z-index: 1010;
   background-color: #eee;
@@ -34,18 +34,32 @@
   border-bottom: 2px solid darken(#ff0a0a, 10%);
   font-weight: 700;
   cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: lighten(#ff0a0a, 20%);
+    border-bottom: 2px solid #ff0a0a;
+  }
 }
 .modalButton2 {
+  @extend .modalButton1;
   background-color: #0f9d58;
-  color: #eee;
-  padding: 1rem;
-  border: none;
-  border-radius: 3px;
-  width: 80px;
-  max-width: 100%;
   border-bottom: 2px solid #0a6e3d;
-  font-weight: 700;
-  cursor: pointer;
+  &:hover {
+    background-color: lighten(#0f9d58, 10%);
+    border-bottom: 2px solid #0f9d58;
+  }
+}
+.modalDismissButton1 {
+  @extend .modalButton1;
+  background-color: #0e1013;
+  border-bottom: darken(#0e1013, 5%);
+  width: 100px;
+  &:hover {
+    background-color: lighten(#0e1013, 20%);
+    border-bottom: #0e1013;
+  }
 }
 .buttonDiv {
   display: flex;

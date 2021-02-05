@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Trophy = require('../models/Trophy');
 const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');

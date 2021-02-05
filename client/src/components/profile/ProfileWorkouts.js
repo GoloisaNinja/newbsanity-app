@@ -6,8 +6,12 @@ import { getUserWorkouts, deleteWorkout } from '../../actions/workouts';
 import Spinner from '../Spinner';
 import Modal from '../Modal';
 import ProfileWorkoutProgress from './ProfileWorkoutProgress';
+import { assignTrophy, seenTrophy } from '../../actions/trophies';
 
 const ProfileWorkouts = ({
+  assignTrophy,
+  seenTrophy,
+  trophy: { trophy },
   auth: { user },
   deleteWorkout,
   getUserWorkouts,
@@ -18,16 +22,37 @@ const ProfileWorkouts = ({
     getUserWorkouts();
   }, [getUserWorkouts]);
 
+  useEffect(() => {
+    if (workouts.length === 1) {
+      assignTrophy('601d179ead25af90297faa12');
+    }
+    if (trophy !== null) {
+      setContent({
+        title: trophy.title,
+        body: trophy.body,
+        icon: trophy.icon,
+        type: 'dismiss',
+      });
+      setShow(true);
+    }
+  }, [profile]);
+
   const [show, setShow] = useState(false);
   const [workoutId, setWorkoutId] = useState('');
+  const [content, setContent] = useState();
 
-  const content = {
-    title: 'Delete Workout?',
-    body: 'OMG, are you sure you want to delete this workout?',
-    icon: '/img/ninja.png',
+  const handleDismiss = () => {
+    setShow(false);
+    seenTrophy(trophy._id);
   };
   const handleDelete = (id) => {
     setWorkoutId(id);
+    setContent({
+      title: 'Delete Workout?',
+      body: 'OMG, are you sure you want to delete this workout?',
+      icon: '/img/ninja.png',
+      type: 'decision',
+    });
     setShow(true);
   };
   const handleClose = (shouldDelete, id) => {
@@ -141,6 +166,7 @@ const ProfileWorkouts = ({
         <Modal
           show={show}
           handleClose={handleClose}
+          handleDismiss={handleDismiss}
           content={content}
           workoutId={workoutId}
         />
@@ -155,14 +181,21 @@ ProfileWorkouts.propTypes = {
   workouts: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  assignTrophy: PropTypes.func.isRequired,
+  seenTrophy: PropTypes.func.isRequired,
+  trophy: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   workouts: state.workouts,
   profile: state.profile,
   auth: state.auth,
+  trophy: state.trophy,
 });
 
-export default connect(mapStateToProps, { getUserWorkouts, deleteWorkout })(
-  ProfileWorkouts
-);
+export default connect(mapStateToProps, {
+  getUserWorkouts,
+  deleteWorkout,
+  assignTrophy,
+  seenTrophy,
+})(ProfileWorkouts);

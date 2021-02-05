@@ -1,6 +1,12 @@
 import React, { Fragment } from 'react';
 
-const Modal = ({ show, handleClose, content, workoutId = 0 }) => {
+const Modal = ({
+  show,
+  handleClose,
+  handleDismiss,
+  content,
+  workoutId = 0,
+}) => {
   return (
     show && (
       <Fragment>
@@ -12,16 +18,28 @@ const Modal = ({ show, handleClose, content, workoutId = 0 }) => {
           <h2 style={{ marginBottom: '2rem' }}>{content.title}</h2>
           <p style={{ marginBottom: '2rem' }}>{content.body}</p>
           <div className='buttonDiv'>
-            <button
-              className='modalButton1'
-              onClick={(e) => handleClose(false)}>
-              cancel
-            </button>
-            <button
-              className='modalButton2'
-              onClick={(e) => handleClose(true, workoutId)}>
-              confirm
-            </button>
+            {content.type === 'decision' ? (
+              <Fragment>
+                <button
+                  className='modalButton1'
+                  onClick={(e) => handleClose(false)}>
+                  cancel
+                </button>
+                <button
+                  className='modalButton2'
+                  onClick={(e) => handleClose(true, workoutId)}>
+                  confirm
+                </button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <button
+                  className='modalDismissButton1'
+                  onClick={(e) => handleDismiss()}>
+                  dismiss
+                </button>
+              </Fragment>
+            )}
           </div>
         </div>
         <div className='modalOverlay'></div>

@@ -1,35 +1,25 @@
-import {
-  GET_PROFILE,
-  CLEAR_PROFILE,
-  PROFILE_FAIL,
-  CREATE_PROFILE,
-} from '../actions/types';
+import { ASSIGN_TROPHY, TROPHY_SEEN } from '../actions/types';
 
 const initialState = {
   loading: true,
-  profile: null,
-  profiles: [],
+  trophy: null,
   error: {},
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_PROFILE:
-    case CREATE_PROFILE:
+    case ASSIGN_TROPHY:
       return {
         ...state,
-        profile: payload,
+        trophy: payload,
         loading: false,
       };
-    case CLEAR_PROFILE:
-    case PROFILE_FAIL:
+    case TROPHY_SEEN:
       return {
         ...state,
-        profile: null,
-        profiles: [],
         loading: false,
-        error: payload,
+        trophy: null,
       };
     default:
       return state;

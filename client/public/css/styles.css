@@ -391,7 +391,8 @@ input {
   text-transform: uppercase;
   padding: 1rem;
   margin-bottom: 1rem;
-  transition: opacity 2s ease-in-out; }
+  transition: opacity 0s ease-in-out;
+  transition: background 0.5s ease-in-out; }
   .btn:hover:not(:disabled) {
     background: #ff3d3d; }
   .btn:disabled {
@@ -908,7 +909,7 @@ progress[value]::-moz-progress-value {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 250px;
+  width: 300px;
   max-width: 90%;
   z-index: 1010;
   background-color: #eee;
@@ -928,7 +929,7 @@ progress[value]::-moz-progress-value {
   background-color: #0a0a0a;
   opacity: 90%; }
 
-.modalButton1 {
+.modalButton1, .modalButton2, .modalDismissButton1 {
   background-color: #ff0a0a;
   color: #eee;
   padding: 1rem;
@@ -938,19 +939,28 @@ progress[value]::-moz-progress-value {
   max-width: 100%;
   border-bottom: 2px solid #d60000;
   font-weight: 700;
-  cursor: pointer; }
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out; }
+  .modalButton1:hover, .modalButton2:hover, .modalDismissButton1:hover {
+    background-color: #ff7070;
+    border-bottom: 2px solid #ff0a0a; }
 
 .modalButton2 {
   background-color: #0f9d58;
-  color: #eee;
-  padding: 1rem;
-  border: none;
-  border-radius: 3px;
-  width: 80px;
-  max-width: 100%;
-  border-bottom: 2px solid #0a6e3d;
-  font-weight: 700;
-  cursor: pointer; }
+  border-bottom: 2px solid #0a6e3d; }
+  .modalButton2:hover {
+    background-color: #13cc72;
+    border-bottom: 2px solid #0f9d58; }
+
+.modalDismissButton1 {
+  background-color: #0e1013;
+  border-bottom: #030404;
+  width: 100px; }
+  .modalDismissButton1:hover {
+    background-color: #39414e;
+    border-bottom: #0e1013; }
 
 .buttonDiv {
   display: flex;

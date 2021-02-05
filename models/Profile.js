@@ -34,6 +34,30 @@ const ProfileSchema = new mongoose.Schema(
     personalwebsite: {
       type: String,
     },
+    trophies: [
+      {
+        trophy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Trophy',
+        },
+        title: {
+          type: String,
+          required: true,
+        },
+        body: {
+          type: String,
+          required: true,
+        },
+        icon: {
+          type: String,
+          required: true,
+        },
+        userSeen: {
+          type: Boolean,
+          required: true,
+        },
+      },
+    ],
     registeredEvents: [
       {
         event: {

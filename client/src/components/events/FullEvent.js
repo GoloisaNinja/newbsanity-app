@@ -61,6 +61,7 @@ const FullEvent = ({
       ? `Are you sure you want to unregister for ${event.title}?`
       : `Are you sure you want to register for ${event.title}?`,
     icon: '/img/crossbone.png',
+    type: 'decision',
   };
 
   const handleClose = (shouldAction) => {
