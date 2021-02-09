@@ -14,6 +14,9 @@ import CreateProfileForm from '../profile/profile-forms/CreateProfileForm';
 import CreateWorkoutForm from '../workouts/CreateWorkoutForm';
 import Avatar from '../profile/profile-forms/Avatar';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
+import AdminPanel from '../admin/AdminPanel';
+import UserPanel from '../admin/users/UserPanel';
 
 const Routes = () => {
   return (
@@ -31,6 +34,8 @@ const Routes = () => {
       <PrivateRoute path='/events' component={EventsPage} />
       <PrivateRoute path='/event/:id' component={Event} />
       <PrivateRoute path='/workouts' component={CreateWorkoutForm} />
+      <AdminRoute exact path='/admin' component={AdminPanel} />
+      <AdminRoute path='/admin/users' component={UserPanel} />
     </Switch>
   );
 };

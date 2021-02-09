@@ -33,7 +33,8 @@ const ProfileAdvice = () => {
     <div className='profile-advice-container'>
       <div className='profile-avatar'>
         <h2>
-          Jarrett's<span style={{ color: '#ff0a0a' }}> Corner</span>
+          Jarrett's
+          <span style={{ color: '#ff0a0a' }}> Corner</span>
         </h2>
       </div>
       <div className='profile-bio' style={{ flex: 1 }}>

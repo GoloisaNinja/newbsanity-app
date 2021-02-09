@@ -6,6 +6,60 @@ const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');
 
+// Get All Users (admin)
+
+router.get('/api/users/admin/getAll', auth, async (req, res) => {
+  const user = await req.user;
+  try {
+    if (!user) {
+      return res.status(404).send({ message: 'Please authenticate...' });
+    }
+    if (!user.isAdmin) {
+      return res.status(401).send({ message: 'Unauthorized' });
+    }
+
+    const users = await User.find(
+      {},
+      'name email createdAt loginCount avatar'
+    ).sort({
+      createdAt: -1,
+    });
+    res.status(200).send(users);
+  } catch (e) {
+    console.error(e.message, e.stack);
+    res.status(400).send({ message: e.message });
+  }
+});
+
+// Admin Delete Avatar Route (admin)
+
+router.delete(
+  '/api/users/admin/avatar/delete/:userId',
+  auth,
+  async (req, res) => {
+    const user = await req.user;
+    const avatarId = req.params.userId;
+    try {
+      if (!user) {
+        return res.status(404).send({ message: 'Please authenticate...' });
+      }
+      if (!user.isAdmin) {
+        return res.status(401).send({ message: 'Unauthorized' });
+      }
+      const userToModify = await User.findById(avatarId);
+      if (!userToModify) {
+        return res.status(404).send({ message: 'Not found' });
+      }
+      userToModify.avatar = undefined;
+      await userToModify.save();
+      res.send(`Avatar for ${userToModify._id} deleted successfully...`);
+    } catch (e) {
+      console.error(e.message);
+      res.send(e.message);
+    }
+  }
+);
+
 // Load authenticated User
 
 router.get('/api/users/auth', auth, async (req, res) => {

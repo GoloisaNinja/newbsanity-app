@@ -621,7 +621,7 @@ input {
   padding-left: 1rem;
   padding-top: 1rem; }
 
-.post-avatar, .post-avatar-profile {
+.post-avatar, .post-avatar-profile, .avatar-profile {
   width: 150px;
   border-radius: 50%;
   margin-bottom: 1rem; }
@@ -654,7 +654,7 @@ input {
     flex-direction: column; }
   .post-text-container {
     min-width: 95%; }
-  .post-avatar, .post-avatar-profile {
+  .post-avatar, .post-avatar-profile, .avatar-profile {
     max-width: 150px;
     margin-bottom: 0.5rem; } }
 
@@ -717,10 +717,10 @@ input {
 #prof-icons {
   color: #242930; }
 
-.post-avatar-profile {
+.post-avatar-profile, .avatar-profile {
   margin-top: 1.5rem; }
 
-.profile-bio, .profile-bio-regevents, .profile-workout-main {
+.profile-bio, .profile-bio-regevents, .profile-workout-main, .user-panel-users {
   background: #242930;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 2rem;
@@ -728,14 +728,14 @@ input {
   width: 100%;
   flex-grow: 1; }
 
-.profile-bio-regevents, .profile-workout-main {
+.profile-bio-regevents, .profile-workout-main, .user-panel-users {
   max-height: 25rem;
   overflow-y: scroll;
   justify-content: start;
   flex: 1;
   scrollbar-width: none;
   -ms-overflow-style: none; }
-  .profile-bio-regevents::-webkit-scrollbar, .profile-workout-main::-webkit-scrollbar {
+  .profile-bio-regevents::-webkit-scrollbar, .profile-workout-main::-webkit-scrollbar, .user-panel-users::-webkit-scrollbar {
     width: 0;
     height: 0; }
 
@@ -840,7 +840,7 @@ input[type='file']::file-selector-button {
   .btn.profile-action {
     width: 100%; } }
 
-.workout-table {
+.workout-table, .user-table {
   margin: 0 auto;
   margin-top: 1rem; }
 
@@ -874,7 +874,7 @@ tr:nth-child(even) {
   justify-content: center;
   flex-grow: 1; }
 
-.profile-workout-main {
+.profile-workout-main, .user-panel-users {
   max-height: 50rem; }
 
 progress[value] {
@@ -883,8 +883,7 @@ progress[value] {
   appearance: none;
   border: none;
   width: 25rem;
-  height: 2rem;
-  margin-left: 1rem; }
+  height: 2rem; }
 
 progress[value]::-webkit-progress-bar {
   background-color: #758374;
@@ -969,3 +968,40 @@ progress[value]::-moz-progress-value {
 .modal-icon {
   width: 80px;
   height: 80px; }
+
+.admin-glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  margin-top: 1.5rem; }
+
+.admin-glance-container {
+  background: #242930;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; }
+
+.admin-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem; }
+
+.action-grid-one,
+.action-grid-two {
+  display: flex;
+  flex-direction: column; }
+
+.avatar-profile {
+  width: 50px; }
+
+.user-panel-users {
+  padding: 1rem;
+  width: 100%; }
+
+.user-table {
+  width: 100%; }
+
+@media (max-width: 45rem) {
+  .admin-glance-grid,
+  .admin-actions-grid {
+    grid-template-columns: 1fr; } }

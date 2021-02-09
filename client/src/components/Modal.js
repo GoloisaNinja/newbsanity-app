@@ -1,12 +1,6 @@
 import React, { Fragment } from 'react';
 
-const Modal = ({
-  show,
-  handleClose,
-  handleDismiss,
-  content,
-  workoutId = 0,
-}) => {
+const Modal = ({ show, handleClose, handleDismiss, content }) => {
   return (
     show && (
       <Fragment>
@@ -27,7 +21,7 @@ const Modal = ({
                 </button>
                 <button
                   className='modalButton2'
-                  onClick={(e) => handleClose(true, workoutId)}>
+                  onClick={(e) => handleClose(true)}>
                   confirm
                 </button>
               </Fragment>

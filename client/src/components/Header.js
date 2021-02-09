@@ -4,7 +4,39 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../actions/auth';
 
-const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
+const Header = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
+  const adminLinks = (
+    <ul>
+      <li>
+        <Link className='navbar-links' to='/posts'>
+          <i
+            style={{ fontSize: '1.6rem' }}
+            className='fas fa-comments'
+            id='hide-sm'
+          />{' '}
+          forum
+        </Link>
+      </li>
+      <li>
+        <Link className='navbar-links' to='/dashboard'>
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-user-ninja' />{' '}
+          <span id='hide-sm'>dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <Link className='navbar-links' to='/admin'>
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-tools' />{' '}
+          <span id='hide-sm'>admin</span>
+        </Link>
+      </li>
+      <li>
+        <Link className='navbar-links' onClick={logoutUser} to='/login'>
+          <i style={{ fontSize: '1.6rem' }} className='fas fa-sign-out-alt' />{' '}
+          <span id='hide-sm'>logout</span>
+        </Link>
+      </li>
+    </ul>
+  );
   const authLinks = (
     <ul>
       <li>
@@ -94,7 +126,13 @@ const Header = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
         </Link>
       </h1>
       {!loading && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+        <Fragment>
+          {isAuthenticated && user.isAdmin
+            ? adminLinks
+            : isAuthenticated
+            ? authLinks
+            : guestLinks}
+        </Fragment>
       )}
     </nav>
   );

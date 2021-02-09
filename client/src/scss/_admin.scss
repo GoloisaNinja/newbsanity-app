@@ -1,0 +1,48 @@
+.admin-glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  margin-top: 1.5rem;
+}
+.admin-glance-container {
+  background: lighten(#0e1013, 10%);
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+// Admin Actions Styling
+
+.admin-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.action-grid-one,
+.action-grid-two {
+  display: flex;
+  flex-direction: column;
+}
+
+// User Panel Styles
+.avatar-profile {
+  @extend .post-avatar-profile;
+  width: 50px;
+}
+.user-panel-users {
+  @extend .profile-workout-main;
+  padding: 1rem;
+  width: 100%;
+}
+.user-table {
+  @extend .workout-table;
+  width: 100%;
+}
+
+@media (max-width: 45rem) {
+  .admin-glance-grid,
+  .admin-actions-grid {
+    grid-template-columns: 1fr;
+  }
+}

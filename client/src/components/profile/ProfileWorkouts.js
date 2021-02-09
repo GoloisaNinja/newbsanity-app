@@ -40,10 +40,10 @@ const ProfileWorkouts = ({
     });
     setShow(true);
   };
-  const handleClose = (shouldDelete, id) => {
+  const handleClose = (shouldDelete) => {
     setShow(false);
     if (shouldDelete) {
-      deleteWorkout(id, user._id);
+      deleteWorkout(workoutId, user._id);
     }
   };
 
@@ -171,7 +171,6 @@ const ProfileWorkouts = ({
           handleClose={handleClose}
           handleDismiss={handleDismiss}
           content={content}
-          workoutId={workoutId}
         />
       </div>
     </Fragment>
