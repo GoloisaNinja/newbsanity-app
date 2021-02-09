@@ -9,9 +9,11 @@ const UserPanel = ({ users, adminDeleteUserAvatar }) => {
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState('');
   const [content, setContent] = useState();
+  const [deleteType, setDeleteType] = useState();
 
   const handleDelete = (id, type) => {
     setUserId(id);
+    setDeleteType(type);
     if (type === 'avatar') {
       setContent({
         title: 'Delete User Avatar?',
@@ -33,7 +35,7 @@ const UserPanel = ({ users, adminDeleteUserAvatar }) => {
 
   const handleClose = (shouldDelete) => {
     setShow(false);
-    if (shouldDelete) {
+    if (shouldDelete && deleteType === 'avatar') {
       adminDeleteUserAvatar(userId);
     }
   };
@@ -75,7 +77,7 @@ const UserPanel = ({ users, adminDeleteUserAvatar }) => {
       <td>
         <button
           className='btn workout-delete'
-          onClick={(e) => handleDelete(workout._id)}>
+          onClick={(e) => console.log('action needed')}>
           <i className='fas fa-trash-alt' />
         </button>
       </td>
