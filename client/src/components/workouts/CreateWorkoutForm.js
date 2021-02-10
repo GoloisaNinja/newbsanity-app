@@ -1,10 +1,11 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createWorkout } from '../../actions/workouts';
 import { setAlert } from '../../actions/alert';
 import Alert from '../Alert';
+import * as dayjs from 'dayjs';
 
 const CreateWorkoutForm = ({
   setAlert,
@@ -17,7 +18,7 @@ const CreateWorkoutForm = ({
     mudGauntletLaps: 0,
     workoutPartner: '',
     text: '',
-    date: '2021-01-01',
+    date: dayjs().format('YYYY-MM-DD'),
   });
 
   const {
@@ -39,14 +40,13 @@ const CreateWorkoutForm = ({
         'danger'
       );
     } else {
-      console.log(formData);
       createWorkout(formData);
       setFormData({
         extremeRavineLaps: 0,
         mudGauntletLaps: 0,
         workoutPartner: '',
         text: '',
-        date: '2021-01-01',
+        date: dayjs().format('YYYY-MM-DD'),
       });
     }
   };

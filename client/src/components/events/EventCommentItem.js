@@ -11,9 +11,6 @@ const EventCommentItem = ({
   auth: { user },
 }) => {
   const [avatar, hasAvatar] = useState(false);
-  useEffect(() => {
-    checkAvatar();
-  }, [comment]);
 
   const checkAvatar = async () => {
     try {
@@ -26,6 +23,10 @@ const EventCommentItem = ({
     }
   };
 
+  useEffect(() => {
+    checkAvatar();
+  }, [checkAvatar, comment]);
+
   return (
     <Fragment>
       <div className='post-container'>
@@ -35,12 +36,14 @@ const EventCommentItem = ({
               className='post-avatar'
               loading='lazy'
               src={`/api/user/${comment.user}/avatar`}
+              alt='avatar'
             />
           ) : (
             <img
               className='post-avatar'
               src='/img/defaultProfile.jpg'
               loading='lazy'
+              alt='avatar'
             />
           )}
 

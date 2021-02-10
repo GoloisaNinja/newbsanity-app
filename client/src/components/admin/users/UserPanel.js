@@ -51,6 +51,7 @@ const UserPanel = ({ users, adminDeleteUserAvatar }) => {
               className='avatar-profile'
               src={`/api/user/${user._id}/avatar`}
               loading='lazy'
+              alt='avatar'
             />
           </button>
         </td>
@@ -60,6 +61,7 @@ const UserPanel = ({ users, adminDeleteUserAvatar }) => {
             className='avatar-profile'
             src='/img/defaultProfile.jpg'
             loading='lazy'
+            alt='avatar'
           />
         </td>
       )}

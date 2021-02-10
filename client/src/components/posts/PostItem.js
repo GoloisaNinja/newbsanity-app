@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { deletePost, likePost, unlikePost } from '../../actions/posts';
 
 const PostItem = ({
@@ -22,12 +21,14 @@ const PostItem = ({
               className='post-avatar'
               src={`/api/user/${post.user}/avatar`}
               loading='lazy'
+              alt='avatar'
             />
           ) : (
             <img
               className='post-avatar'
               src='/img/defaultProfile.jpg'
               loading='lazy'
+              alt='avatar'
             />
           )}
 

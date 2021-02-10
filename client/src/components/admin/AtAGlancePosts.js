@@ -42,7 +42,7 @@ const AtAGlancePosts = ({ posts: { loading, posts }, getAllPosts }) => {
             width: '100%',
           }}>
           <h2 style={{ color: '#0e1013' }}>
-            Posts <span style={{ color: '#ff0a0a' }}>Panel</span>
+            Posts <span style={{ color: '#ff0a0a' }}>Activity</span>
           </h2>
         </div>
         <div style={{ padding: '1rem', flex: 1 }}>

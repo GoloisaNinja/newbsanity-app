@@ -14,6 +14,7 @@ const ProfileTop = ({ auth: { user }, profile: { profile } }) => {
                 className='post-avatar-profile'
                 src={`/api/user/${user._id}/avatar`}
                 loading='lazy'
+                alt='avatar'
               />
               <div
                 className='img-overlay'
@@ -50,6 +51,7 @@ const ProfileTop = ({ auth: { user }, profile: { profile } }) => {
                 className='post-avatar-profile'
                 src='/img/defaultProfile.jpg'
                 loading='lazy'
+                alt='avatar'
               />
               <div
                 className='img-overlay'

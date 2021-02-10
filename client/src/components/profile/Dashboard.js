@@ -6,8 +6,18 @@ import Alert from '../Alert';
 import Spinner from '../Spinner';
 import ProfileActions from './ProfileActions';
 import Profile from './Profile';
+import { seenTrophy } from '../../actions/trophies';
+import Modal from '../Modal';
 
-const Dashboard = ({ auth: { user, loading } }) => {
+const Dashboard = ({
+  auth: { user, loading },
+  trophy: { trophy },
+  seenTrophy,
+}) => {
+  const handleDismiss = () => {
+    seenTrophy(trophy._id);
+  };
+
   return (
     <div>
       {!loading ? (
@@ -23,6 +33,18 @@ const Dashboard = ({ auth: { user, loading } }) => {
             <ProfileActions />
             <Profile user={user} />
           </div>
+          {trophy !== null && (
+            <Modal
+              show={true}
+              handleDismiss={handleDismiss}
+              content={{
+                title: trophy.title,
+                body: trophy.body,
+                icon: trophy.icon,
+                type: 'dismiss',
+              }}
+            />
+          )}
         </Fragment>
       ) : (
         <Spinner />
@@ -33,10 +55,13 @@ const Dashboard = ({ auth: { user, loading } }) => {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
+  trophy: PropTypes.object.isRequired,
+  seenTrophy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  trophy: state.trophy,
 });
 
-export default connect(mapStateToProps)(withRouter(Dashboard));
+export default connect(mapStateToProps, { seenTrophy })(withRouter(Dashboard));

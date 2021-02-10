@@ -79,7 +79,7 @@ const CreateProfileForm = ({
         youtube:
           loading || !profile.social.youtube ? '' : profile.social.youtube,
       });
-  }, [loading, getProfile]);
+  }, [loading, getProfile, profile, _id]);
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

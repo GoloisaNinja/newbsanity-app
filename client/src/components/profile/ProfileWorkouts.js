@@ -4,17 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserWorkouts, deleteWorkout } from '../../actions/workouts';
 import Spinner from '../Spinner';
-import Modal from '../Modal';
 import ProfileWorkoutProgress from './ProfileWorkoutProgress';
-import { assignTrophy, seenTrophy } from '../../actions/trophies';
+import { assignTrophy } from '../../actions/trophies';
+import Modal from '../Modal';
 
 const ProfileWorkouts = ({
-  assignTrophy,
-  seenTrophy,
-  trophy: { trophy },
   auth: { user },
   deleteWorkout,
   getUserWorkouts,
+  assignTrophy,
   workouts: { loading, workouts },
   profile: { profile },
 }) => {
@@ -28,7 +26,6 @@ const ProfileWorkouts = ({
 
   const handleDismiss = () => {
     setShow(false);
-    seenTrophy(trophy._id);
   };
   const handleDelete = (id) => {
     setWorkoutId(id);
@@ -68,21 +65,9 @@ const ProfileWorkouts = ({
 
   useEffect(() => {
     if (workouts.length === 1) {
-      assignTrophy('601d25a4d9db960017439142');
+      assignTrophy('601d179ead25af90297faa12');
     }
-  }, [workouts]);
-
-  useEffect(() => {
-    if (trophy !== null) {
-      setContent({
-        title: trophy.title,
-        body: trophy.body,
-        icon: trophy.icon,
-        type: 'dismiss',
-      });
-      setShow(true);
-    }
-  }, [assignTrophy]);
+  }, [assignTrophy, workouts]);
 
   return loading ? (
     <Spinner />
@@ -178,26 +163,22 @@ const ProfileWorkouts = ({
 };
 
 ProfileWorkouts.propTypes = {
+  assignTrophy: PropTypes.func,
   getUserWorkouts: PropTypes.func.isRequired,
   deleteWorkout: PropTypes.func.isRequired,
   workouts: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  assignTrophy: PropTypes.func.isRequired,
-  seenTrophy: PropTypes.func.isRequired,
-  trophy: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   workouts: state.workouts,
   profile: state.profile,
   auth: state.auth,
-  trophy: state.trophy,
 });
 
 export default connect(mapStateToProps, {
   getUserWorkouts,
   deleteWorkout,
   assignTrophy,
-  seenTrophy,
 })(ProfileWorkouts);

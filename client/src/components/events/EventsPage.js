@@ -11,7 +11,7 @@ const EventsPage = ({ user, loading, getAllEvents, allevents, getProfile }) => {
   useEffect(() => {
     getAllEvents();
     getProfile(user._id);
-  }, [getAllEvents, getProfile]);
+  }, [getAllEvents, getProfile, user._id]);
   return (
     <Fragment>
       {loading ? (

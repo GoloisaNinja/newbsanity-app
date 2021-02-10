@@ -14,10 +14,12 @@ export const assignTrophy = (id) => async (dispatch) => {
     };
 
     const res = await axios.post(`/api/trophies/assign/${id}`, config);
-    dispatch({
-      type: ASSIGN_TROPHY,
-      payload: res.data,
-    });
+    if (res.status === 200) {
+      dispatch({
+        type: ASSIGN_TROPHY,
+        payload: res.data,
+      });
+    }
   } catch (e) {
     console.log(e);
   }
@@ -35,9 +37,11 @@ export const seenTrophy = (id) => async (dispatch) => {
     };
 
     const res = await axios.post(`/api/trophies/markAsSeen/${id}`, config);
-    dispatch({
-      type: TROPHY_SEEN,
-    });
+    if (res.status === 200) {
+      dispatch({
+        type: TROPHY_SEEN,
+      });
+    }
   } catch (e) {
     console.log(e);
   }

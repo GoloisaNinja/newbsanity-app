@@ -51,7 +51,7 @@ const FullEvent = ({
 
   useEffect(() => {
     checkRegistered();
-  }, [event]);
+  }, [checkRegistered, event]);
 
   const content = {
     title: isRegistered

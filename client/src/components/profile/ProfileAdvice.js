@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const ProfileAdvice = () => {
   const jarrettAdvice = [
@@ -66,7 +66,11 @@ const ProfileAdvice = () => {
               alignItems: 'center',
             }}>
             <div>
-              <img className='advice-img' src='/img/jar1.jpg' />{' '}
+              <img
+                className='advice-img'
+                src='/img/jar1.jpg'
+                alt='jarrett looking judgey'
+              />{' '}
             </div>
             <div>
               <h5 style={{ textAlign: 'right', paddingRight: '2rem' }}>

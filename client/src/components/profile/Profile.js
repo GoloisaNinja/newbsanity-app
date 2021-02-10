@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
@@ -8,47 +8,18 @@ import ProfileEvents from './ProfileEvents';
 import ProfileAdvice from './ProfileAdvice';
 import ProfileRegisteredEvents from './ProfileRegisteredEvents';
 import ProfileWorkouts from './ProfileWorkouts';
-import Modal from '../Modal';
-import { assignTrophy, seenTrophy } from '../../actions/trophies';
+import { assignTrophy } from '../../actions/trophies';
 
-const Profile = ({
-  user,
-  getProfile,
-  profile: { loading, profile },
-  seenTrophy,
-  assignTrophy,
-  trophy: { trophy },
-}) => {
+const Profile = ({ user, getProfile, profile: { loading }, assignTrophy }) => {
   useEffect(() => {
     getProfile(user._id);
-  }, [getProfile]);
-
-  const [show, setShow] = useState(false);
-  const [content, setContent] = useState();
-
-  const handleDismiss = () => {
-    seenTrophy(trophy._id);
-    setShow(false);
-  };
+  }, [getProfile, user._id]);
 
   useEffect(() => {
     if (user.loginCount === 10) {
-      assignTrophy('601d2694d9db960017439143');
+      assignTrophy('601d0d8d06f1328ecfe1d9cd');
     }
   }, []);
-
-  useEffect(() => {
-    if (trophy !== null) {
-      console.log('running based on trophy');
-      setContent({
-        title: trophy.title,
-        body: trophy.body,
-        icon: trophy.icon,
-        type: 'dismiss',
-      });
-      setShow(true);
-    }
-  }, [trophy]);
 
   return !loading ? (
     <Fragment>
@@ -61,7 +32,6 @@ const Profile = ({
         <ProfileEvents />
         <ProfileWorkouts />
       </div>
-      <Modal show={show} handleDismiss={handleDismiss} content={content} />
     </Fragment>
   ) : (
     <Spinner />
@@ -71,18 +41,14 @@ const Profile = ({
 Profile.propTypes = {
   getProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  seenTrophy: PropTypes.func.isRequired,
   assignTrophy: PropTypes.func.isRequired,
-  trophy: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
-  trophy: state.trophy,
 });
 
 export default connect(mapStateToProps, {
   getProfile,
   assignTrophy,
-  seenTrophy,
 })(Profile);

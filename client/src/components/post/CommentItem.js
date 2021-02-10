@@ -6,9 +6,6 @@ import { deleteComment } from '../../actions/posts';
 
 const CommentItem = ({ deleteComment, comment, postId, auth: { user } }) => {
   const [avatar, hasAvatar] = useState(false);
-  useEffect(() => {
-    checkAvatar();
-  }, [comment]);
 
   const checkAvatar = async () => {
     try {
@@ -21,6 +18,10 @@ const CommentItem = ({ deleteComment, comment, postId, auth: { user } }) => {
     }
   };
 
+  useEffect(() => {
+    checkAvatar();
+  }, [checkAvatar, comment]);
+
   return (
     <Fragment>
       <div className='post-container'>
@@ -30,12 +31,14 @@ const CommentItem = ({ deleteComment, comment, postId, auth: { user } }) => {
               className='post-avatar'
               src={`/api/user/${comment.user}/avatar`}
               loading='lazy'
+              alt='avatar'
             />
           ) : (
             <img
               className='post-avatar'
               src='/img/defaultProfile.jpg'
               loading='lazy'
+              alt='avatar'
             />
           )}
 

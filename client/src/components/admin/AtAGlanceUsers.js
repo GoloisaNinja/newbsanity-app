@@ -44,7 +44,7 @@ const AtAGlanceUsers = ({ admin: { loading, users }, adminGetAllUsers }) => {
             width: '100%',
           }}>
           <h2 style={{ color: '#0e1013' }}>
-            User <span style={{ color: '#ff0a0a' }}>Panel</span>
+            User <span style={{ color: '#ff0a0a' }}>Activity</span>
           </h2>
         </div>
         <div style={{ padding: '1rem', flex: 1 }}>
