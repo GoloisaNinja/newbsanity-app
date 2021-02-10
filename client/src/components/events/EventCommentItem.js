@@ -12,20 +12,19 @@ const EventCommentItem = ({
 }) => {
   const [avatar, hasAvatar] = useState(false);
 
-  const checkAvatar = async () => {
-    try {
-      const res = await axios.get(`/api/user/${comment.user}/avatar`);
-      if (res.status === 200) {
-        hasAvatar(true);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
+    const checkAvatar = async () => {
+      try {
+        const res = await axios.get(`/api/user/${comment.user}/avatar`);
+        if (res.status === 200) {
+          hasAvatar(true);
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
     checkAvatar();
-  }, [checkAvatar, comment]);
+  }, [hasAvatar]);
 
   return (
     <Fragment>

@@ -9,6 +9,7 @@ const CreateProfileForm = ({
   user: { _id },
   profile: { loading, profile },
   createProfile,
+  getProfile,
   history,
 }) => {
   const [formData, setFormData] = useState({
