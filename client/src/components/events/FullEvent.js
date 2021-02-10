@@ -24,34 +24,33 @@ const FullEvent = ({
   const [isRegistered, setIsRegistered] = useState();
   const [show, setShow] = useState(false);
 
-  const checkDate = () => {
-    const formatDate = event.date.slice(0, 10);
-    const dateParts = formatDate.split('-');
-    const eventDateObject = new Date(
-      dateParts[0],
-      dateParts[1] - 1,
-      dateParts[2]
-    );
-    const today = new Date();
-    if (eventDateObject < today) {
-      setExpired(true);
-    }
-  };
   useEffect(() => {
-    checkDate();
-  }, []);
-
-  const checkRegistered = () => {
-    for (let i = 0; i < event.registration.length; i++) {
-      if (event.registration[i]['user'] === user._id) {
-        setIsRegistered(true);
+    const checkDate = () => {
+      const formatDate = event.date.slice(0, 10);
+      const dateParts = formatDate.split('-');
+      const eventDateObject = new Date(
+        dateParts[0],
+        dateParts[1] - 1,
+        dateParts[2]
+      );
+      const today = new Date();
+      if (eventDateObject < today) {
+        setExpired(true);
       }
-    }
-  };
+    };
+    checkDate();
+  }, [setExpired]);
 
   useEffect(() => {
+    const checkRegistered = () => {
+      for (let i = 0; i < event.registration.length; i++) {
+        if (event.registration[i]['user'] === user._id) {
+          setIsRegistered(true);
+        }
+      }
+    };
     checkRegistered();
-  }, [checkRegistered, event]);
+  }, [setIsRegistered]);
 
   const content = {
     title: isRegistered

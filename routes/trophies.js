@@ -49,7 +49,9 @@ router.post('/api/trophies/assign/:trophyId', auth, async (req, res) => {
     );
 
     if (alreadyAwarded.length > 0) {
-      return res.send({ message: 'Trophy already rewarded to user' });
+      return res
+        .status(400)
+        .send({ message: 'Trophy already rewarded to user' });
     } else {
       const trophyFields = {
         trophy: trophy._id,
