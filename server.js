@@ -7,6 +7,7 @@ const apiPostRoute = require('./routes/posts');
 const apiEventRoute = require('./routes/events');
 const apiWorkoutRoute = require('./routes/workouts');
 const apiTrophyRoute = require('./routes/trophies');
+const apiEmailsRoute = require('./routes/emails');
 const path = require('path');
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(apiPostRoute);
 app.use(apiEventRoute);
 app.use(apiWorkoutRoute);
 app.use(apiTrophyRoute);
+app.use(apiEmailsRoute);
 
 // use dotenv during dev
 
