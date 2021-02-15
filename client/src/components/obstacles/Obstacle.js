@@ -1,23 +1,24 @@
 import React, { Fragment } from 'react';
-import obstacleArray from './ObstacleArray';
 
-const Obstacle = () => {
+const Obstacle = ({ obstacles }) => {
   return (
     <Fragment>
-      {obstacleArray.map((obstacle) => (
-        <div className='obstacle-container' key={obstacle.key}>
+      {obstacles.map((obstacle) => (
+        <div className='obstacle-container' key={obstacle._id}>
           <div className='obstacle-container-img'>
             <img
               style={{ height: '100%' }}
               src={obstacle.src}
               loading='lazy'
-              alt={`Newbsanity people near obstacle named ${obstacle.name1} ${obstacle.name2}`}
+              alt={`Newbsanity people near obstacle named ${obstacle.name1}`}
             />
             <div className='img-overlay'>
               <div className='text-overlay'>
                 <h2 style={{ padding: '0 2rem' }} className='event-title'>
                   {obstacle.name1}{' '}
-                  <span className='low-weight-span'>{obstacle.name2}</span>
+                  <span className='low-weight-span'>
+                    {obstacle.name2 ? obstacle.name2 : ''}
+                  </span>
                 </h2>
               </div>
             </div>

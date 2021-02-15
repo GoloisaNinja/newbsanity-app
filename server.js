@@ -8,6 +8,8 @@ const apiEventRoute = require('./routes/events');
 const apiWorkoutRoute = require('./routes/workouts');
 const apiTrophyRoute = require('./routes/trophies');
 const apiEmailsRoute = require('./routes/emails');
+const apiObstaclesRoute = require('./routes/obstacles');
+const apiAdviceRoute = require('./routes/advice');
 const path = require('path');
 
 const app = express();
@@ -28,6 +30,8 @@ app.use(apiEventRoute);
 app.use(apiWorkoutRoute);
 app.use(apiTrophyRoute);
 app.use(apiEmailsRoute);
+app.use(apiObstaclesRoute);
+app.use(apiAdviceRoute);
 
 // use dotenv during dev
 

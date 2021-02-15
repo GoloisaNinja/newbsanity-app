@@ -7,6 +7,8 @@ import profile from './profile';
 import workouts from './workouts';
 import trophy from './trophy';
 import admin from './admin';
+import obstacles from './obstacles';
+import advice from './advice';
 export default combineReducers({
   admin,
   alert,
@@ -16,4 +18,6 @@ export default combineReducers({
   profile,
   workouts,
   trophy,
+  obstacles,
+  advice,
 });

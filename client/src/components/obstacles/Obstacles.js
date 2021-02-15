@@ -1,8 +1,17 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getObstacles } from '../../actions/obstacles';
+import Spinner from '../Spinner';
 import Obstacle from './Obstacle';
 
-const Obstacles = () => {
-  return (
+const Obstacles = ({ obstacles: { loading, obstacles }, getObstacles }) => {
+  useEffect(() => {
+    getObstacles();
+  }, [getObstacles]);
+  return loading ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='content-container'>
         <div className='landing-intro'>
@@ -35,7 +44,7 @@ const Obstacles = () => {
           </div>
         </div>
         <div className='obstacle-grid'>
-          <Obstacle />
+          <Obstacle obstacles={obstacles} />
         </div>
         <h3>
           <span className='red-span'>Fine</span>{' '}
@@ -80,4 +89,13 @@ const Obstacles = () => {
   );
 };
 
-export default Obstacles;
+Obstacles.propTypes = {
+  getObstacles: PropTypes.func.isRequired,
+  obstacles: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  obstacles: state.obstacles,
+});
+
+export default connect(mapStateToProps, { getObstacles })(Obstacles);

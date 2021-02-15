@@ -2,6 +2,7 @@ import {
   CREATE_WORKOUT,
   GET_USER_WORKOUTS,
   DELETE_WORKOUT,
+  CLEAR_USER_WORKOUTS,
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +32,14 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         workouts: payload,
+      };
+    case CLEAR_USER_WORKOUTS:
+      return {
+        ...state,
+        loading: true,
+        workouts: [],
+        workout: null,
+        error: {},
       };
     default:
       return state;

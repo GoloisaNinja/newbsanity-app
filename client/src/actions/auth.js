@@ -10,6 +10,7 @@ import {
   REGISTER_FAIL,
   CLEAR_POSTS,
   CLEAR_PROFILE,
+  CLEAR_USER_WORKOUTS,
 } from './types';
 import { setAlert } from './alert';
 import SetAuthToken from '../utils/SetAuthToken';
@@ -86,7 +87,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   }
 };
 
-// Logout the User/Clear profiles
+// Logout the User/Clear Content
 
 export const logoutUser = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -107,6 +108,9 @@ export const logoutUser = () => async (dispatch) => {
       });
       dispatch({
         type: CLEAR_PROFILE,
+      });
+      dispatch({
+        type: CLEAR_USER_WORKOUTS,
       });
     }
   } catch (e) {
