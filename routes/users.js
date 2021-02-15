@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Trophy = require('../models/Trophy');
+const { sendWelcomeEmail } = require('../emails/account');
 const auth = require('../middleware/auth');
 const multer = require('multer');
 const sharp = require('sharp');
@@ -82,6 +83,7 @@ router.post('/api/users', async (req, res) => {
   try {
     await user.save();
     const token = await user.generateAuthToken();
+    sendWelcomeEmail(req.body.name, req.body.email);
     res.status(201).send({ user, token });
   } catch (e) {
     res.status(500).send({ message: e.message });
