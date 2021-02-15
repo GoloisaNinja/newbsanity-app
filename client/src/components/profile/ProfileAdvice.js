@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProfileAdvice = () => {
   const jarrettAdvice = [
@@ -27,8 +27,15 @@ const ProfileAdvice = () => {
       advice: `Are clouds solid enough to run on? Could Newbsanity have obstacles in the sky? Is it possible to taste danger?`,
     },
   ];
-  const advice =
-    jarrettAdvice[Math.floor(Math.random() * jarrettAdvice.length)];
+
+  const [advice, setAdvice] = useState({});
+
+  useEffect(() => {
+    const advicePick =
+      jarrettAdvice[Math.floor(Math.random() * jarrettAdvice.length)];
+    setAdvice(advicePick);
+  }, [setAdvice]);
+
   return (
     <div className='profile-advice-container'>
       <div className='profile-avatar'>

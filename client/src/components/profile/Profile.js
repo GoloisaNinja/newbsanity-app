@@ -7,19 +7,23 @@ import ProfileTop from './ProfileTop';
 import ProfileEvents from './ProfileEvents';
 import ProfileAdvice from './ProfileAdvice';
 import ProfileRegisteredEvents from './ProfileRegisteredEvents';
+import ProfileTrophyCase from './ProfileTrophyCase';
+import ProfileOrderHistory from './ProfileOrderHistory';
 import ProfileWorkouts from './ProfileWorkouts';
 import { assignTrophy } from '../../actions/trophies';
 
-const Profile = ({ user, getProfile, profile: { loading }, assignTrophy }) => {
-  useEffect(() => {
-    getProfile(user._id);
-  }, [getProfile, user._id]);
-
+const Profile = ({
+  user,
+  getProfile,
+  profile: { loading, profile },
+  assignTrophy,
+}) => {
   useEffect(() => {
     if (user.loginCount === 10) {
       assignTrophy('601d2694d9db960017439143');
     }
-  }, []);
+    getProfile(user._id);
+  }, [getProfile, user._id]);
 
   return !loading ? (
     <Fragment>
@@ -28,6 +32,8 @@ const Profile = ({ user, getProfile, profile: { loading }, assignTrophy }) => {
           <ProfileTop />
           <ProfileAdvice />
           <ProfileRegisteredEvents />
+          <ProfileTrophyCase profile={profile} />
+          <ProfileOrderHistory />
         </div>
         <ProfileEvents />
         <ProfileWorkouts />

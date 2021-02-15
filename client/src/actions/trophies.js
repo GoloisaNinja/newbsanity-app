@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ASSIGN_TROPHY, TROPHY_SEEN } from './types';
+import { ASSIGN_TROPHY, TROPHY_SEEN, GET_PROFILE } from './types';
 
 // Assign a trophy to a user profile
 
@@ -40,6 +40,10 @@ export const seenTrophy = (id) => async (dispatch) => {
     if (res.status === 200) {
       dispatch({
         type: TROPHY_SEEN,
+      });
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
       });
     }
   } catch (e) {

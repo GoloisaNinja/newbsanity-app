@@ -29,6 +29,15 @@
   margin-bottom: 0.5rem;
 }
 
+.profile-main-grid {
+  display: grid;
+  grid-template-areas:
+    'one two'
+    'one three'
+    'four five';
+  grid-gap: 2rem;
+}
+
 .profile-container {
   grid-area: one;
   display: flex;
@@ -110,13 +119,6 @@
     font-size: 1.2rem;
   }
 }
-.profile-main-grid {
-  display: grid;
-  grid-template-areas:
-    'one two'
-    'one three';
-  grid-gap: 2rem;
-}
 
 .profile-advice-container {
   @extend .profile-container;
@@ -128,7 +130,29 @@
   grid-area: three;
   width: 100%;
 }
+.profile-trophy-container {
+  @extend .profile-container;
+  grid-area: four;
+  //margin-bottom: 0;
+}
+.profile-order-container {
+  @extend .profile-container;
+  grid-area: five;
+}
 .profile-events-container {
+  margin-top: 2rem;
+}
+.trophy-card-container {
+  margin-top: 1rem;
+  border-radius: 3px;
+  background: #5d685c;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.trophy-icon {
+  width: 150px;
+  margin: 0 auto;
   margin-top: 2rem;
 }
 
@@ -203,7 +227,9 @@ input[type='file']::file-selector-button {
     grid-template-areas:
       'one'
       'two'
-      'three';
+      'three'
+      'four'
+      'five';
     grid-gap: 3rem;
   }
   .profile-container {
