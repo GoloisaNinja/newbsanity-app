@@ -331,7 +331,6 @@ input {
   width: 100%;
   font-family: 'Oswald', sans-serif;
   font-size: 1.6rem;
-  text-transform: uppercase;
   padding-left: 1rem; }
 
 .event-regForm-submit, .event-regForm-submit-unreg {
@@ -424,6 +423,11 @@ input {
     background: none;
     border: none;
     box-shadow: none; }
+  .btn.user-delete {
+    background: none;
+    color: #0e1013;
+    border: none;
+    box-shadow: none; }
   .btn.club-standings {
     background: none; }
     .btn.club-standings:hover {
@@ -465,7 +469,6 @@ input {
 .form-input {
   border: none;
   font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 1.6rem;
   padding: 1rem;
@@ -1019,6 +1022,18 @@ progress[value]::-moz-progress-value {
 
 .user-table {
   width: 100%; }
+
+.user-card-container {
+  display: flex;
+  background: #e0e0e0;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  font-size: 1.2rem; }
 
 @media (max-width: 45rem) {
   .admin-glance-grid,

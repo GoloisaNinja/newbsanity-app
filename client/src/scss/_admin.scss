@@ -40,6 +40,20 @@
   width: 100%;
 }
 
+// User Card Styles
+.user-card-container {
+  display: flex;
+  background: #e0e0e0;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
 @media (max-width: 45rem) {
   .admin-glance-grid,
   .admin-actions-grid {
