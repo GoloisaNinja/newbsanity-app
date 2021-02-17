@@ -49,9 +49,9 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 3px;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 // Post Card Styles
 .post-card-container {
@@ -62,7 +62,7 @@
   margin-top: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 3px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 .post-card-inner {
   display: flex;
@@ -71,10 +71,17 @@
   padding: 1rem;
 }
 .post-card__text {
+  font-size: 1.4rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   max-width: 20rem;
+}
+.post-card__details,
+.user-card__details {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 @media (max-width: 45rem) {

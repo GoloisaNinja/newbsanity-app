@@ -81,7 +81,7 @@ const Post = ({ post }) => {
           <div id='hide-sm' className='post-card__details'>
             {post.likes.length}
           </div>
-          <div className='user-card__details'>{post.comments.length}</div>
+          <div className='post-card__details'>{post.comments.length}</div>
           <div id='hide-sm' className='post-card__details'>
             {post.date.slice(0, 10)}
           </div>
@@ -103,8 +103,11 @@ const Post = ({ post }) => {
                 marginBottom: '1rem',
                 maxWidth: '80%',
                 borderBottom: '3px solid #ff0a0a',
+                fontSize: '1.4rem',
               }}>
-              <p style={{ marginBottom: '.5rem' }}>{post.text}</p>
+              <p style={{ marginBottom: '.5rem', fontSize: '1.4rem' }}>
+                {post.text}
+              </p>
             </div>
           </Fragment>
         )}
