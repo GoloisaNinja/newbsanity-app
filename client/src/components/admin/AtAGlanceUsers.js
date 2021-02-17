@@ -108,7 +108,7 @@ AtAGlanceUsers.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  admin: state.admin,
+  admin: state.admin.users,
 });
 
 export default connect(mapStateToProps, { adminGetAllUsers })(AtAGlanceUsers);

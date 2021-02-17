@@ -9,6 +9,7 @@ import trophy from './trophy';
 import admin from './admin';
 import obstacles from './obstacles';
 import advice from './advice';
+import filters from './filters';
 export default combineReducers({
   admin,
   alert,
@@ -20,4 +21,5 @@ export default combineReducers({
   trophy,
   obstacles,
   advice,
+  filters,
 });

@@ -25,7 +25,7 @@ const ProfileTrophyCase = ({ profile }) => {
             <span className='low-weight-span'>Center</span>
           </h3>
         </div>
-        <p style={{ borderBottom: '3px solid #ff0a0a' }}>
+        <p style={{ borderBottom: '3px solid #ff0a0a', marginBottom: '2rem' }}>
           Last Trophy Acquired
         </p>
         {trophy !== null ? (

@@ -1,0 +1,122 @@
+import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Modal from '../../Modal';
+
+const Post = ({ post }) => {
+  {
+    /* const [show, setShow] = useState(false);
+  const [userId, setUserId] = useState('');
+  const [content, setContent] = useState();
+  const [deleteType, setDeleteType] = useState();
+
+  const handleDelete = (id, type, name) => {
+    setUserId(id);
+    setDeleteType(type);
+    if (type === 'avatar') {
+      setContent({
+        title: 'Delete User Avatar?',
+        body: `Are you sure you want to delete avatar belonging to ${name}?`,
+        icon: '/img/robot.png',
+        type: 'decision',
+      });
+    }
+    if (type === 'account') {
+      setContent({
+        title: 'Delete User Account?',
+        body: `Are you sure you want to delete this user's account?`,
+        icon: '/img/robot.png',
+        type: 'decision',
+      });
+    }
+    setShow(true);
+  };
+
+  const handleClose = (shouldDelete) => {
+    setShow(false);
+    if (shouldDelete && deleteType === 'avatar') {
+      adminDeleteUserAvatar(userId);
+    }
+  }; */
+  }
+  const [openText, setOpenText] = useState(false);
+  return (
+    <Fragment>
+      <div className='post-card-container' key={post._id}>
+        <div className='post-card-inner'>
+          <div className='user-card__avatar'>
+            {post.avatar ? (
+              <img
+                className='avatar-profile'
+                src={`/api/user/${post.user}/avatar`}
+                loading='lazy'
+                alt='avatar'
+              />
+            ) : (
+              <img
+                className='avatar-profile'
+                src='/img/defaultProfile.jpg'
+                loading='lazy'
+                alt='avatar'
+              />
+            )}
+          </div>
+          <div id='hide-sm' className='post-card__details'>
+            {post.name}
+          </div>
+
+          <button
+            onClick={(e) => setOpenText(!openText)}
+            style={{
+              background: 'none',
+              cursor: 'pointer',
+              border: 'none',
+              fontSize: '1.2rem',
+              fontFamily: 'Oswald, sans-serif',
+              textTransform: 'uppercase',
+            }}>
+            <div className='post-card__text'>{post.text}</div>
+          </button>
+
+          <div id='hide-sm' className='post-card__details'>
+            {post.likes.length}
+          </div>
+          <div className='user-card__details'>{post.comments.length}</div>
+          <div id='hide-sm' className='post-card__details'>
+            {post.date.slice(0, 10)}
+          </div>
+
+          <div>
+            <button
+              style={{ marginTop: '1rem' }}
+              className='btn user-delete'
+              onClick={(e) => console.log('action needed')}>
+              <i className='fas fa-trash-alt' />
+            </button>
+          </div>
+        </div>
+        {openText && (
+          <Fragment>
+            <div
+              style={{
+                marginLeft: '2rem',
+                marginBottom: '1rem',
+                maxWidth: '80%',
+                borderBottom: '3px solid #ff0a0a',
+              }}>
+              <p style={{ marginBottom: '.5rem' }}>{post.text}</p>
+            </div>
+          </Fragment>
+        )}
+      </div>
+
+      {/* <Modal show={show} handleClose={handleClose} content={content} /> */}
+    </Fragment>
+  );
+};
+
+Post.propTypes = {
+  post: PropTypes.object.isRequired,
+};
+
+export default connect(null, {})(Post);

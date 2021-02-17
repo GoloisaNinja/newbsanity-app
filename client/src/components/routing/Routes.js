@@ -17,6 +17,7 @@ import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import AdminPanel from '../admin/AdminPanel';
 import UserPanel from '../admin/users/UserPanel';
+import PostPanel from '../admin/posts/PostPanel';
 
 const Routes = () => {
   return (
@@ -36,6 +37,7 @@ const Routes = () => {
       <PrivateRoute path='/workouts' component={CreateWorkoutForm} />
       <AdminRoute exact path='/admin' component={AdminPanel} />
       <AdminRoute path='/admin/users' component={UserPanel} />
+      <AdminRoute path='/admin/posts' component={PostPanel} />
     </Switch>
   );
 };

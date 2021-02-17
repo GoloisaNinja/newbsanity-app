@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { adminDeleteUserAvatar } from '../../../actions/admin';
 import Modal from '../../Modal';
 
-const User = ({ users, adminDeleteUserAvatar }) => {
+const User = ({ user, adminDeleteUserAvatar }) => {
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState('');
   const [content, setContent] = useState();
@@ -39,69 +39,61 @@ const User = ({ users, adminDeleteUserAvatar }) => {
     }
   };
   return (
-    users &&
-    users.length > 0 &&
-    users.map((user) => (
-      <Fragment>
-        <div className='user-card-container'>
-          <div className='user-card__avatar'>
-            {user.avatar ? (
-              <button
-                onClick={(e) => handleDelete(user._id, 'avatar', user.name)}
-                style={{
-                  background: 'none',
-                  cursor: 'pointer',
-                  border: 'none',
-                }}>
-                <img
-                  className='avatar-profile'
-                  src={`/api/user/${user._id}/avatar`}
-                  loading='lazy'
-                  alt='avatar'
-                />
-              </button>
-            ) : (
+    <Fragment>
+      <div className='user-card-container'>
+        <div className='user-card__avatar' key={user._id}>
+          {user.avatar ? (
+            <button
+              onClick={(e) => handleDelete(user._id, 'avatar', user.name)}
+              style={{
+                background: 'none',
+                cursor: 'pointer',
+                border: 'none',
+              }}>
               <img
                 className='avatar-profile'
-                src='/img/defaultProfile.jpg'
+                src={`/api/user/${user._id}/avatar`}
                 loading='lazy'
                 alt='avatar'
               />
-            )}
-          </div>
-          <div id='hide-sm' className='user-card__details'>
-            {user._id}
-          </div>
-          <div className='user-card__details'>{user.name}</div>
-          <div className='user-card__details'>{user.email}</div>
-          <div id='hide-sm' className='user-card__details'>
-            {user.createdAt.slice(0, 10)}
-          </div>
-          <div id='hide-sm' className='user-card__details'>
-            {user.loginCount}
-          </div>
-          <div>
-            <button
-              style={{ marginTop: '1rem' }}
-              className='btn user-delete'
-              onClick={(e) => console.log('action needed')}>
-              <i className='fas fa-trash-alt' />
             </button>
-          </div>
+          ) : (
+            <img
+              className='avatar-profile'
+              src='/img/defaultProfile.jpg'
+              loading='lazy'
+              alt='avatar'
+            />
+          )}
         </div>
-        <Modal show={show} handleClose={handleClose} content={content} />
-      </Fragment>
-    ))
+        <div id='hide-sm' className='user-card__details'>
+          {user._id}
+        </div>
+        <div className='user-card__details'>{user.name}</div>
+        <div className='user-card__details'>{user.email}</div>
+        <div id='hide-sm' className='user-card__details'>
+          {user.createdAt.slice(0, 10)}
+        </div>
+        <div id='hide-sm' className='user-card__details'>
+          {user.loginCount}
+        </div>
+        <div>
+          <button
+            style={{ marginTop: '1rem' }}
+            className='btn user-delete'
+            onClick={(e) => console.log('action needed')}>
+            <i className='fas fa-trash-alt' />
+          </button>
+        </div>
+      </div>
+      <Modal show={show} handleClose={handleClose} content={content} />
+    </Fragment>
   );
 };
 
 User.propTypes = {
-  users: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
   adminDeleteUserAvatar: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  users: state.admin.users,
-});
-
-export default connect(mapStateToProps, { adminDeleteUserAvatar })(User);
+export default connect(null, { adminDeleteUserAvatar })(User);

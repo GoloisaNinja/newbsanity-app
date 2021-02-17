@@ -18,7 +18,7 @@ const ProfileOrderHistory = () => {
             <span className='low-weight-span'>Activity</span>
           </h3>
         </div>
-        <p style={{ borderBottom: '3px solid #ff0a0a' }}>
+        <p style={{ borderBottom: '3px solid #ff0a0a', marginBottom: '2rem' }}>
           Details of last order
         </p>
 

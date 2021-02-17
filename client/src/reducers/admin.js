@@ -5,11 +5,26 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  users: [],
-  registrations: [],
-  workouts: [],
-  loading: true,
-  error: {},
+  users: {
+    users: [],
+    loading: true,
+    error: {},
+  },
+  registrations: {
+    registrations: [],
+    loading: true,
+    error: {},
+  },
+  workouts: {
+    workouts: [],
+    loading: true,
+    error: {},
+  },
+  posts: {
+    post: [],
+    loading: true,
+    error: {},
+  },
 };
 
 export default function (state = initialState, action) {
@@ -18,22 +33,28 @@ export default function (state = initialState, action) {
     case ADMIN_GET_USERS:
       return {
         ...state,
-        loading: false,
-        users: payload,
+        users: {
+          users: payload,
+          loading: false,
+        },
       };
     case ADMIN_GET_ALL_WORKOUTS:
       return {
         ...state,
-        loading: false,
-        workouts: payload,
+        workouts: {
+          workouts: payload,
+          loading: false,
+        },
       };
     case ADMIN_DELETE_USER_AVATAR:
       return {
         ...state,
-        loading: false,
-        users: state.users.map((user) =>
-          user._id === payload ? { ...user, avatar: undefined } : user
-        ),
+        users: {
+          loading: false,
+          users: state.users.users.map((user) =>
+            user._id === payload ? { ...user, avatar: undefined } : user
+          ),
+        },
       };
     default:
       return state;

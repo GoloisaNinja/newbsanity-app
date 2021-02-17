@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Alert from '../../Alert';
-import Users from './Users';
-import UsersFilters from './UsersFilters';
+import PostsFilters from './PostsFilters';
+import Posts from './Posts';
 
-const UserPanel = () => {
+const PostPanel = () => {
   return (
     <Fragment>
       <Alert />
@@ -16,12 +16,12 @@ const UserPanel = () => {
             </Link>
           </div>
           <h1 style={{ marginBottom: '1rem' }}>
-            <span className='red-span'>User</span>{' '}
+            <span className='red-span'>Post</span>{' '}
             <span className='low-weight-span'> Admin Panel</span>
           </h1>
           <p style={{ marginBottom: '1rem' }}>
-            Use this panel to manage Newbsaniacs. See below for available Admin
-            Actions. User cards are ordered in the following fashion:
+            Use this panel to manage Newbsaniacs Posts. See below for available
+            Admin Actions. Post cards are ordered in the following fashion:
           </p>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <ul style={{ marginBottom: '1rem' }}>
@@ -35,7 +35,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                user avatar
+                post user avatar
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -43,7 +43,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                user id - hidden on small devices
+                post user name - hidden on small devices
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -51,7 +51,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                user name
+                post text
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -59,7 +59,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                user email
+                post likes count - hidden on small devices
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -67,7 +67,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                app join date - hidden on small devices
+                post comment count
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -75,7 +75,7 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                login count - hidden on small devices
+                post date - hidden on small devices
               </li>
               <li
                 style={{ fontWeight: 400, fontSize: '1.4rem', color: '#fff' }}>
@@ -83,28 +83,33 @@ const UserPanel = () => {
                   className='fas fa-skull-crossbones'
                   style={{ color: '#ff0a0a' }}
                 />{' '}
-                delete user action
+                delete post action
               </li>
             </ul>
           </div>
           <p style={{ marginBottom: '1rem' }}>
-            Please note that clicking the user's avatar will also allow you to
-            delete just the avatar, should it be offensive, or if you just don't
-            like that person and want to mess with them.
+            If a post is deleted it cannot be retrieved. Only delete a post if
+            it should be removed, or if you just don't like the person that
+            posted it.
           </p>
           <p style={{ marginBottom: '1rem' }}>
-            User searches are matched to User Name.
+            If post text is cut off, full post text can be viewed by clicking on
+            the post text itself. The card will expand to show the full post.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Post searches are by Post Text by default - however you can also
+            search posts by user name text.
           </p>
         </div>
         <h3 style={{ marginBottom: '2rem' }}>
           <span className='red-span'>All </span>{' '}
-          <span className='low-weight-span'>Users</span>
+          <span className='low-weight-span'>Posts</span>
         </h3>
-        <UsersFilters />
-        <Users />
+        <PostsFilters />
+        <Posts />
       </div>
     </Fragment>
   );
 };
 
-export default UserPanel;
+export default PostPanel;

@@ -103,7 +103,7 @@ AtAGlanceWorkouts.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  admin: state.admin,
+  admin: state.admin.workouts,
 });
 
 export default connect(mapStateToProps, { adminGetAllWorkouts })(
