@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { adminDeleteUserAvatar } from '../../../actions/admin';
+import { adminDeleteUserAvatar, adminDeleteUser } from '../../../actions/admin';
 import Modal from '../../Modal';
 
-const User = ({ user, adminDeleteUserAvatar }) => {
+const User = ({ user, adminDeleteUserAvatar, adminDeleteUser }) => {
   const [show, setShow] = useState(false);
   const [userId, setUserId] = useState('');
   const [content, setContent] = useState();
@@ -24,7 +24,7 @@ const User = ({ user, adminDeleteUserAvatar }) => {
     if (type === 'account') {
       setContent({
         title: 'Delete User Account?',
-        body: `Are you sure you want to delete this user's account?`,
+        body: `Are you sure you want to delete account belonging to ${name}?`,
         icon: '/img/robot.png',
         type: 'decision',
       });
@@ -36,6 +36,8 @@ const User = ({ user, adminDeleteUserAvatar }) => {
     setShow(false);
     if (shouldDelete && deleteType === 'avatar') {
       adminDeleteUserAvatar(userId);
+    } else if (shouldDelete && deleteType === 'account') {
+      adminDeleteUser(userId);
     }
   };
   return (
@@ -81,7 +83,7 @@ const User = ({ user, adminDeleteUserAvatar }) => {
           <button
             style={{ marginTop: '1rem' }}
             className='btn user-delete'
-            onClick={(e) => console.log('action needed')}>
+            onClick={(e) => handleDelete(user._id, 'account', user.name)}>
             <i className='fas fa-trash-alt' />
           </button>
         </div>
@@ -94,6 +96,7 @@ const User = ({ user, adminDeleteUserAvatar }) => {
 User.propTypes = {
   user: PropTypes.object.isRequired,
   adminDeleteUserAvatar: PropTypes.func.isRequired,
+  adminDeleteUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { adminDeleteUserAvatar })(User);
+export default connect(null, { adminDeleteUserAvatar, adminDeleteUser })(User);

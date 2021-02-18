@@ -90,6 +90,34 @@ router.post('/api/users', async (req, res) => {
   }
 });
 
+// Admin Delete User Account (admin)
+
+router.delete(
+  '/api/users/admin/user/delete/:userId',
+  auth,
+  async (req, res) => {
+    const user = await req.user;
+    const userId = req.params.userId;
+    try {
+      if (!user) {
+        return res.status(404).send({ message: 'Please authenticate...' });
+      }
+      if (!user.isAdmin) {
+        return res.status(401).send({ message: 'Unauthorized' });
+      }
+      const userToDelete = await User.findById(userId);
+      if (!userToDelete) {
+        return res.status(404).send({ message: 'Not found' });
+      }
+      userToDelete.delete();
+      res.send(`Account deleted successfully...`);
+    } catch (e) {
+      console.error(e.message);
+      res.send(e.message);
+    }
+  }
+);
+
 // Login the user
 
 router.post('/api/user/login', async (req, res) => {

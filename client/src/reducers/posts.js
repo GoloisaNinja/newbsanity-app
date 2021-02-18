@@ -7,6 +7,7 @@ import {
   UPDATE_LIKES,
   CREATE_COMMENT,
   DELETE_COMMENT,
+  ADMIN_DELETE_POST,
 } from '../actions/types';
 
 const initialState = {
@@ -38,6 +39,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case DELETE_POST:
+    case ADMIN_DELETE_POST:
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== payload),

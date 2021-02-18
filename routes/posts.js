@@ -53,6 +53,30 @@ router.delete('/api/posts/delete/:_id', auth, async (req, res) => {
   }
 });
 
+// Admin Delete a Post (admin)
+
+router.delete('/api/posts/admin/delete/:_id', auth, async (req, res) => {
+  const _id = req.params._id;
+  const user = await req.user;
+  const { id } = user;
+  try {
+    const post = await Post.findById({ _id });
+    if (!post) {
+      return res.status(404).send({ message: 'Could not find post...' });
+    }
+    if (!user.isAdmin) {
+      return res.status(401).send({ message: 'Not authorized' });
+    }
+    await post.remove();
+    res.status(200).send({ message: 'Post successfully removed...' });
+  } catch (e) {
+    if (e.kind === 'ObjectId') {
+      res.status(404).send({ message: 'Could not find post...' });
+    }
+    res.status(400).send({ message: e.message });
+  }
+});
+
 // Get all Posts
 
 router.get('/api/posts/all', auth, async (req, res) => {

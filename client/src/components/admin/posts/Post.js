@@ -1,44 +1,31 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { adminDeletePost } from '../../../actions/admin';
 import Modal from '../../Modal';
 
-const Post = ({ post }) => {
-  {
-    /* const [show, setShow] = useState(false);
-  const [userId, setUserId] = useState('');
+const Post = ({ post, adminDeletePost }) => {
+  const [show, setShow] = useState(false);
+  const [postId, setPostId] = useState('');
   const [content, setContent] = useState();
-  const [deleteType, setDeleteType] = useState();
 
-  const handleDelete = (id, type, name) => {
-    setUserId(id);
-    setDeleteType(type);
-    if (type === 'avatar') {
-      setContent({
-        title: 'Delete User Avatar?',
-        body: `Are you sure you want to delete avatar belonging to ${name}?`,
-        icon: '/img/robot.png',
-        type: 'decision',
-      });
-    }
-    if (type === 'account') {
-      setContent({
-        title: 'Delete User Account?',
-        body: `Are you sure you want to delete this user's account?`,
-        icon: '/img/robot.png',
-        type: 'decision',
-      });
-    }
+  const handleDelete = (id, name) => {
+    setPostId(id);
+    setContent({
+      title: 'Delete This Post?',
+      body: `Are you sure you want to delete this post by to ${name}?`,
+      icon: '/img/robot.png',
+      type: 'decision',
+    });
     setShow(true);
   };
 
   const handleClose = (shouldDelete) => {
     setShow(false);
-    if (shouldDelete && deleteType === 'avatar') {
-      adminDeleteUserAvatar(userId);
+    if (shouldDelete) {
+      adminDeletePost(postId);
     }
-  }; */
-  }
+  };
   const [openText, setOpenText] = useState(false);
   return (
     <Fragment>
@@ -90,7 +77,7 @@ const Post = ({ post }) => {
             <button
               style={{ marginTop: '1rem' }}
               className='btn user-delete'
-              onClick={(e) => console.log('action needed')}>
+              onClick={(e) => handleDelete(post._id, post.name)}>
               <i className='fas fa-trash-alt' />
             </button>
           </div>
@@ -113,13 +100,14 @@ const Post = ({ post }) => {
         )}
       </div>
 
-      {/* <Modal show={show} handleClose={handleClose} content={content} /> */}
+      <Modal show={show} handleClose={handleClose} content={content} />
     </Fragment>
   );
 };
 
 Post.propTypes = {
   post: PropTypes.object.isRequired,
+  adminDeletePost: PropTypes.func.isRequired,
 };
 
-export default connect(null, {})(Post);
+export default connect(null, { adminDeletePost })(Post);

@@ -2,6 +2,7 @@ import {
   ADMIN_GET_USERS,
   ADMIN_GET_ALL_WORKOUTS,
   ADMIN_DELETE_USER_AVATAR,
+  ADMIN_DELETE_USER,
 } from '../actions/types';
 
 const initialState = {
@@ -17,11 +18,6 @@ const initialState = {
   },
   workouts: {
     workouts: [],
-    loading: true,
-    error: {},
-  },
-  posts: {
-    post: [],
     loading: true,
     error: {},
   },
@@ -56,6 +52,15 @@ export default function (state = initialState, action) {
           ),
         },
       };
+    case ADMIN_DELETE_USER:
+      return {
+        ...state,
+        users: {
+          loading: false,
+          users: state.users.users.filter((user) => user._id !== payload),
+        },
+      };
+
     default:
       return state;
   }

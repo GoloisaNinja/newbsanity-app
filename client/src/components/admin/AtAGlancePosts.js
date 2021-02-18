@@ -17,7 +17,7 @@ const AtAGlancePosts = ({ posts: { loading, posts }, getAllPosts }) => {
 
   posts.forEach((post) => {
     totalComments += post.comments.length;
-    const postDate = dayjs(post.createdAt).month();
+    const postDate = dayjs(post.date).month();
     if (postDate === thisMonth) {
       postsThisMonth.push(post);
     }
