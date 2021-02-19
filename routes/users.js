@@ -21,7 +21,7 @@ router.get('/api/users/admin/getAll', auth, async (req, res) => {
 
     const users = await User.find(
       {},
-      'name email createdAt loginCount avatar'
+      'name email createdAt loginCount avatar isAdmin'
     ).sort({
       createdAt: -1,
     });
@@ -109,8 +109,43 @@ router.delete(
       if (!userToDelete) {
         return res.status(404).send({ message: 'Not found' });
       }
-      userToDelete.delete();
+      await userToDelete.delete();
       res.send(`Account deleted successfully...`);
+    } catch (e) {
+      console.error(e.message);
+      res.send(e.message);
+    }
+  }
+);
+
+// Admin Edit User isAdmin field (admin)
+
+router.patch(
+  '/api/users/admin/user/isAdmin/:userId',
+  auth,
+  async (req, res) => {
+    const user = await req.user;
+    const userId = req.params.userId;
+    const editParam = req.body.editParam;
+    console.log(editParam);
+    try {
+      if (!user) {
+        return res.status(404).send({ message: 'Please authenticate...' });
+      }
+      if (!user.isAdmin) {
+        return res.status(401).send({ message: 'Unauthorized' });
+      }
+      const userToEdit = await User.findById(userId);
+      if (!userToEdit) {
+        return res.status(404).send({ message: 'Not found' });
+      }
+      if (editParam === 'add') {
+        userToEdit.isAdmin = true;
+      } else if (editParam === 'remove') {
+        userToEdit.isAdmin = false;
+      }
+      await userToEdit.save();
+      res.status(200).send(`Account edited successfully...`);
     } catch (e) {
       console.error(e.message);
       res.send(e.message);

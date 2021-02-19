@@ -1025,15 +1025,19 @@ progress[value]::-moz-progress-value {
 
 .user-card-container {
   display: flex;
+  flex-direction: column;
   background: #e0e0e0;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 3px;
+  font-size: 1.4rem; }
+
+.user-card-inner {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  font-size: 1.4rem; }
+  padding: 1rem; }
 
 .post-card-container {
   display: flex;

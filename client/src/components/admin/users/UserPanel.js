@@ -88,9 +88,15 @@ const UserPanel = () => {
             </ul>
           </div>
           <p style={{ marginBottom: '1rem' }}>
-            Please note that clicking the user's avatar will also allow you to
-            delete just the avatar, should it be offensive, or if you just don't
+            Please note that clicking the user's avatar will allow you to delete
+            just the user avatar, should it be offensive, or if you just don't
             like that person and want to mess with them.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Clicking the user's name will allow you to edit that user's admin
+            access. Please be extremely careful to whom you grant admin access.
+            You wouldn't want to give it to a guy that erases white board course
+            clues for example...
           </p>
           <p style={{ marginBottom: '1rem' }}>
             User searches are matched to User Name.

@@ -5,6 +5,7 @@ import {
   ADMIN_DELETE_USER_AVATAR,
   ADMIN_DELETE_USER,
   ADMIN_DELETE_POST,
+  ADMIN_EDIT_ADMIN,
 } from './types';
 import { setAlert } from './alert';
 
@@ -114,6 +115,52 @@ export const adminDeletePost = (postId) => async (dispatch) => {
       payload: postId,
     });
     dispatch(setAlert('Successfully deleted post', 'success'));
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Edit Admin Access
+
+export const adminEditAdmin = (userId, editParam) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  let isAdmin;
+  if (editParam === 'add') {
+    isAdmin = true;
+  } else {
+    isAdmin = false;
+  }
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const body = JSON.stringify({ editParam });
+    const res = await axios.patch(
+      `/api/users/admin/user/isAdmin/${userId}`,
+      body,
+      config
+    );
+    if (res.status === 200) {
+      dispatch({
+        type: ADMIN_EDIT_ADMIN,
+        payload: {
+          id: userId,
+          admin: isAdmin,
+        },
+      });
+      dispatch(
+        setAlert(
+          editParam === 'add'
+            ? 'Granted User Admin Access'
+            : 'Removed User Admin Access',
+          'success'
+        )
+      );
+    }
   } catch (e) {
     console.log(e.message, e.stack);
     dispatch(setAlert(e.response.data.message, 'danger'));

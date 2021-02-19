@@ -3,6 +3,7 @@ import {
   ADMIN_GET_ALL_WORKOUTS,
   ADMIN_DELETE_USER_AVATAR,
   ADMIN_DELETE_USER,
+  ADMIN_EDIT_ADMIN,
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +50,16 @@ export default function (state = initialState, action) {
           loading: false,
           users: state.users.users.map((user) =>
             user._id === payload ? { ...user, avatar: undefined } : user
+          ),
+        },
+      };
+    case ADMIN_EDIT_ADMIN:
+      return {
+        ...state,
+        users: {
+          loading: false,
+          users: state.users.users.map((user) =>
+            user._id === payload.id ? { ...user, isAdmin: payload.admin } : user
           ),
         },
       };
