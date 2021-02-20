@@ -393,7 +393,8 @@ input {
   transition: opacity 0s ease-in-out;
   transition: background 0.5s ease-in-out; }
   .btn:hover:not(:disabled) {
-    background: #ff3d3d; }
+    background: #ff3d3d;
+    border-bottom: 3px solid #ff0a0a; }
   .btn:disabled {
     opacity: 55%;
     cursor: default; }
@@ -402,18 +403,30 @@ input {
     margin-right: 1rem; }
   .btn.create-post, .btn.btn-forum {
     background: #242930;
-    border-bottom: 3px solid #191c22;
-    margin-bottom: 1.5rem; }
+    border-bottom: 2px solid #191c22;
+    margin-bottom: 1.5rem;
+    width: 35%; }
+    .btn.create-post:hover, .btn.btn-forum:hover {
+      background: #39414e;
+      border-bottom: 2px solid #2e353f; }
   .btn.post-like {
     margin-right: 1rem;
     background: #242930;
     border-bottom: 2px solid black; }
+    .btn.post-like:hover {
+      background: #39414e;
+      border-bottom: 2px solid #191c22; }
   .btn.post-discussion {
     background: #5d685c;
     border-bottom: 2px solid #454d44;
     margin-right: 1rem; }
+    .btn.post-discussion:hover {
+      background: #758374;
+      border-bottom: 2px solid #5d685c; }
   .btn.post-delete {
     border-bottom: 2px solid #d60000; }
+    .btn.post-delete:hover {
+      border-bottom: 2px solid #ff0a0a; }
   .btn.btn-forum {
     background: #ff0a0a;
     border-bottom: 3px solid #d60000; }
@@ -668,18 +681,24 @@ input {
 
 .btn.profile-action {
   background: #242930;
-  border-bottom: #0e1013;
+  border-bottom: 3px solid #0e1013;
   margin-right: 2rem; }
+  .btn.profile-action:hover:not(:disabled) {
+    background: #39414e;
+    border-bottom: 3px solid #2e353f; }
   .btn.profile-action:disabled {
     opacity: 55%;
     cursor: default; }
 
 .btn.profile-social {
-  border-bottom: #0e1013;
+  border-bottom: 3px solid #0e1013;
   background: #242930;
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 2rem; }
+  .btn.profile-social:hover {
+    border-bottom: 3px solid #242930;
+    background: #39414e; }
 
 .btn.profile-submit {
   width: 100%; }
@@ -1038,6 +1057,10 @@ progress[value]::-moz-progress-value {
   align-items: center;
   justify-content: space-between;
   padding: 1rem; }
+
+.user-card__avatar,
+.user-card__details {
+  margin-right: 0.5rem; }
 
 .post-card-container {
   display: flex;

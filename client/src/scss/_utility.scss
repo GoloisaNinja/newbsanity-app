@@ -26,6 +26,7 @@
 
   &:hover:not(:disabled) {
     background: lighten(#ff0a0a, 10%);
+    border-bottom: 3px solid #ff0a0a;
   }
   &:disabled {
     opacity: 55%;
@@ -37,21 +38,37 @@
   }
   &.create-post {
     background: lighten(#0e1013, 10%);
-    border-bottom: 3px solid lighten(#0e1013, 5%);
+    border-bottom: 2px solid lighten(#0e1013, 5%);
     margin-bottom: 1.5rem;
+    width: 35%;
+    &:hover {
+      background: lighten(#0e1013, 20%);
+      border-bottom: 2px solid lighten(#0e1013, 15%);
+    }
   }
   &.post-like {
     margin-right: 1rem;
     background: lighten(#0e1013, 10%);
     border-bottom: 2px solid darken(#0e1013, 10%);
+    &:hover {
+      background: lighten(#0e1013, 20%);
+      border-bottom: 2px solid lighten(#0e1013, 5%);
+    }
   }
   &.post-discussion {
     background: #5d685c;
     border-bottom: 2px solid darken(#5d685c, 10%);
     margin-right: 1rem;
+    &:hover {
+      background: lighten(#5d685c, 10%);
+      border-bottom: 2px solid #5d685c;
+    }
   }
   &.post-delete {
     border-bottom: 2px solid darken(#ff0a0a, 10%);
+    &:hover {
+      border-bottom: 2px solid #ff0a0a;
+    }
   }
   &.btn-forum {
     @extend .create-post;

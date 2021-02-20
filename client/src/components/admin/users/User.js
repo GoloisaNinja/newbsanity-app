@@ -65,7 +65,7 @@ const User = ({
       setContent({
         title: 'Remove User Admin Access?',
         body: `Are you sure you want to remove admin access for ${name}?`,
-        icon: '/img/robot.png',
+        icon: '/img/pirate.png',
         type: 'decision',
       });
     }
@@ -73,7 +73,7 @@ const User = ({
       setContent({
         title: 'Add User Admin Access?',
         body: `This is serious! Are you sure you want to grant admin access for ${name}?`,
-        icon: '/img/robot.png',
+        icon: '/img/pirate.png',
         type: 'decision',
       });
     }
@@ -160,10 +160,10 @@ const User = ({
           <Fragment>
             <div
               style={{
-                marginLeft: '2rem',
+                margin: '0 auto',
                 marginBottom: '1rem',
-                maxWidth: '90%',
-                borderBottom: '3px solid #ff0a0a',
+                width: '90%',
+
                 fontSize: '1.4rem',
               }}>
               <button
