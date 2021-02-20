@@ -40,8 +40,15 @@
   width: 100%;
 }
 
-// User Card Styles
-.user-card-container {
+// Obstacle Image
+.obstacle-card-img {
+  width: 75px;
+}
+
+// Admin Card Styles
+.user-card-container,
+.post-card-container,
+.obstacle-card-container {
   display: flex;
   flex-direction: column;
   background: #e0e0e0;
@@ -51,7 +58,9 @@
   border-radius: 3px;
   font-size: 1.4rem;
 }
-.user-card-inner {
+.user-card-inner,
+.post-card-inner,
+.obstacle-card-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,24 +71,8 @@
   margin-right: 0.5rem;
 }
 
-// Post Card Styles
-.post-card-container {
-  display: flex;
-  flex-direction: column;
-  background: #e0e0e0;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 3px;
-  font-size: 1.4rem;
-}
-.post-card-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-}
-.post-card__text {
+.post-card__text,
+.obstacle-card__text {
   font-size: 1.4rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -87,7 +80,8 @@
   max-width: 20rem;
 }
 .post-card__details,
-.user-card__details {
+.user-card__details,
+.obstacle-card__details {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

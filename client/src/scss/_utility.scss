@@ -87,6 +87,9 @@
     color: #0e1013;
     border: none;
     box-shadow: none;
+    &:hover {
+      border-bottom: none;
+    }
   }
   &.club-standings {
     background: none;

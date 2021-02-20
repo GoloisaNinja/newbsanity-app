@@ -6,6 +6,8 @@ import {
   ADMIN_DELETE_USER,
   ADMIN_DELETE_POST,
   ADMIN_EDIT_ADMIN,
+  ADMIN_GET_OBSTACLES,
+  ADMIN_DELETE_OBSTACLE,
 } from './types';
 import { setAlert } from './alert';
 
@@ -161,6 +163,46 @@ export const adminEditAdmin = (userId, editParam) => async (dispatch) => {
         )
       );
     }
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Get All Obstacles (admin)
+
+export const adminGetObstacles = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/obstacles/');
+    dispatch({
+      type: ADMIN_GET_OBSTACLES,
+      payload: res.data,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// Admin Delete Obstacle
+
+export const adminDeleteObstacle = (obstacleId) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.delete(
+      `/api/obstacles/admin/delete/${obstacleId}`,
+      config
+    );
+    dispatch({
+      type: ADMIN_DELETE_OBSTACLE,
+      payload: obstacleId,
+    });
+    dispatch(setAlert('Successfully deleted obstacle', 'success'));
   } catch (e) {
     console.log(e.message, e.stack);
     dispatch(setAlert(e.response.data.message, 'danger'));

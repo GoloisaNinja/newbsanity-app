@@ -441,6 +441,8 @@ input {
     color: #0e1013;
     border: none;
     box-shadow: none; }
+    .btn.user-delete:hover {
+      border-bottom: none; }
   .btn.club-standings {
     background: none; }
     .btn.club-standings:hover {
@@ -1042,7 +1044,12 @@ progress[value]::-moz-progress-value {
 .user-table {
   width: 100%; }
 
-.user-card-container {
+.obstacle-card-img {
+  width: 75px; }
+
+.user-card-container,
+.post-card-container,
+.obstacle-card-container {
   display: flex;
   flex-direction: column;
   background: #e0e0e0;
@@ -1052,7 +1059,9 @@ progress[value]::-moz-progress-value {
   border-radius: 3px;
   font-size: 1.4rem; }
 
-.user-card-inner {
+.user-card-inner,
+.post-card-inner,
+.obstacle-card-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1062,23 +1071,8 @@ progress[value]::-moz-progress-value {
 .user-card__details {
   margin-right: 0.5rem; }
 
-.post-card-container {
-  display: flex;
-  flex-direction: column;
-  background: #e0e0e0;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  border-radius: 3px;
-  font-size: 1.4rem; }
-
-.post-card-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem; }
-
-.post-card__text {
+.post-card__text,
+.obstacle-card__text {
   font-size: 1.4rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -1086,7 +1080,8 @@ progress[value]::-moz-progress-value {
   max-width: 20rem; }
 
 .post-card__details,
-.user-card__details {
+.user-card__details,
+.obstacle-card__details {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap; }

@@ -4,6 +4,8 @@ import {
   ADMIN_DELETE_USER_AVATAR,
   ADMIN_DELETE_USER,
   ADMIN_EDIT_ADMIN,
+  ADMIN_GET_OBSTACLES,
+  ADMIN_DELETE_OBSTACLE,
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +21,12 @@ const initialState = {
   },
   workouts: {
     workouts: [],
+    loading: true,
+    error: {},
+  },
+  obstacles: {
+    obstacles: [],
+    obstacle: null,
     loading: true,
     error: {},
   },
@@ -69,6 +77,24 @@ export default function (state = initialState, action) {
         users: {
           loading: false,
           users: state.users.users.filter((user) => user._id !== payload),
+        },
+      };
+    case ADMIN_GET_OBSTACLES:
+      return {
+        ...state,
+        obstacles: {
+          loading: false,
+          obstacles: payload,
+        },
+      };
+    case ADMIN_DELETE_OBSTACLE:
+      return {
+        ...state,
+        obstacles: {
+          loading: false,
+          obstacles: state.obstacles.obstacles.filter(
+            (obstacle) => obstacle._id !== payload
+          ),
         },
       };
 
