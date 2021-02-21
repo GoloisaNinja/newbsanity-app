@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { adminDeleteObstacle } from '../../../actions/admin';
@@ -32,12 +33,14 @@ const Obstacle = ({ obstacle, adminDeleteObstacle }) => {
       <div className='obstacle-card-container' key={obstacle._id}>
         <div className='obstacle-card-inner'>
           <div className='user-card__avatar'>
-            <img
-              className='obstacle-card-img'
-              src={obstacle.src}
-              loading='lazy'
-              alt={obstacle.name1}
-            />
+            <Link to={`/admin/obstacle/${obstacle._id}`}>
+              <img
+                className='obstacle-card-img'
+                src={obstacle.src}
+                loading='lazy'
+                alt={obstacle.name1}
+              />
+            </Link>
           </div>
           <div id='hide-sm' className='obstacle-card__details'>
             {obstacle._id}

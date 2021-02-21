@@ -6,6 +6,7 @@ import {
   ADMIN_EDIT_ADMIN,
   ADMIN_GET_OBSTACLES,
   ADMIN_DELETE_OBSTACLE,
+  ADMIN_GET_OBSTACLE_BY_ID,
 } from '../actions/types';
 
 const initialState = {
@@ -85,6 +86,8 @@ export default function (state = initialState, action) {
         obstacles: {
           loading: false,
           obstacles: payload,
+          obstacle: null,
+          error: {},
         },
       };
     case ADMIN_DELETE_OBSTACLE:
@@ -92,12 +95,23 @@ export default function (state = initialState, action) {
         ...state,
         obstacles: {
           loading: false,
-          obstacles: state.obstacles.obstacles.filter(
+          obstacles: state.admin.obstacles.obstacles.filter(
             (obstacle) => obstacle._id !== payload
           ),
+          obstacle: null,
+          error: {},
         },
       };
-
+    case ADMIN_GET_OBSTACLE_BY_ID:
+      return {
+        ...state,
+        obstacles: {
+          obstacles: [],
+          loading: false,
+          obstacle: payload,
+          error: {},
+        },
+      };
     default:
       return state;
   }

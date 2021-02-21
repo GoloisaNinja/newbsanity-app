@@ -19,6 +19,7 @@ import AdminPanel from '../admin/AdminPanel';
 import UserPanel from '../admin/users/UserPanel';
 import PostPanel from '../admin/posts/PostPanel';
 import ObstaclePanel from '../admin/obstacles/ObstaclePanel';
+import EditObstacle from '../admin/obstacles/EditObstacle';
 
 const Routes = () => {
   return (
@@ -40,6 +41,7 @@ const Routes = () => {
       <AdminRoute path='/admin/users' component={UserPanel} />
       <AdminRoute path='/admin/posts' component={PostPanel} />
       <AdminRoute path='/admin/obstacles' component={ObstaclePanel} />
+      <AdminRoute path='/admin/obstacle/:id' component={EditObstacle} />
     </Switch>
   );
 };

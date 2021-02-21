@@ -1086,7 +1086,17 @@ progress[value]::-moz-progress-value {
   overflow: hidden;
   white-space: nowrap; }
 
+.admin-edit-obstacle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem; }
+
+.edit-obstacle-container {
+  color: #fff; }
+
 @media (max-width: 45rem) {
   .admin-glance-grid,
   .admin-actions-grid {
+    grid-template-columns: 1fr; }
+  .admin-edit-obstacle-grid {
     grid-template-columns: 1fr; } }

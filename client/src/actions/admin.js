@@ -8,6 +8,7 @@ import {
   ADMIN_EDIT_ADMIN,
   ADMIN_GET_OBSTACLES,
   ADMIN_DELETE_OBSTACLE,
+  ADMIN_GET_OBSTACLE_BY_ID,
 } from './types';
 import { setAlert } from './alert';
 
@@ -183,7 +184,7 @@ export const adminGetObstacles = () => async (dispatch) => {
   }
 };
 
-// Admin Delete Obstacle
+// Admin Delete Obstacle (admin)
 
 export const adminDeleteObstacle = (obstacleId) => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -203,6 +204,60 @@ export const adminDeleteObstacle = (obstacleId) => async (dispatch) => {
       payload: obstacleId,
     });
     dispatch(setAlert('Successfully deleted obstacle', 'success'));
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Get Obstacle by Id (admin)
+
+export const adminGetObstacleById = (obstacleId) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.get(
+      `/api/obstacles/admin/obstacle/${obstacleId}`,
+      config
+    );
+    dispatch({
+      type: ADMIN_GET_OBSTACLE_BY_ID,
+      payload: res.data,
+    });
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Edit Obstacle (admin)
+
+export const adminEditObstacle = (formData, obstacleId, history) => async (
+  dispatch
+) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const body = formData;
+    const res = await axios.post(
+      `/api/obstacles/admin/edit/${obstacleId}`,
+      body,
+      config
+    );
+    if (res.status === 200) {
+      dispatch(setAlert('Successfully edited obstacle data', 'success'));
+      history.push('/admin/obstacles');
+    }
   } catch (e) {
     console.log(e.message, e.stack);
     dispatch(setAlert(e.response.data.message, 'danger'));
