@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Alert from '../../Alert';
+import ObstacleActions from './ObstacleActions';
 import Obstacles from './Obstacles';
 
 const ObstaclePanel = () => {
@@ -9,7 +10,7 @@ const ObstaclePanel = () => {
       <Alert />
       <div className='content-container'>
         <div className='landing-intro'>
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
             <Link to='/admin' className='btn profile-social'>
               Go Back to Main Admin
             </Link>
@@ -83,6 +84,7 @@ const ObstaclePanel = () => {
             will expand to show the full obstacle text.
           </p>
         </div>
+        <ObstacleActions />
         <h3 style={{ marginBottom: '2rem' }}>
           <span className='red-span'>All </span>{' '}
           <span className='low-weight-span'>Obstacles</span>

@@ -18,6 +18,7 @@ const EventCommentForm = ({ createEventComment, eventId }) => {
           <textarea
             className='post-textarea'
             placeholder='your comment here...'
+            required
             onChange={(e) => setText(e.target.value)}
             name='text'
             value={text}

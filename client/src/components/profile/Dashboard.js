@@ -25,7 +25,7 @@ const Dashboard = ({
           <Alert />
           <div className='content-container'>
             <Fragment>
-              <h1 style={{ marginBottom: '1rem' }}>
+              <h1 style={{ marginBottom: '2rem' }}>
                 <span className='red-span'>Welcome</span>{' '}
                 <span className='low-weight-span'>{user.name}!</span>
               </h1>

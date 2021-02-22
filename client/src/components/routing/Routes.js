@@ -20,6 +20,7 @@ import UserPanel from '../admin/users/UserPanel';
 import PostPanel from '../admin/posts/PostPanel';
 import ObstaclePanel from '../admin/obstacles/ObstaclePanel';
 import EditObstacle from '../admin/obstacles/EditObstacle';
+import AddObstacle from '../admin/obstacles/AddObstacle';
 
 const Routes = () => {
   return (
@@ -40,8 +41,9 @@ const Routes = () => {
       <AdminRoute exact path='/admin' component={AdminPanel} />
       <AdminRoute path='/admin/users' component={UserPanel} />
       <AdminRoute path='/admin/posts' component={PostPanel} />
-      <AdminRoute path='/admin/obstacles' component={ObstaclePanel} />
+      <AdminRoute exact path='/admin/obstacles' component={ObstaclePanel} />
       <AdminRoute path='/admin/obstacle/:id' component={EditObstacle} />
+      <AdminRoute path='/admin/obstacles/add' component={AddObstacle} />
     </Switch>
   );
 };

@@ -20,6 +20,7 @@ const PostForm = ({ createPost }) => {
             placeholder='start typing here...'
             onChange={(e) => setText(e.target.value)}
             name='text'
+            required
             value={text}
             cols={30}
             rows={4}></textarea>

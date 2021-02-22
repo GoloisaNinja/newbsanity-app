@@ -6,8 +6,9 @@
 .btn {
   &.profile-action {
     background: lighten(#0e1013, 10%);
-    border-bottom: 3px solid #0e1013;
+    border-bottom: 3px solid lighten(#0e1013, 5%);
     margin-right: 2rem;
+    margin-bottom: 2rem;
     &:hover:not(:disabled) {
       background: lighten(#0e1013, 20%);
       border-bottom: 3px solid lighten(#0e1013, 15%);
@@ -20,9 +21,8 @@
   &.profile-social {
     border-bottom: 3px solid #0e1013;
     background: lighten(#0e1013, 10%);
-    width: 100%;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     &:hover {
       border-bottom: 3px solid lighten(#0e1013, 10%);
       background: lighten(#0e1013, 20%);

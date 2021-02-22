@@ -95,7 +95,7 @@ export default function (state = initialState, action) {
         ...state,
         obstacles: {
           loading: false,
-          obstacles: state.admin.obstacles.obstacles.filter(
+          obstacles: state.obstacles.obstacles.filter(
             (obstacle) => obstacle._id !== payload
           ),
           obstacle: null,

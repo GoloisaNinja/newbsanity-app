@@ -378,6 +378,7 @@ input {
 
 .btn {
   background: #ff0a0a;
+  display: inline-block;
   border: none;
   border-radius: 3px;
   border-bottom: 3px solid #d60000;
@@ -401,12 +402,11 @@ input {
   .btn.register {
     width: 40%;
     margin-right: 1rem; }
-  .btn.create-post, .btn.btn-forum {
+  .btn.create-post {
     background: #242930;
     border-bottom: 2px solid #191c22;
-    margin-bottom: 1.5rem;
-    width: 35%; }
-    .btn.create-post:hover, .btn.btn-forum:hover {
+    margin-bottom: 2rem; }
+    .btn.create-post:hover {
       background: #39414e;
       border-bottom: 2px solid #2e353f; }
   .btn.post-like {
@@ -427,9 +427,6 @@ input {
     border-bottom: 2px solid #d60000; }
     .btn.post-delete:hover {
       border-bottom: 2px solid #ff0a0a; }
-  .btn.btn-forum {
-    background: #ff0a0a;
-    border-bottom: 3px solid #d60000; }
   .btn.workout-delete {
     font-size: 1.2rem;
     padding: none;
@@ -470,9 +467,11 @@ input {
 @media (max-width: 45rem) {
   .btn.register {
     margin-right: 0;
-    width: 80%; } }
+    width: 80%; }
+  .btn.create-post {
+    width: 100%; } }
 
-.form-container {
+.form-container, .obstacle-form-container {
   display: flex;
   flex-direction: column;
   max-width: 35rem; }
@@ -683,8 +682,9 @@ input {
 
 .btn.profile-action {
   background: #242930;
-  border-bottom: 3px solid #0e1013;
-  margin-right: 2rem; }
+  border-bottom: 3px solid #191c22;
+  margin-right: 2rem;
+  margin-bottom: 2rem; }
   .btn.profile-action:hover:not(:disabled) {
     background: #39414e;
     border-bottom: 3px solid #2e353f; }
@@ -695,9 +695,8 @@ input {
 .btn.profile-social {
   border-bottom: 3px solid #0e1013;
   background: #242930;
-  width: 100%;
   margin-top: 1rem;
-  margin-bottom: 2rem; }
+  margin-bottom: 1rem; }
   .btn.profile-social:hover {
     border-bottom: 3px solid #242930;
     background: #39414e; }
@@ -1088,15 +1087,22 @@ progress[value]::-moz-progress-value {
 
 .admin-edit-obstacle-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2rem; }
+  grid-template-areas: 'one two';
+  grid-gap: 3rem; }
 
 .edit-obstacle-container {
-  color: #fff; }
+  color: #fff;
+  grid-area: two; }
+
+.obstacle-form-container {
+  grid-area: one;
+  width: 35rem; }
 
 @media (max-width: 45rem) {
   .admin-glance-grid,
   .admin-actions-grid {
     grid-template-columns: 1fr; }
   .admin-edit-obstacle-grid {
-    grid-template-columns: 1fr; } }
+    grid-template-areas: 'two' 'one'; }
+  .obstacle-form-container {
+    width: 100%; } }

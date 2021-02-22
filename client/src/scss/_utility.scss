@@ -9,6 +9,7 @@
 }
 .btn {
   background: #ff0a0a;
+  display: inline-block;
   border: none;
   border-radius: 3px;
   border-bottom: 3px solid darken(#ff0a0a, 10%);
@@ -28,6 +29,7 @@
     background: lighten(#ff0a0a, 10%);
     border-bottom: 3px solid #ff0a0a;
   }
+
   &:disabled {
     opacity: 55%;
     cursor: default;
@@ -39,8 +41,7 @@
   &.create-post {
     background: lighten(#0e1013, 10%);
     border-bottom: 2px solid lighten(#0e1013, 5%);
-    margin-bottom: 1.5rem;
-    width: 35%;
+    margin-bottom: 2rem;
     &:hover {
       background: lighten(#0e1013, 20%);
       border-bottom: 2px solid lighten(#0e1013, 15%);
@@ -70,11 +71,7 @@
       border-bottom: 2px solid #ff0a0a;
     }
   }
-  &.btn-forum {
-    @extend .create-post;
-    background: #ff0a0a;
-    border-bottom: 3px solid darken(#ff0a0a, 10%);
-  }
+
   &.workout-delete {
     font-size: 1.2rem;
     padding: none;
@@ -127,6 +124,9 @@
     &.register {
       margin-right: 0;
       width: 80%;
+    }
+    &.create-post {
+      width: 100%;
     }
   }
 }

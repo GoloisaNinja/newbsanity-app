@@ -263,3 +263,25 @@ export const adminEditObstacle = (formData, obstacleId, history) => async (
     dispatch(setAlert(e.response.data.message, 'danger'));
   }
 };
+
+// Admin Create Obstacle (admin)
+
+export const adminAddObstacle = (formData) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const body = formData;
+    const res = await axios.post(`/api/obstacles/admin/create`, body, config);
+    if (res.status === 200) {
+      dispatch(setAlert('Successfully created obstacle', 'success'));
+    }
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};

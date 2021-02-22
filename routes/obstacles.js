@@ -3,6 +3,34 @@ const router = express.Router();
 const Obstacle = require('../models/Obstacle');
 const auth = require('../middleware/auth');
 
+// Admin Create Obstacle (admin)
+
+router.post('/api/obstacles/admin/create', auth, async (req, res) => {
+  const user = req.user;
+  const { name1, name2, src, description } = req.body;
+
+  // build obstacle object
+  let obstacleFields = {};
+  obstacleFields.name1 = name1;
+  obstacleFields.name2 = name2 || '';
+  obstacleFields.src = src;
+  obstacleFields.description = description;
+  try {
+    if (!user) {
+      return res.status(400).send({ message: 'Please authenticate' });
+    }
+    if (!user.isAdmin) {
+      return res.status(400).send({ message: 'Not authorized' });
+    }
+    const obstacle = new Obstacle(obstacleFields);
+    await obstacle.save();
+    res.status(200).json(obstacle);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send(e.message);
+  }
+});
+
 // Get all Obstacles
 
 router.get('/api/obstacles', async (req, res) => {
@@ -87,7 +115,7 @@ router.delete(
   auth,
   async (req, res) => {
     const user = await req.user;
-    const id = req.params.obstacleId;
+    const _id = req.params.obstacleId;
     try {
       if (!user) {
         return res.status(401).send({ message: 'Please authenticate' });
@@ -95,7 +123,7 @@ router.delete(
       if (!user.isAdmin) {
         return res.status(400).send({ message: 'Not authorized' });
       }
-      const obstacle = await Obstacle.findById(id);
+      const obstacle = await Obstacle.findById({ _id });
       await obstacle.delete();
       res.status(200).send({ message: 'Obstacle successfully deleted' });
     } catch (e) {

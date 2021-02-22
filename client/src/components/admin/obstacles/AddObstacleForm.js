@@ -1,28 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { adminEditObstacle } from '../../../actions/admin';
+import { adminAddObstacle } from '../../../actions/admin';
 import Modal from '../../Modal';
 
-const EditObstacleForm = ({ obstacle, history, adminEditObstacle }) => {
+const AddObstacleForm = ({ adminAddObstacle }) => {
   const [formData, setFormData] = useState({
-    name1: '',
-    name2: '',
-    src: '',
-    description: '',
+    name1: 'Failure',
+    name2: 'Mountain',
+    src: '/img/failure.jpg',
+    description: `You feel the wind in your hair. You hear the cheers and the praise of all your peers far below you. You've ascended the most epic and extreme obstacle crafted by mortals. You are about to claim your victory flagon of winner's mead when your hand slips. You fall one and half feet to the hard ground. There were no cheers. You are alone. You've fallen out of bed and peed yourself. The only thing you've ascended today is failure mountain bitch.`,
   });
 
   const { name1, name2, src, description } = formData;
-
-  useEffect(() => {
-    setFormData({
-      name1: !obstacle.name1 ? '' : obstacle.name1,
-      name2: !obstacle.name2 ? '' : obstacle.name2,
-      src: !obstacle.src ? '' : obstacle.src,
-      description: !obstacle.description ? '' : obstacle.description,
-    });
-  }, [obstacle, setFormData]);
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,8 +20,8 @@ const EditObstacleForm = ({ obstacle, history, adminEditObstacle }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     setContent({
-      title: 'Edit Obstacle',
-      body: `This could get grim. Are you sure you want to commit your edits to this obstacle?`,
+      title: 'Add Obstacle',
+      body: `This could get grim. Are you sure you want to add ${name1} ${name2} to the Newbsanity Obstacle Stable?`,
       icon: '/img/grim-reaper.png',
       type: 'decision',
     });
@@ -41,7 +31,13 @@ const EditObstacleForm = ({ obstacle, history, adminEditObstacle }) => {
   const handleClose = (shouldEdit) => {
     setShow(false);
     if (shouldEdit) {
-      adminEditObstacle(formData, obstacle._id, history);
+      adminAddObstacle(formData);
+      setFormData({
+        name1: 'Failure',
+        name2: 'Mountain',
+        src: '/img/fallfail.jpg',
+        description: `You feel the wind in your hair. You hear the cheers and the praise of all your peers far below you. You've ascended the most epic and extreme obstacle crafted by mortals. You are about to claim your victory flagon of winner's mead when your hand slips. You fall one and half feet to the hard ground. There were no cheers. You are alone. You've fallen out of bed and peed yourself. The only thing you've ascended today is failure mountain bitch.`,
+      });
     }
   };
   const [show, setShow] = useState(false);
@@ -135,7 +131,7 @@ const EditObstacleForm = ({ obstacle, history, adminEditObstacle }) => {
             <input
               type='submit'
               className='btn profile-submit'
-              value='Edit Obstacle'
+              value='Add Obstacle'
             />
           </div>
         </form>
@@ -145,11 +141,8 @@ const EditObstacleForm = ({ obstacle, history, adminEditObstacle }) => {
   );
 };
 
-EditObstacleForm.propTypes = {
-  obstacle: PropTypes.object.isRequired,
-  adminEditObstacle: PropTypes.func.isRequired,
+AddObstacleForm.propTypes = {
+  adminAddObstacle: PropTypes.func.isRequired,
 };
 
-export default connect(null, { adminEditObstacle })(
-  withRouter(EditObstacleForm)
-);
+export default connect(null, { adminAddObstacle })(AddObstacleForm);
