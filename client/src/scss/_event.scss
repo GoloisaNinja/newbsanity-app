@@ -2,6 +2,10 @@
   width: 300px;
   height: 100%;
 }
+.edit-event-img {
+  width: 100%;
+  min-height: 230px;
+}
 .allevent-img {
   @extend .event-img;
   width: 100%;
@@ -83,6 +87,7 @@
 @media (max-width: 45rem) {
   .event-img {
     width: 100%;
+    min-height: 230px;
   }
   .event-grid-main {
     grid-template-columns: 1fr;

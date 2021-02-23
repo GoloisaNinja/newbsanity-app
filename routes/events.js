@@ -8,22 +8,23 @@ const auth = require('../middleware/auth');
 
 // Create new Event
 
-router.post('/api/events', auth, async (req, res) => {
+router.post('/api/events/create', auth, async (req, res) => {
   const { title, text, mediaLink, mediaTypeIframe, date, time } = req.body;
   const user = await req.user;
-  const dateParts = date.split('/');
-  const formatDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-  const { name, id } = user;
   try {
     if (!user) {
-      throw new Error('Please authenticate...');
+      return res.status(401).send({ message: 'Please Authenticate' });
     }
+    if (!user.isAdmin) {
+      return res.status(400).send({ message: 'Not Authorized' });
+    }
+
     const event = new Event({
       title,
       text,
       mediaLink,
       mediaTypeIframe,
-      date: formatDate,
+      date,
       time,
     });
     await event.save();
@@ -34,22 +35,66 @@ router.post('/api/events', auth, async (req, res) => {
   }
 });
 
+// Admin Edit an existing Event (admin)
+
+router.post('/api/events/admin/edit/:eventId', auth, async (req, res) => {
+  const user = req.user;
+  const _id = req.params.eventId;
+  const { title, mediaLink, mediaTypeIframe, date, time, text } = req.body;
+
+  // build event object
+  let eventFields = {};
+  eventFields.title = title;
+  eventFields.mediaLink = mediaLink;
+  eventFields.mediaTypeIframe = mediaTypeIframe;
+  eventFields.date = date;
+  eventFields.time = time;
+  eventFields.text = text;
+  try {
+    if (!user) {
+      return res.status(400).send({ message: 'Please authenticate' });
+    }
+    if (!user.isAdmin) {
+      return res.status(400).send({ message: 'Not authorized' });
+    }
+    let event = await Event.findById({ _id });
+    if (!event) {
+      return res.status(404).send({ message: 'Event not found...' });
+    }
+
+    event = await Event.findOneAndUpdate(
+      { _id },
+      { $set: eventFields },
+      { new: true }
+    );
+
+    await event.save();
+    res.status(200).json(event);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send(e.message);
+  }
+});
+
 // Delete an Event
 
 router.delete('/api/events/delete/:_id', auth, async (req, res) => {
-  const _id = req.params._id;
   const user = await req.user;
-  const { id } = user;
+  const _id = req.params._id;
   try {
-    const event = await Post.findById({ _id });
+    if (!user) {
+      return res.status(401).send({ message: 'Please Authenticate' });
+    }
+    if (!user.isAdmin) {
+      return res.status(400).send({ message: 'Not authorized' });
+    }
+
+    const event = await Event.findById({ _id });
     if (!event) {
       return res.status(404).send({ message: 'Could not find event...' });
     }
-    // need to handle auth for Jarrett and CMS
-    // if (post.user.toString() !== id) {
-    //   return res.status(403).send({ message: 'Not authorized' });
-    // }
-    await post.remove();
+
+    await event.delete();
     res.status(200).send({ message: 'Event successfully removed...' });
   } catch (e) {
     if (e.kind === 'ObjectId') {

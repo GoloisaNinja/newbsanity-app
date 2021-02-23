@@ -240,6 +240,18 @@ input {
   color: #fff;
   min-height: 23rem; }
 
+.flex-event-edit-container {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #fff; }
+
+.flex-event-edit-contents {
+  border-bottom: 3px solid #ff0a0a;
+  background: #242930; }
+
 .flex-container-end {
   display: flex;
   justify-content: flex-end;
@@ -297,6 +309,10 @@ input {
 .event-img, .allevent-img, .about-img {
   width: 300px;
   height: 100%; }
+
+.edit-event-img {
+  width: 100%;
+  min-height: 230px; }
 
 .allevent-img {
   width: 100%;
@@ -363,7 +379,8 @@ input {
 
 @media (max-width: 45rem) {
   .event-img, .allevent-img, .about-img {
-    width: 100%; }
+    width: 100%;
+    min-height: 230px; }
   .event-grid-main {
     grid-template-columns: 1fr; } }
 
@@ -1046,9 +1063,14 @@ progress[value]::-moz-progress-value {
 .obstacle-card-img {
   width: 75px; }
 
+.event-card-img {
+  width: 75px;
+  max-height: 54px; }
+
 .user-card-container,
 .post-card-container,
-.obstacle-card-container {
+.obstacle-card-container,
+.event-card-container {
   display: flex;
   flex-direction: column;
   background: #e0e0e0;
@@ -1060,7 +1082,8 @@ progress[value]::-moz-progress-value {
 
 .user-card-inner,
 .post-card-inner,
-.obstacle-card-inner {
+.obstacle-card-inner,
+.event-card-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1071,7 +1094,8 @@ progress[value]::-moz-progress-value {
   margin-right: 0.5rem; }
 
 .post-card__text,
-.obstacle-card__text {
+.obstacle-card__text,
+.event-card__text {
   font-size: 1.4rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -1080,7 +1104,8 @@ progress[value]::-moz-progress-value {
 
 .post-card__details,
 .user-card__details,
-.obstacle-card__details {
+.obstacle-card__details,
+.event-card__details {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap; }

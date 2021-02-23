@@ -45,10 +45,17 @@
   width: 75px;
 }
 
+// Event Card Image
+.event-card-img {
+  width: 75px;
+  max-height: 54px;
+}
+
 // Admin Card Styles
 .user-card-container,
 .post-card-container,
-.obstacle-card-container {
+.obstacle-card-container,
+.event-card-container {
   display: flex;
   flex-direction: column;
   background: #e0e0e0;
@@ -60,7 +67,8 @@
 }
 .user-card-inner,
 .post-card-inner,
-.obstacle-card-inner {
+.obstacle-card-inner,
+.event-card-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,7 +80,8 @@
 }
 
 .post-card__text,
-.obstacle-card__text {
+.obstacle-card__text,
+.event-card__text {
   font-size: 1.4rem;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -81,7 +90,8 @@
 }
 .post-card__details,
 .user-card__details,
-.obstacle-card__details {
+.obstacle-card__details,
+.event-card__details {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

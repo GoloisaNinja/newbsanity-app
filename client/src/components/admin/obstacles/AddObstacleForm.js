@@ -35,7 +35,7 @@ const AddObstacleForm = ({ adminAddObstacle }) => {
       setFormData({
         name1: 'Failure',
         name2: 'Mountain',
-        src: '/img/fallfail.jpg',
+        src: '/img/failure.jpg',
         description: `You feel the wind in your hair. You hear the cheers and the praise of all your peers far below you. You've ascended the most epic and extreme obstacle crafted by mortals. You are about to claim your victory flagon of winner's mead when your hand slips. You fall one and half feet to the hard ground. There were no cheers. You are alone. You've fallen out of bed and peed yourself. The only thing you've ascended today is failure mountain bitch.`,
       });
     }

@@ -6,6 +6,7 @@ import {
   UPDATE_EVENT_LIKES,
   CREATE_EVENT_COMMENT,
   DELETE_EVENT_COMMENT,
+  ADMIN_DELETE_EVENT,
 } from '../actions/types';
 
 const initialState = {
@@ -70,6 +71,12 @@ export default function (state = initialState, action) {
         allevents: state.allevents.map((event) =>
           event._id === payload.id ? { ...event, likes: payload.likes } : event
         ),
+      };
+    case ADMIN_DELETE_EVENT:
+      return {
+        ...state,
+        loading: false,
+        allevents: state.allevents.filter((event) => event._id !== payload),
       };
     default:
       return state;

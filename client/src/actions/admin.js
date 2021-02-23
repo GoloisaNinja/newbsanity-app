@@ -9,8 +9,11 @@ import {
   ADMIN_GET_OBSTACLES,
   ADMIN_DELETE_OBSTACLE,
   ADMIN_GET_OBSTACLE_BY_ID,
+  ADMIN_DELETE_EVENT,
 } from './types';
 import { setAlert } from './alert';
+
+// **** ADMIN USER FUNCTIONS ****
 
 // Admin get all users
 
@@ -26,21 +29,6 @@ export const adminGetAllUsers = () => async (dispatch) => {
     const res = await axios.get('/api/users/admin/getAll', config);
     dispatch({
       type: ADMIN_GET_USERS,
-      payload: res.data,
-    });
-  } catch (e) {
-    console.log(e.message, e.stack);
-    dispatch(setAlert(e.response.data.message, 'danger'));
-  }
-};
-
-// Admin get all workouts
-
-export const adminGetAllWorkouts = () => async (dispatch) => {
-  try {
-    const res = await axios.get('/api/workouts/all');
-    dispatch({
-      type: ADMIN_GET_ALL_WORKOUTS,
       payload: res.data,
     });
   } catch (e) {
@@ -101,29 +89,6 @@ export const adminDeleteUser = (userId) => async (dispatch) => {
   }
 };
 
-// Admin Delete Post
-
-export const adminDeletePost = (postId) => async (dispatch) => {
-  const token = localStorage.getItem('token');
-  try {
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: token,
-      },
-    };
-    const res = await axios.delete(`/api/posts/admin/delete/${postId}`, config);
-    dispatch({
-      type: ADMIN_DELETE_POST,
-      payload: postId,
-    });
-    dispatch(setAlert('Successfully deleted post', 'success'));
-  } catch (e) {
-    console.log(e.message, e.stack);
-    dispatch(setAlert(e.response.data.message, 'danger'));
-  }
-};
-
 // Admin Edit Admin Access
 
 export const adminEditAdmin = (userId, editParam) => async (dispatch) => {
@@ -169,6 +134,12 @@ export const adminEditAdmin = (userId, editParam) => async (dispatch) => {
     dispatch(setAlert(e.response.data.message, 'danger'));
   }
 };
+
+// **** END ADMIN USER FUNCTIONS ****
+
+// ----------------------------------------------------------------
+
+// **** ADMIN OBSTACLE FUNCTIONS ****
 
 // Admin Get All Obstacles (admin)
 
@@ -285,3 +256,137 @@ export const adminAddObstacle = (formData) => async (dispatch) => {
     dispatch(setAlert(e.response.data.message, 'danger'));
   }
 };
+
+// **** END ADMIN OBSTACLE FUNCTIONS ****
+
+// ----------------------------------------------------------------
+
+// **** ADMIN WORKOUT FUNCTIONS
+
+// Admin get all workouts
+
+export const adminGetAllWorkouts = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/workouts/all');
+    dispatch({
+      type: ADMIN_GET_ALL_WORKOUTS,
+      payload: res.data,
+    });
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// **** END ADMIN WORKOUT FUNCTIONS ****
+
+// ----------------------------------------------------------------
+
+// **** ADMIN POST FUNCTIONS ****
+
+// Admin Delete Post
+
+export const adminDeletePost = (postId) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.delete(`/api/posts/admin/delete/${postId}`, config);
+    dispatch({
+      type: ADMIN_DELETE_POST,
+      payload: postId,
+    });
+    dispatch(setAlert('Successfully deleted post', 'success'));
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// **** END ADMIN POST FUNCTIONS ****
+
+// ----------------------------------------------------------------
+
+// **** ADMIN EVENT FUNCTIONS ****
+
+// Admin Create Event
+
+export const adminAddEvent = (formData) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const body = formData;
+    const res = await axios.post(`/api/events/create`, body, config);
+    if (res.status === 200) {
+      dispatch(setAlert('Successfully created event', 'success'));
+    }
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Delete Event
+
+export const adminDeleteEvent = (eventId) => async (dispatch) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const res = await axios.delete(`/api/events/delete/${eventId}`, config);
+    dispatch({
+      type: ADMIN_DELETE_EVENT,
+      payload: eventId,
+    });
+    dispatch(setAlert('Successfully deleted event', 'success'));
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// Admin Edit Event (admin)
+
+export const adminEditEvent = (formData, eventId, history) => async (
+  dispatch
+) => {
+  const token = localStorage.getItem('token');
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: token,
+      },
+    };
+    const body = formData;
+    const res = await axios.post(
+      `/api/events/admin/edit/${eventId}`,
+      body,
+      config
+    );
+    if (res.status === 200) {
+      dispatch(setAlert('Successfully edited event data', 'success'));
+      history.push('/admin/events');
+    }
+  } catch (e) {
+    console.log(e.message, e.stack);
+    dispatch(setAlert(e.response.data.message, 'danger'));
+  }
+};
+
+// **** END ADMIN EVENT FUNTIONS ****
+
+// ----------------------------------------------------------------

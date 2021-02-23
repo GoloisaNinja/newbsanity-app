@@ -21,6 +21,9 @@ import PostPanel from '../admin/posts/PostPanel';
 import ObstaclePanel from '../admin/obstacles/ObstaclePanel';
 import EditObstacle from '../admin/obstacles/EditObstacle';
 import AddObstacle from '../admin/obstacles/AddObstacle';
+import EventPanel from '../admin/events/EventPanel';
+import EditEvent from '../admin/events/EditEvent';
+import AddEvent from '../admin/events/AddEvent';
 
 const Routes = () => {
   return (
@@ -44,6 +47,9 @@ const Routes = () => {
       <AdminRoute exact path='/admin/obstacles' component={ObstaclePanel} />
       <AdminRoute path='/admin/obstacle/:id' component={EditObstacle} />
       <AdminRoute path='/admin/obstacles/add' component={AddObstacle} />
+      <AdminRoute exact path='/admin/events' component={EventPanel} />
+      <AdminRoute path='/admin/event/:id' component={EditEvent} />
+      <AdminRoute path='/admin/events/add' component={AddEvent} />
     </Switch>
   );
 };

@@ -15,6 +15,18 @@
   color: #fff;
   min-height: 23rem;
 }
+.flex-event-edit-container {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+.flex-event-edit-contents {
+  border-bottom: 3px solid #ff0a0a;
+  background: lighten(#0e1013, 10%);
+}
 .flex-container-end {
   display: flex;
   justify-content: flex-end;
