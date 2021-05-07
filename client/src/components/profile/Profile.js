@@ -13,48 +13,48 @@ import ProfileWorkouts from './ProfileWorkouts';
 import { assignTrophy } from '../../actions/trophies';
 
 const Profile = ({
-  user,
-  getProfile,
-  profile: { loading, profile },
-  assignTrophy,
+	user,
+	getProfile,
+	profile: { loading, profile },
+	assignTrophy,
 }) => {
-  useEffect(() => {
-    if (user.loginCount === 10) {
-      assignTrophy('601d2694d9db960017439143');
-    }
-    getProfile(user._id);
-  }, [getProfile, user._id]);
+	useEffect(() => {
+		if (user.loginCount === 10) {
+			assignTrophy('601d2694d9db960017439143');
+		}
+		getProfile(user._id);
+	}, [getProfile, user._id, user.loginCount, assignTrophy]);
 
-  return !loading ? (
-    <Fragment>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div className='profile-main-grid'>
-          <ProfileTop />
-          <ProfileAdvice />
-          <ProfileRegisteredEvents />
-          <ProfileTrophyCase profile={profile} />
-          <ProfileOrderHistory />
-        </div>
-        <ProfileEvents />
-        <ProfileWorkouts />
-      </div>
-    </Fragment>
-  ) : (
-    <Spinner />
-  );
+	return !loading ? (
+		<Fragment>
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<div className='profile-main-grid'>
+					<ProfileTop />
+					<ProfileAdvice />
+					<ProfileRegisteredEvents />
+					<ProfileTrophyCase profile={profile} />
+					<ProfileOrderHistory />
+				</div>
+				<ProfileEvents />
+				<ProfileWorkouts />
+			</div>
+		</Fragment>
+	) : (
+		<Spinner />
+	);
 };
 
 Profile.propTypes = {
-  getProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-  assignTrophy: PropTypes.func.isRequired,
+	getProfile: PropTypes.func.isRequired,
+	profile: PropTypes.object.isRequired,
+	assignTrophy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+	profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
-  getProfile,
-  assignTrophy,
+	getProfile,
+	assignTrophy,
 })(Profile);

@@ -19,17 +19,17 @@ const Event = ({ getEvent, events: { event, loading }, match }) => {
   ) : (
     <Fragment>
       <Alert />
-      <div className='content-container'>
+      <div className="content-container">
         <div style={{ marginBottom: '2.5rem', marginTop: '.25rem' }}>
-          <Link to='/events' className='btn btn-forum'>
-            Back <span className='low-weight-span'>to Events</span>
+          <Link to="/events" className="btn btn-forum">
+            Back <span className="low-weight-span">to Events</span>
           </Link>
         </div>
         <EventItem event={event} />
-        <h3 className='text-type-effect2'>
-          <i className='far fa-comments' />{' '}
-          <span className='red-span'> Leave</span>{' '}
-          <span className='low-weight-span'>a comment...</span>{' '}
+        <h3 className="text-type-effect2">
+          <i className="far fa-comments" />{' '}
+          <span className="red-span"> Leave</span>{' '}
+          <span className="low-weight-span">a comment...</span>{' '}
         </h3>
         <EventCommentForm eventId={event._id} />
         <Fragment>
