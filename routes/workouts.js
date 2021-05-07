@@ -2,263 +2,276 @@ const express = require('express');
 const router = express.Router();
 const Workout = require('../models/Workout');
 const Profile = require('../models/Profile');
+const Trophy = require('../models/Trophy');
 const auth = require('../middleware/auth');
 
 // Create new Workout
 
 router.post('/api/workouts', auth, async (req, res) => {
-  const {
-    extremeRavineLaps = 0,
-    mudGauntletLaps = 0,
-    workoutPartner = '',
-    text = '',
-    date,
-  } = req.body;
-  const user = await req.user;
-  const dateParts = date.split('-');
-  const formatDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-  const { name, id } = user;
-  try {
-    if (!user) {
-      throw new Error('Please authenticate...');
-    }
-    const profile = await Profile.findOne({ user: id });
-    if (!profile) {
-      throw new Error('Profile not found...');
-    }
-    const workout = new Workout({
-      user: id,
-      name,
-      extremeRavineLaps,
-      mudGauntletLaps,
-      workoutPartner,
-      text,
-      date: formatDate,
-    });
-    await workout.save();
-    const profWorkout = {
-      workout: workout._id,
-      extremeRavineLaps,
-      mudGauntletLaps,
-      workoutPartner,
-      text,
-      date: formatDate,
-    };
-    profile.workouts.unshift(profWorkout);
+	const {
+		extremeRavineLaps = 0,
+		mudGauntletLaps = 0,
+		workoutPartner = '',
+		text = '',
+		date,
+	} = req.body;
+	const user = await req.user;
+	const dateParts = date.split('-');
+	const formatDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+	const { name, id } = user;
+	try {
+		if (!user) {
+			throw new Error('Please authenticate...');
+		}
+		const profile = await Profile.findOne({ user: id });
+		if (!profile) {
+			throw new Error('Profile not found...');
+		}
+		if (profile.workouts.length === 0) {
+			const trophy = await Trophy.findOne({ serial: 'firstWorkoutLvl001' });
+			const trophyFields = {
+				trophy: trophy._id,
+				title: trophy.title,
+				body: trophy.body,
+				icon: trophy.icon,
+				userSeen: false,
+			};
+			profile.trophies.unshift(trophyFields);
+			await profile.save();
+		}
+		const workout = new Workout({
+			user: id,
+			name,
+			extremeRavineLaps,
+			mudGauntletLaps,
+			workoutPartner,
+			text,
+			date: formatDate,
+		});
+		await workout.save();
+		const profWorkout = {
+			workout: workout._id,
+			extremeRavineLaps,
+			mudGauntletLaps,
+			workoutPartner,
+			text,
+			date: formatDate,
+		};
+		profile.workouts.unshift(profWorkout);
 
-    const {
-      ravineClubTotal,
-      ravineTotal,
-      gauntletClubTotal,
-      gauntletTotal,
-    } = profile.centuryClub;
+		const {
+			ravineClubTotal,
+			ravineTotal,
+			gauntletClubTotal,
+			gauntletTotal,
+		} = profile.centuryClub;
 
-    // Extreme Ravine Club Total Adjustment
+		// Extreme Ravine Club Total Adjustment
 
-    if (Number(ravineTotal) + Number(extremeRavineLaps) < 50) {
-      ravineAdjustment = Number(extremeRavineLaps);
-    } else if (
-      Number(ravineTotal) < 50 &&
-      Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
-      Number(ravineTotal) + Number(extremeRavineLaps) < 100
-    ) {
-      ravineAdjustment = 50 - Number(ravineTotal);
-    } else if (
-      Number(ravineTotal) > 50 &&
-      Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
-      Number(ravineTotal) + Number(extremeRavineLaps) < 100
-    ) {
-      ravineAdjustment = 0;
-    } else {
-      ravineAdjustment = Number(extremeRavineLaps);
-    }
+		if (Number(ravineTotal) + Number(extremeRavineLaps) < 50) {
+			ravineAdjustment = Number(extremeRavineLaps);
+		} else if (
+			Number(ravineTotal) < 50 &&
+			Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
+			Number(ravineTotal) + Number(extremeRavineLaps) < 100
+		) {
+			ravineAdjustment = 50 - Number(ravineTotal);
+		} else if (
+			Number(ravineTotal) > 50 &&
+			Number(ravineTotal) + Number(extremeRavineLaps) >= 50 &&
+			Number(ravineTotal) + Number(extremeRavineLaps) < 100
+		) {
+			ravineAdjustment = 0;
+		} else {
+			ravineAdjustment = Number(extremeRavineLaps);
+		}
 
-    // Mud Gauntlet Club Total Adjustment
+		// Mud Gauntlet Club Total Adjustment
 
-    if (Number(gauntletTotal) + Number(mudGauntletLaps) < 50) {
-      mudAdjustment = Number(mudGauntletLaps);
-    } else if (
-      Number(gauntletTotal) < 50 &&
-      Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
-      Number(gauntletTotal) + Number(mudGauntletLaps) < 100
-    ) {
-      mudAdjustment = 50 - Number(gauntletTotal);
-    } else if (
-      Number(gauntletTotal) > 50 &&
-      Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
-      Number(gauntletTotal) + Number(mudGauntletLaps) < 100
-    ) {
-      mudAdjustment = 0;
-    } else {
-      mudAdjustment = Number(mudGauntletLaps);
-    }
+		if (Number(gauntletTotal) + Number(mudGauntletLaps) < 50) {
+			mudAdjustment = Number(mudGauntletLaps);
+		} else if (
+			Number(gauntletTotal) < 50 &&
+			Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
+			Number(gauntletTotal) + Number(mudGauntletLaps) < 100
+		) {
+			mudAdjustment = 50 - Number(gauntletTotal);
+		} else if (
+			Number(gauntletTotal) > 50 &&
+			Number(gauntletTotal) + Number(mudGauntletLaps) >= 50 &&
+			Number(gauntletTotal) + Number(mudGauntletLaps) < 100
+		) {
+			mudAdjustment = 0;
+		} else {
+			mudAdjustment = Number(mudGauntletLaps);
+		}
 
-    // Set values for profile updates
+		// Set values for profile updates
 
-    const newRavineClub = Number(ravineClubTotal) + Number(ravineAdjustment);
-    const newGauntletClub = Number(gauntletClubTotal) + Number(mudGauntletLaps);
-    const newRavine = Number(ravineTotal) + Number(extremeRavineLaps);
-    const newGauntlet = Number(gauntletTotal) + Number(mudGauntletLaps);
+		const newRavineClub = Number(ravineClubTotal) + Number(ravineAdjustment);
+		const newGauntletClub = Number(gauntletClubTotal) + Number(mudGauntletLaps);
+		const newRavine = Number(ravineTotal) + Number(extremeRavineLaps);
+		const newGauntlet = Number(gauntletTotal) + Number(mudGauntletLaps);
 
-    profile.centuryClub = {
-      ravineClubTotal: newRavineClub,
-      gauntletClubTotal: newGauntletClub,
-      ravineTotal: newRavine,
-      gauntletTotal: newGauntlet,
-    };
+		profile.centuryClub = {
+			ravineClubTotal: newRavineClub,
+			gauntletClubTotal: newGauntletClub,
+			ravineTotal: newRavine,
+			gauntletTotal: newGauntlet,
+		};
 
-    await profile.save();
-    res.status(200).json(workout);
-  } catch (e) {
-    console.error({ message: e.message });
-    res.json({ message: e.message });
-  }
+		await profile.save();
+		res.status(200).json(workout);
+	} catch (e) {
+		console.error({ message: e.message });
+		res.json({ message: e.message });
+	}
 });
 
 // Delete a Workout
 
 router.delete('/api/workouts/delete/:_id', auth, async (req, res) => {
-  const _id = req.params._id;
-  const user = await req.user;
-  const { id } = user;
-  try {
-    const workout = await Workout.findById({ _id });
-    if (!workout) {
-      return res.status(404).send({ message: 'Could not find workout...' });
-    }
-    const profile = await Profile.findOne({ user: id });
-    if (!profile) {
-      return res.status(404).send({ message: 'Could not find profile...' });
-    }
-    profile.workouts = profile.workouts.filter(
-      (workout) => workout.workout.toString() !== _id.toString()
-    );
-    const { extremeRavineLaps, mudGauntletLaps } = workout;
+	const _id = req.params._id;
+	const user = await req.user;
+	const { id } = user;
+	try {
+		const workout = await Workout.findById({ _id });
+		if (!workout) {
+			return res.status(404).send({ message: 'Could not find workout...' });
+		}
+		const profile = await Profile.findOne({ user: id });
+		if (!profile) {
+			return res.status(404).send({ message: 'Could not find profile...' });
+		}
+		profile.workouts = profile.workouts.filter(
+			(workout) => workout.workout.toString() !== _id.toString()
+		);
+		const { extremeRavineLaps, mudGauntletLaps } = workout;
 
-    const {
-      ravineClubTotal,
-      ravineTotal,
-      gauntletClubTotal,
-      gauntletTotal,
-    } = profile.centuryClub;
+		const {
+			ravineClubTotal,
+			ravineTotal,
+			gauntletClubTotal,
+			gauntletTotal,
+		} = profile.centuryClub;
 
-    // Extreme Ravine Club Total Adjustment
+		// Extreme Ravine Club Total Adjustment
 
-    if (extremeRavineLaps !== 0) {
-      if (
-        ravineClubTotal >= 50 &&
-        ravineClubTotal < 100 &&
-        ravineTotal - extremeRavineLaps >= 50
-      ) {
-        ravineAdjustment = 0;
-      } else if (
-        ravineClubTotal >= 50 &&
-        ravineClubTotal < 100 &&
-        ravineTotal - extremeRavineLaps < 50
-      ) {
-        ravineAdjustment = 50 - (ravineTotal - extremeRavineLaps);
-      } else {
-        ravineAdjustment = extremeRavineLaps;
-      }
-    } else {
-      ravineAdjustment = 0;
-    }
-    // Mud Gauntlet Club Total Adjustment
+		if (extremeRavineLaps !== 0) {
+			if (
+				ravineClubTotal >= 50 &&
+				ravineClubTotal < 100 &&
+				ravineTotal - extremeRavineLaps >= 50
+			) {
+				ravineAdjustment = 0;
+			} else if (
+				ravineClubTotal >= 50 &&
+				ravineClubTotal < 100 &&
+				ravineTotal - extremeRavineLaps < 50
+			) {
+				ravineAdjustment = 50 - (ravineTotal - extremeRavineLaps);
+			} else {
+				ravineAdjustment = extremeRavineLaps;
+			}
+		} else {
+			ravineAdjustment = 0;
+		}
+		// Mud Gauntlet Club Total Adjustment
 
-    if (mudGauntletLaps !== 0) {
-      if (
-        gauntletClubTotal >= 50 &&
-        gauntletClubTotal < 100 &&
-        gauntletTotal - mudGauntletLaps >= 50
-      ) {
-        mudAdjustment = 0;
-      } else if (
-        gauntletClubTotal >= 50 &&
-        gauntletClubTotal < 100 &&
-        gauntletTotal - mudGauntletLaps < 50
-      ) {
-        mudAdjustment = 50 - (gauntletTotal - mudGauntletLaps);
-      } else {
-        mudAdjustment = mudGauntletLaps;
-      }
-    } else {
-      mudAdjustment = 0;
-    }
-    // Set values for profile updates
+		if (mudGauntletLaps !== 0) {
+			if (
+				gauntletClubTotal >= 50 &&
+				gauntletClubTotal < 100 &&
+				gauntletTotal - mudGauntletLaps >= 50
+			) {
+				mudAdjustment = 0;
+			} else if (
+				gauntletClubTotal >= 50 &&
+				gauntletClubTotal < 100 &&
+				gauntletTotal - mudGauntletLaps < 50
+			) {
+				mudAdjustment = 50 - (gauntletTotal - mudGauntletLaps);
+			} else {
+				mudAdjustment = mudGauntletLaps;
+			}
+		} else {
+			mudAdjustment = 0;
+		}
+		// Set values for profile updates
 
-    const newRavineClub = Number(ravineClubTotal) - Number(ravineAdjustment);
-    const newGauntletClub = Number(gauntletClubTotal) - Number(mudGauntletLaps);
-    const newRavine = Number(ravineTotal) - Number(extremeRavineLaps);
-    const newGauntlet = Number(gauntletTotal) - Number(mudGauntletLaps);
+		const newRavineClub = Number(ravineClubTotal) - Number(ravineAdjustment);
+		const newGauntletClub = Number(gauntletClubTotal) - Number(mudGauntletLaps);
+		const newRavine = Number(ravineTotal) - Number(extremeRavineLaps);
+		const newGauntlet = Number(gauntletTotal) - Number(mudGauntletLaps);
 
-    profile.centuryClub = {
-      ravineClubTotal: newRavineClub,
-      gauntletClubTotal: newGauntletClub,
-      ravineTotal: newRavine,
-      gauntletTotal: newGauntlet,
-    };
-    await workout.remove();
-    await profile.save();
-    res.status(200).send({ message: 'Workout successfully deleted...' });
-  } catch (e) {
-    if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find workout...' });
-    }
-    res.status(400).send({ message: e.message });
-  }
+		profile.centuryClub = {
+			ravineClubTotal: newRavineClub,
+			gauntletClubTotal: newGauntletClub,
+			ravineTotal: newRavine,
+			gauntletTotal: newGauntlet,
+		};
+		await workout.remove();
+		await profile.save();
+		res.status(200).send({ message: 'Workout successfully deleted...' });
+	} catch (e) {
+		if (e.kind === 'ObjectId') {
+			res.status(404).send({ message: 'Could not find workout...' });
+		}
+		res.status(400).send({ message: e.message });
+	}
 });
 
 // Get all Workouts
 
 router.get('/api/workouts/all', async (req, res) => {
-  try {
-    const workouts = await Workout.find().sort({ date: 1 });
-    if (!workouts) {
-      return res.status(404).send({ message: 'No Workouts by members...' });
-    }
-    res.status(200).send(workouts);
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
+	try {
+		const workouts = await Workout.find().sort({ date: 1 });
+		if (!workouts) {
+			return res.status(404).send({ message: 'No Workouts by members...' });
+		}
+		res.status(200).send(workouts);
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
 });
 
 // Get a Workout by Id
 
 router.get('/api/workouts/workout/:_id', async (req, res) => {
-  const _id = req.params._id;
-  try {
-    const workout = await Workout.findById({ _id });
-    if (!workout) {
-      return res.status(404).send({ message: 'Could not find workout...' });
-    }
-    res.status(200).send(workout);
-  } catch (e) {
-    if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find workout...' });
-    }
-    res.status(400).send({ message: e.message });
-  }
+	const _id = req.params._id;
+	try {
+		const workout = await Workout.findById({ _id });
+		if (!workout) {
+			return res.status(404).send({ message: 'Could not find workout...' });
+		}
+		res.status(200).send(workout);
+	} catch (e) {
+		if (e.kind === 'ObjectId') {
+			res.status(404).send({ message: 'Could not find workout...' });
+		}
+		res.status(400).send({ message: e.message });
+	}
 });
 
 // Get all Workout by User Id
 
 router.get('/api/workouts/user', auth, async (req, res) => {
-  const user = req.user;
-  const { name, id } = user;
-  try {
-    const workouts = await Workout.find({ user: id }).sort({ date: -1 });
-    if (!workouts) {
-      return res
-        .status(404)
-        .send({ message: 'Could not find any workouts...' });
-    }
-    res.status(200).send(workouts);
-  } catch (e) {
-    if (e.kind === 'ObjectId') {
-      res.status(404).send({ message: 'Could not find workout...' });
-    }
-    res.status(400).send({ message: e.message });
-  }
+	const user = req.user;
+	const { name, id } = user;
+	try {
+		const workouts = await Workout.find({ user: id }).sort({ date: -1 });
+		if (!workouts) {
+			return res
+				.status(404)
+				.send({ message: 'Could not find any workouts...' });
+		}
+		res.status(200).send(workouts);
+	} catch (e) {
+		if (e.kind === 'ObjectId') {
+			res.status(404).send({ message: 'Could not find workout...' });
+		}
+		res.status(400).send({ message: e.message });
+	}
 });
 
 ///// THESE NEED TO BE REFACTORED FOR WORKOUTS THEY STILL REFLECT EVENT DATA //////////

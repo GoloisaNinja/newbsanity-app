@@ -1,8 +1,12 @@
-import { ASSIGN_TROPHY, TROPHY_SEEN } from '../actions/types';
+import {
+	ASSIGN_TROPHY,
+	TROPHY_SEEN,
+	GET_USER_TROPHIES,
+} from '../actions/types';
 
 const initialState = {
 	loading: true,
-	trophy: null,
+	trophies: [],
 	error: {},
 };
 
@@ -12,14 +16,22 @@ export default function foo(state = initialState, action) {
 		case ASSIGN_TROPHY:
 			return {
 				...state,
-				trophy: payload,
+				trophies: state.trophies.unshift(payload),
+				loading: false,
+			};
+		case GET_USER_TROPHIES:
+			return {
+				...state,
+				trophies: payload,
 				loading: false,
 			};
 		case TROPHY_SEEN:
 			return {
 				...state,
 				loading: false,
-				trophy: null,
+				trophies: state.trophies.filter(
+					(trophy) => trophy.trophy !== payload._id
+				),
 			};
 		default:
 			return state;

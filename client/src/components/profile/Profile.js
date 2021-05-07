@@ -10,20 +10,16 @@ import ProfileRegisteredEvents from './ProfileRegisteredEvents';
 import ProfileTrophyCase from './ProfileTrophyCase';
 import ProfileOrderHistory from './ProfileOrderHistory';
 import ProfileWorkouts from './ProfileWorkouts';
-import { assignTrophy } from '../../actions/trophies';
 
 const Profile = ({
 	user,
 	getProfile,
 	profile: { loading, profile },
-	assignTrophy,
+	//assignTrophy,
 }) => {
 	useEffect(() => {
-		if (user.loginCount === 10) {
-			assignTrophy('601d2694d9db960017439143');
-		}
 		getProfile(user._id);
-	}, [getProfile, user._id, user.loginCount, assignTrophy]);
+	}, [getProfile, user._id]);
 
 	return !loading ? (
 		<Fragment>
@@ -47,7 +43,6 @@ const Profile = ({
 Profile.propTypes = {
 	getProfile: PropTypes.func.isRequired,
 	profile: PropTypes.object.isRequired,
-	assignTrophy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -56,5 +51,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
 	getProfile,
-	assignTrophy,
 })(Profile);

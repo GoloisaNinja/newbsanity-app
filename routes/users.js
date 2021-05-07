@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Profile = require('../models/Profile');
 const Trophy = require('../models/Trophy');
 const { sendWelcomeEmail } = require('../emails/account');
 const auth = require('../middleware/auth');
@@ -10,252 +11,265 @@ const sharp = require('sharp');
 // Get All Users (admin)
 
 router.get('/api/users/admin/getAll', auth, async (req, res) => {
-  const user = await req.user;
-  try {
-    if (!user) {
-      return res.status(404).send({ message: 'Please authenticate...' });
-    }
-    if (!user.isAdmin) {
-      return res.status(401).send({ message: 'Unauthorized' });
-    }
+	const user = await req.user;
+	try {
+		if (!user) {
+			return res.status(404).send({ message: 'Please authenticate...' });
+		}
+		if (!user.isAdmin) {
+			return res.status(401).send({ message: 'Unauthorized' });
+		}
 
-    const users = await User.find(
-      {},
-      'name email createdAt loginCount avatar isAdmin'
-    ).sort({
-      createdAt: -1,
-    });
-    res.status(200).send(users);
-  } catch (e) {
-    console.error(e.message, e.stack);
-    res.status(400).send({ message: e.message });
-  }
+		const users = await User.find(
+			{},
+			'name email createdAt loginCount avatar isAdmin'
+		).sort({
+			createdAt: -1,
+		});
+		res.status(200).send(users);
+	} catch (e) {
+		console.error(e.message, e.stack);
+		res.status(400).send({ message: e.message });
+	}
 });
 
 // Admin Delete Avatar Route (admin)
 
 router.delete(
-  '/api/users/admin/avatar/delete/:userId',
-  auth,
-  async (req, res) => {
-    const user = await req.user;
-    const avatarId = req.params.userId;
-    try {
-      if (!user) {
-        return res.status(404).send({ message: 'Please authenticate...' });
-      }
-      if (!user.isAdmin) {
-        return res.status(401).send({ message: 'Unauthorized' });
-      }
-      const userToModify = await User.findById(avatarId);
-      if (!userToModify) {
-        return res.status(404).send({ message: 'Not found' });
-      }
-      userToModify.avatar = undefined;
-      await userToModify.save();
-      res.send(`Avatar for ${userToModify._id} deleted successfully...`);
-    } catch (e) {
-      console.error(e.message);
-      res.send(e.message);
-    }
-  }
+	'/api/users/admin/avatar/delete/:userId',
+	auth,
+	async (req, res) => {
+		const user = await req.user;
+		const avatarId = req.params.userId;
+		try {
+			if (!user) {
+				return res.status(404).send({ message: 'Please authenticate...' });
+			}
+			if (!user.isAdmin) {
+				return res.status(401).send({ message: 'Unauthorized' });
+			}
+			const userToModify = await User.findById(avatarId);
+			if (!userToModify) {
+				return res.status(404).send({ message: 'Not found' });
+			}
+			userToModify.avatar = undefined;
+			await userToModify.save();
+			res.send(`Avatar for ${userToModify._id} deleted successfully...`);
+		} catch (e) {
+			console.error(e.message);
+			res.send(e.message);
+		}
+	}
 );
 
 // Load authenticated User
 
 router.get('/api/users/auth', auth, async (req, res) => {
-  const user = req.user;
-  try {
-    if (user) {
-      return res.status(200).json(user);
-    } else {
-      throw new Error('Please authenticate');
-    }
-  } catch (e) {
-    res.status(400).send({ message: e.message });
-  }
+	const user = req.user;
+	try {
+		if (user) {
+			return res.status(200).json(user);
+		} else {
+			throw new Error('Please authenticate');
+		}
+	} catch (e) {
+		res.status(400).send({ message: e.message });
+	}
 });
 
 // Create new User
 
 router.post('/api/users', async (req, res) => {
-  const user = new User(req.body);
-  try {
-    await user.save();
-    const token = await user.generateAuthToken();
-    sendWelcomeEmail(req.body.name, req.body.email);
-    res.status(201).send({ user, token });
-  } catch (e) {
-    res.status(500).send({ message: e.message });
-  }
+	const user = new User(req.body);
+	try {
+		await user.save();
+		const token = await user.generateAuthToken();
+		sendWelcomeEmail(req.body.name, req.body.email);
+		res.status(201).send({ user, token });
+	} catch (e) {
+		res.status(500).send({ message: e.message });
+	}
 });
 
 // Admin Delete User Account (admin)
 
 router.delete(
-  '/api/users/admin/user/delete/:userId',
-  auth,
-  async (req, res) => {
-    const user = await req.user;
-    const userId = req.params.userId;
-    try {
-      if (!user) {
-        return res.status(404).send({ message: 'Please authenticate...' });
-      }
-      if (!user.isAdmin) {
-        return res.status(401).send({ message: 'Unauthorized' });
-      }
-      const userToDelete = await User.findById(userId);
-      if (!userToDelete) {
-        return res.status(404).send({ message: 'Not found' });
-      }
-      await userToDelete.delete();
-      res.send(`Account deleted successfully...`);
-    } catch (e) {
-      console.error(e.message);
-      res.send(e.message);
-    }
-  }
+	'/api/users/admin/user/delete/:userId',
+	auth,
+	async (req, res) => {
+		const user = await req.user;
+		const userId = req.params.userId;
+		try {
+			if (!user) {
+				return res.status(404).send({ message: 'Please authenticate...' });
+			}
+			if (!user.isAdmin) {
+				return res.status(401).send({ message: 'Unauthorized' });
+			}
+			const userToDelete = await User.findById(userId);
+			if (!userToDelete) {
+				return res.status(404).send({ message: 'Not found' });
+			}
+			await userToDelete.delete();
+			res.send(`Account deleted successfully...`);
+		} catch (e) {
+			console.error(e.message);
+			res.send(e.message);
+		}
+	}
 );
 
 // Admin Edit User isAdmin field (admin)
 
 router.patch(
-  '/api/users/admin/user/isAdmin/:userId',
-  auth,
-  async (req, res) => {
-    const user = await req.user;
-    const userId = req.params.userId;
-    const editParam = req.body.editParam;
-    console.log(editParam);
-    try {
-      if (!user) {
-        return res.status(404).send({ message: 'Please authenticate...' });
-      }
-      if (!user.isAdmin) {
-        return res.status(401).send({ message: 'Unauthorized' });
-      }
-      const userToEdit = await User.findById(userId);
-      if (!userToEdit) {
-        return res.status(404).send({ message: 'Not found' });
-      }
-      if (editParam === 'add') {
-        userToEdit.isAdmin = true;
-      } else if (editParam === 'remove') {
-        userToEdit.isAdmin = false;
-      }
-      await userToEdit.save();
-      res.status(200).send(`Account edited successfully...`);
-    } catch (e) {
-      console.error(e.message);
-      res.send(e.message);
-    }
-  }
+	'/api/users/admin/user/isAdmin/:userId',
+	auth,
+	async (req, res) => {
+		const user = await req.user;
+		const userId = req.params.userId;
+		const editParam = req.body.editParam;
+		console.log(editParam);
+		try {
+			if (!user) {
+				return res.status(404).send({ message: 'Please authenticate...' });
+			}
+			if (!user.isAdmin) {
+				return res.status(401).send({ message: 'Unauthorized' });
+			}
+			const userToEdit = await User.findById(userId);
+			if (!userToEdit) {
+				return res.status(404).send({ message: 'Not found' });
+			}
+			if (editParam === 'add') {
+				userToEdit.isAdmin = true;
+			} else if (editParam === 'remove') {
+				userToEdit.isAdmin = false;
+			}
+			await userToEdit.save();
+			res.status(200).send(`Account edited successfully...`);
+		} catch (e) {
+			console.error(e.message);
+			res.send(e.message);
+		}
+	}
 );
 
 // Login the user
 
 router.post('/api/user/login', async (req, res) => {
-  try {
-    const user = await User.findByCredentials(
-      req.body.email,
-      req.body.password
-    );
-    const token = await user.generateAuthToken();
-    await user.save();
-    res.send({ user, token });
-  } catch (e) {
-    res.status(401).send({ message: 'Login failed...' });
-  }
+	try {
+		const user = await User.findByCredentials(
+			req.body.email,
+			req.body.password
+		);
+		const token = await user.generateAuthToken();
+		await user.save();
+		const profile = await Profile.findOne({ user: user._id });
+		if (profile && user.loginCount === 10) {
+			const trophy = await Trophy.findOne({ serial: 'newUserLoginLvl001' });
+			const trophyFields = {
+				trophy: trophy._id,
+				title: trophy.title,
+				body: trophy.body,
+				icon: trophy.icon,
+				userSeen: false,
+			};
+			profile.trophies.unshift(trophyFields);
+			await profile.save();
+		}
+		res.send({ user, token });
+	} catch (e) {
+		res.status(401).send({ message: 'Login failed...' });
+	}
 });
 
 // Logout the user
 
 router.post('/api/user/logout', auth, async (req, res) => {
-  try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token !== req.token;
-    });
-    await req.user.save();
-    res.status(200).send('User logged out');
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
+	try {
+		req.user.tokens = req.user.tokens.filter((token) => {
+			return token.token !== req.token;
+		});
+		await req.user.save();
+		res.status(200).send('User logged out');
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
 });
 
 // Logout all user instances
 
 router.post('/api/user/logoutAll', auth, async (req, res) => {
-  try {
-    req.user.tokens = [];
-    await req.user.save();
-    res.status(200).send('All user sessions logged out');
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
+	try {
+		req.user.tokens = [];
+		await req.user.save();
+		res.status(200).send('All user sessions logged out');
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
 });
 
 // Set up Multer for Avatar Upload
 
 const upload = multer({
-  limits: {
-    fileSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('Please upload an image file'));
-    }
+	limits: {
+		fileSize: 1000000,
+	},
+	fileFilter(req, file, cb) {
+		if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+			return cb(new Error('Please upload an image file'));
+		}
 
-    cb(undefined, true);
-  },
+		cb(undefined, true);
+	},
 });
 
 // User Upload Route - use sharp to format to png and size
 
 router.post(
-  '/api/user/me/avatar',
-  auth,
-  upload.single('avatar'),
-  async (req, res) => {
-    const buffer = await sharp(req.file.buffer)
-      .resize({ width: 250, height: 250 })
-      .png()
-      .toBuffer();
+	'/api/user/me/avatar',
+	auth,
+	upload.single('avatar'),
+	async (req, res) => {
+		const buffer = await sharp(req.file.buffer)
+			.resize({ width: 250, height: 250 })
+			.png()
+			.toBuffer();
 
-    const user = await req.user;
-    user.avatar = buffer;
-    await user.save();
-    res.status(200).send({ message: 'Avatar image uploaded successfully...' });
-  },
-  (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
-  }
+		const user = await req.user;
+		user.avatar = buffer;
+		await user.save();
+		res.status(200).send({ message: 'Avatar image uploaded successfully...' });
+	},
+	(error, req, res, next) => {
+		res.status(400).send({ error: error.message });
+	}
 );
 
 // User Delete Avatar Route
 
 router.delete('/api/user/me/avatar', auth, async (req, res) => {
-  const user = await req.user;
-  user.avatar = undefined;
-  await user.save();
-  res.send('Profile avatar deleted successfully...');
+	const user = await req.user;
+	user.avatar = undefined;
+	await user.save();
+	res.send('Profile avatar deleted successfully...');
 });
 
 // Get User Avatar Binary
 
 router.get('/api/user/:id/avatar', async (req, res) => {
-  const user = await User.findById(req.params.id);
+	const user = await User.findById(req.params.id);
 
-  try {
-    if (!user || !user.avatar) {
-      return res.status(400).send({ message: 'Not found' });
-    }
+	try {
+		if (!user || !user.avatar) {
+			return res.status(400).send({ message: 'Not found' });
+		}
 
-    res.set('Content-Type', 'image/png');
-    res.status(200).send(user.avatar);
-  } catch (e) {
-    res.status(400).send(e.message);
-  }
+		res.set('Content-Type', 'image/png');
+		res.status(200).send(user.avatar);
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
 });
 
 module.exports = router;

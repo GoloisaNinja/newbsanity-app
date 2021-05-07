@@ -58,6 +58,7 @@ export const ADMIN_GET_ALL_WORKOUTS = 'ADMIN_GET_ALL_WORKOUTS';
 // Trophy Types
 export const ASSIGN_TROPHY = 'ASSIGN_TROPHY';
 export const TROPHY_SEEN = 'TROPHY_SEEN';
+export const GET_USER_TROPHIES = 'GET_USER_TROPHIES';
 
 // Advice Types
 
