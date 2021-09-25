@@ -26,10 +26,7 @@ const Landing = ({ loading, getLandingEvents, landingEvents }) => {
 			<h3>
 				<span className='red-span'>Upcoming</span>{' '}
 				<span className='low-weight-span'>Events</span>
-				<span style={{ fontSize: '1rem' }}>
-					{' '}
-					- click event for full listing
-				</span>
+				<span style={{ fontSize: '1rem' }}></span>
 			</h3>
 			<Fragment>
 				{!loading && landingEvents.length > 0 ? (
@@ -38,11 +35,12 @@ const Landing = ({ loading, getLandingEvents, landingEvents }) => {
 					<Spinner />
 				)}
 			</Fragment>
-			<Link to='/'>
+			{/* for upcoming feature page that lists full year of events */}
+			{/* <Link to='/'>
 				<button className='btn btn-red'>
 					Full <span className='low-weight-span'>event listing</span>
 				</button>
-			</Link>
+			</Link> */}
 			<h3>
 				<span className='red-span'>Thank you</span>{' '}
 				<span className='low-weight-span'>to our local sponsors!</span>
